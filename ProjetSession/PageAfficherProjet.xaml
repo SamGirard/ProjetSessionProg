@@ -23,15 +23,9 @@
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local:Projet">
                             <StackPanel CornerRadius="10" Padding="10" Orientation="Vertical" Height="300" Width="300" Margin="30" HorizontalAlignment="Center">
-                                <TextBlock Text="das" FontWeight="Light" FontSize="15pt" Foreground="Black"/>
-                                <TextBlock Text="das" FontSize="30pt" TextWrapping="Wrap" Foreground="Black" FontWeight="SemiBold"/>
-                                <TextBlock FontSize="25pt" Foreground="Black">
-                            <Run Text="dsadsa" />
-                            <Run Text=" $$" />
-                                </TextBlock>
-                                <TextBlock Text="" FontSize="18pt" Foreground="Black"/>
-                                <TextBlock Text="" FontSize="18pt" Foreground="Black"/>
-                                <TextBlock Text="" FontSize="18pt" Foreground="Black"/>
+                                <TextBlock Text="{x:Bind IdProjet}" FontWeight="Light" FontSize="15pt" Foreground="WhiteSmoke"/>
+                                <TextBlock Text="{x:Bind Titre}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
+                                <TextBlock FontSize="25pt" Foreground="White" Text="{x:Bind DateDebut}"/>
                             </StackPanel>
                         </DataTemplate>
                     </GridView.ItemTemplate>

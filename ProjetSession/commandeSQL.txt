@@ -13,7 +13,7 @@ CREATE TABLE employe(
     );
 
 CREATE TABLE client(
-    id_client VARCHAR(3) UNIQUE PRIMARY KEY,
+    id_client INTEGER(3) UNIQUE PRIMARY KEY,
     nom VARCHAR(50),
     adresse VARCHAR(100),
     numero_tel VARCHAR(30),
@@ -52,7 +52,7 @@ CREATE TRIGGER identifiantClient BEFORE INSERT
     on client
     FOR EACH ROW
     BEGIN
-        SET NEW.identifiant = CAST(FLOOR(rand()*899) + 100 AS CHAR);
+        SET NEW.idClient = FLOOR(rand()*899) + 100;
     end //
 DELIMITER ;
 

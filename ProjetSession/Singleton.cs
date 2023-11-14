@@ -23,7 +23,7 @@ namespace ProjetSession
             listeProjet = new ObservableCollection<Projet>();
             listeClient = new ObservableCollection<Client>();
             listeEmploye = new ObservableCollection<Employe>();
-            //con = new MySqlConnection("Server=cours.cegep3r.info;Database=2172853-samuel-girard;Uid=2172853;Pwd=2172853");
+            //con = new MySqlConnection("Server=cours.cegep3r.info;Database=2172853-girard-samuel;Uid=2172853;Pwd=2172853");
         }
 
         public static Singleton GetInstance()
