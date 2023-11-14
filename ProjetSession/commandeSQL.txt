@@ -1,0 +1,69 @@
+-----------------------------CRÉATION DES TABLES-------------------------------
+CREATE TABLE employe(
+    matricule VARCHAR(10) UNIQUE PRIMARY KEY,
+    nom VARCHAR(20),
+    prenom VARCHAR(20),
+    date_naissance DATE,
+    email VARCHAR(50),
+    adresse VARCHAR(100),
+    date_embauche DATE,
+    taux INT,
+    photo VARCHAR(1000),
+    statut VARCHAR(20) -- Journalier ou permanent
+);
+
+CREATE TABLE client(
+    identifiant VARCHAR(3) UNIQUE PRIMARY KEY,
+    nom VARCHAR(20),
+    adresse VARCHAR(100),
+    numero_tel VARCHAR(30),
+    email VARCHAR(100)
+);
+
+CREATE TABLE projet(
+    numero VARCHAR(11) PRIMARY KEY UNIQUE,
+    titre VARCHAR(100),
+    date_debut DATE,
+    description VARCHAR(255),
+    budget INT,
+    nb_employeRequis INT(5),
+    salaireTotal INT,
+    client VARCHAR(3),
+    statut VARCHAR(15), -- Terminé ou en cours
+    FOREIGN KEY projet(client) REFERENCES client(identifiant)
+);
+
+-----------------------------TRIGGER---------------------------------
+
+/*Trigger pour le matricule de l'employe*/
+DELIMITER  //
+CREATE TRIGGER matriculeEmp BEFORE INSERT
+    on employe
+    FOR EACH ROW
+    BEGIN
+        SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 0, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
+    end //
+DELIMITER ;
+
+/*Trigger pour l'identifiant du client*/
+DELIMITER  //
+CREATE TRIGGER identifiantClient BEFORE INSERT
+    on client
+    FOR EACH ROW
+    BEGIN
+        SET NEW.identifiant = CAST(FLOOR(rand()*899) + 100 AS CHAR);
+    end //
+DELIMITER ;
+
+
+/*Trigger pour le numéro de projet*/
+DELIMITER  //
+CREATE TRIGGER numeroProjet BEFORE INSERT
+    on projet
+    FOR EACH ROW
+    BEGIN
+        SET NEW.numero = CONCAT(UPPER(NEW.client), '-', FLOOR(rand()*89) + 10, '-', YEAR(NEW.date_debut));
+    end //
+DELIMITER ;
+
+
