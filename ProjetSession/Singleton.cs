@@ -75,5 +75,43 @@ namespace ProjetSession
                 return null;
             }
         }
+
+
+        public ObservableCollection<Client> GetListeClient()
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT * FROM client";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Client unClient = new Client()
+                    {
+                        Id_Client = reader.GetString("identifiant"),
+                        Nom = reader.GetString("nom"),
+                        Adresse = reader.GetString("adresse"),
+                        Num_Tel = reader.GetString("numero_tel"),
+                        Email = reader.GetString("email"),
+                    };
+
+                    listeClient.Add(unClient);
+                }
+
+                reader.Close();
+                con.Close();
+
+                return listeClient;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                return null;
+            }
+        }
     }
 }
