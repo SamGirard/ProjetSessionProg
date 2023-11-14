@@ -18,9 +18,10 @@
                 <NavigationViewItem Content="Liste employés" x:Name="iListeEmploye" Icon="Contact2"/>
                 <NavigationViewItemSeparator/>
                 <NavigationViewItemHeader Content="Ajouter"/>
-                <NavigationViewItem Content="Ajouter un nouveau projet" x:Name="iAjoutProjet" Icon="Add"/>
+                <NavigationViewItem Content="Ajouter un nouveau projet" x:Name="iAjoutProjet" Tapped="iAjoutProjet_Tapped" SelectsOnInvoked="False" Icon="Add"/>
                 <NavigationViewItem Content="Ajouter un nouvel employé" x:Name="iAjoutEmpl" Icon="AddFriend"/>
                 <NavigationViewItem Content="Ajouter un nouveau client" x:Name="iAjoutClient" Icon="AddFriend"/>
+                <TextBlock x:Name="dialogAjout"/>
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
@@ -28,6 +29,7 @@
                 <NavigationViewItem Content="Exporter" x:Name="iExport" Tapped="iExport_Tapped" SelectsOnInvoked="False" Icon="Save"/>
                 <NavigationViewItemSeparator/>
                 <NavigationViewItem Content="Se déconnecter" x:Name="iDeco" Tapped="iDeco_Tapped" SelectsOnInvoked="False" Icon="OpenPane"/>
+                
             </NavigationView.FooterMenuItems>
 
             <Frame x:Name="mainFrame"/>

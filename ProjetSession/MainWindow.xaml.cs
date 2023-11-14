@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -53,6 +54,16 @@ namespace ProjetSession
         private void iDeco_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
+        }
+
+        private void iAjoutProjet_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = dialogAjout.XamlRoot;
+            dialog.Title = "Créer un nouveau projet";
+            dialog.PrimaryButtonText = "Ajouter";
+            dialog.CloseButtonText = "Annuler";
+            dialog.Content;
         }
     }
 }
