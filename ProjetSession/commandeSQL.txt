@@ -1,36 +1,37 @@
 -----------------------------CRÉATION DES TABLES-------------------------------
 CREATE TABLE employe(
     matricule VARCHAR(10) UNIQUE PRIMARY KEY,
-    nom VARCHAR(20),
-    prenom VARCHAR(20),
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
     date_naissance DATE,
-    email VARCHAR(50),
+    email VARCHAR(150),
     adresse VARCHAR(100),
     date_embauche DATE,
-    taux INT,
+    taux DOUBLE,
     photo VARCHAR(1000),
-    statut VARCHAR(20) -- Journalier ou permanent
-);
+    statut ENUM('Journalier', 'Permanent')
+    );
 
 CREATE TABLE client(
-    identifiant VARCHAR(3) UNIQUE PRIMARY KEY,
-    nom VARCHAR(20),
+    id_client VARCHAR(3) UNIQUE PRIMARY KEY,
+    nom VARCHAR(50),
     adresse VARCHAR(100),
     numero_tel VARCHAR(30),
-    email VARCHAR(100)
+    email VARCHAR(150)
 );
 
 CREATE TABLE projet(
-    numero VARCHAR(11) PRIMARY KEY UNIQUE,
+    id_projet VARCHAR(11) PRIMARY KEY UNIQUE,
     titre VARCHAR(100),
     date_debut DATE,
     description VARCHAR(255),
-    budget INT,
-    nb_employeRequis INT(5),
-    salaireTotal INT,
-    client VARCHAR(3),
-    statut VARCHAR(15), -- Terminé ou en cours
-    FOREIGN KEY projet(client) REFERENCES client(identifiant)
+    budget DOUBLE,
+    nb_employe INT,
+    salaireTotal DOUBLE,
+    id_client VARCHAR(3),
+    statut ENUM('Terminé', 'En cours'),
+    CHECK (nb_employe <= 5),
+    FOREIGN KEY projet(id_client) REFERENCES client(id_client)
 );
 
 -----------------------------TRIGGER---------------------------------
@@ -64,6 +65,28 @@ CREATE TRIGGER numeroProjet BEFORE INSERT
     BEGIN
         SET NEW.numero = CONCAT(UPPER(NEW.client), '-', FLOOR(rand()*89) + 10, '-', YEAR(NEW.date_debut));
     end //
+DELIMITER ;
+
+-----------------------------Procédures---------------------------------
+DELIMITER //
+CREATE PROCEDURE p_ajout_employe(IN matricule VARCHAR(10), IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
+BEGIN
+    INSERT into employe VALUES(matricule, nom, prenom, dateNaiss, email, adresse, date_embauche, taux, photo, statut);
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE p_ajout_client(IN id VARCHAR(3), IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
+BEGIN
+    INSERT into client VALUES(id, nom, adresse, numero_tel, email);
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE p_ajout_projet(IN id VARCHAR(3), IN titre VARCHAR(50), IN date_debut DATE, IN description VARCHAR(255), IN budget DOUBLE, IN nbEmpl INT, IN salairTot DOUBLE, IN id_client VARCHAR(3), IN statut VARCHAR(20))
+BEGIN
+    INSERT into client VALUES(id, titre, date_debut, description, budget, nbEmpl, salairTot, id_client, statut);
+end //
 DELIMITER ;
 
 
