@@ -10,13 +10,13 @@ namespace ProjetSession
 {
     internal class Client : INotifyPropertyChanged
     {
-        int id_client;
+        string id_client;
         string nom;
         string adresse;
         string num_tel;
         string email;
 
-        public int Id_Client
+        public string Id_Client
         {
             get { return id_client; }
             set { id_client = value; this.OnPropertyChanged(); }
