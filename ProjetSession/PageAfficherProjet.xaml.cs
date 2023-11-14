@@ -27,7 +27,7 @@ namespace ProjetSession
         public PageAfficherProjet()
         {
             this.InitializeComponent();
-            //gvListe.ItemsSource = Singleton.GetInstance().GetListeProduits();
+            gvListe.ItemsSource = Singleton.GetInstance().GetListeProjet();
         }
     }
 }
