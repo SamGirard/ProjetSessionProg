@@ -8,7 +8,29 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <Grid>
+        <NavigationView x:Name="navView" PaneTitle="Gestion entreprise" PaneDisplayMode="Left" SelectionChanged="navView_SelectionChanged"
+        IsBackButtonVisible="Collapsed" IsSettingsVisible="False">
+            <NavigationView.MenuItems>
+                <NavigationViewItemHeader Content="Listes"/>
+                <NavigationViewItem Content="Liste projets" x:Name="iListeProjet" Icon="Library"/>
+                <NavigationViewItem Content="Liste clients" x:Name="iListeClient" Icon="Contact"/>
+                <NavigationViewItem Content="Liste employés" x:Name="iListeEmploye" Icon="Contact2"/>
+                <NavigationViewItemSeparator/>
+                <NavigationViewItemHeader Content="Ajouter"/>
+                <NavigationViewItem Content="Ajouter un nouveau projet" x:Name="iAjoutProjet" Icon="Add"/>
+                <NavigationViewItem Content="Ajouter un nouvel employé" x:Name="iAjoutEmpl" Icon="AddFriend"/>
+                <NavigationViewItem Content="Ajouter un nouveau client" x:Name="iAjoutClient" Icon="AddFriend"/>
+            </NavigationView.MenuItems>
+
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="Importer" x:Name="iImport" Tapped="iImport_Tapped" SelectsOnInvoked="False" Icon="Import"/>
+                <NavigationViewItem Content="Exporter" x:Name="iExport" Tapped="iExport_Tapped" SelectsOnInvoked="False" Icon="Save"/>
+                <NavigationViewItemSeparator/>
+                <NavigationViewItem Content="Se déconnecter" x:Name="iDeco" Tapped="iDeco_Tapped" SelectsOnInvoked="False" Icon="OpenPane"/>
+            </NavigationView.FooterMenuItems>
+            
+            
+        </NavigationView>
+    </Grid>
 </Window>

@@ -22,9 +22,24 @@ namespace ProjetSession
             this.InitializeComponent();
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            myButton.Content = "Clicked";
+
+        }
+
+        private void iImport_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void iExport_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void iDeco_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
         }
     }
 }
