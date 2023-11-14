@@ -29,8 +29,9 @@
                 <NavigationViewItemSeparator/>
                 <NavigationViewItem Content="Se déconnecter" x:Name="iDeco" Tapped="iDeco_Tapped" SelectsOnInvoked="False" Icon="OpenPane"/>
             </NavigationView.FooterMenuItems>
-            
-            
+
+            <Frame x:Name="mainFrame"/>
         </NavigationView>
+        
     </Grid>
 </Window>

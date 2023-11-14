@@ -24,8 +24,21 @@ namespace ProjetSession
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
+            var items = (NavigationViewItem)args.SelectedItem;
+
+            switch (items.Name)
+            {
+                case "iListeProjet":
+                    mainFrame.Navigate(typeof(PageAfficherProjet));
+                    break;
+
+                default:
+                    break;
+            }
 
         }
+
+
 
         private void iImport_Tapped(object sender, TappedRoutedEventArgs e)
         {

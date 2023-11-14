@@ -10,17 +10,17 @@ namespace ProjetSession
 {
     internal class Projet : INotifyPropertyChanged
     {
-        int idProjet;
+        string idProjet;
         string titre;
         string dateDebut;
         string description;
         double budget;
         int nbEmploye;
         double totalSal;
-        int[] idCLient = new int[] {0};
+        string idCLient;
         string statut;
 
-        public int IdProjet
+        public string IdProjet
         {
             get { return idProjet; }
             set { idProjet = value; this.OnPropertyChanged(); }
@@ -59,12 +59,12 @@ namespace ProjetSession
             set { totalSal = value; this.OnPropertyChanged(); }
         }
         
-        public int[] IdCLient
+        public string IdCLient
         {
             get { return idCLient; }
             set
             {
-
+                idCLient = value; this.OnPropertyChanged();
             }
         }
         public string Statut
