@@ -64,14 +64,14 @@ namespace ProjetSession
 
         }
 
-        private void iAjoutProjet_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void iAjoutProjet_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            ContentDialog dialog = new ContentDialog();
+            AjoutProjetContent dialog = new AjoutProjetContent();
             dialog.XamlRoot = dialogAjout.XamlRoot;
             dialog.Title = "Créer un nouveau projet";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
-            //dialog.Content;
+            ContentDialogResult result = await dialog.ShowAsync();
         }
     }
 }
