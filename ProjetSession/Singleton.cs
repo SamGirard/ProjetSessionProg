@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
 
 namespace ProjetSession
@@ -23,7 +24,7 @@ namespace ProjetSession
             listeProjet = new ObservableCollection<Projet>();
             listeClient = new ObservableCollection<Client>();
             listeEmploye = new ObservableCollection<Employe>();
-            //con = new MySqlConnection("Server=cours.cegep3r.info;Database=2172853-girard-samuel;Uid=2172853;Pwd=2172853");
+            con = new MySqlConnection("Server=cours.cegep3r.info;Database=2172853-girard-samuel;Uid=2172853;Pwd=2172853");
         }
 
         public static Singleton GetInstance()
@@ -113,5 +114,80 @@ namespace ProjetSession
                 return null;
             }
         }
+
+        public ObservableCollection<Employe> GetListeEmploye()
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT * FROM employe";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Employe unEmploye = new Employe()
+                    {
+                        Matricule = reader.GetString("matricule"),
+                        Nom = reader.GetString("nom"),
+                        Prenom = reader.GetString("prenom"),
+                        DateNaiss = reader.GetString("date_naissance"),
+                        Email = reader.GetString("email"),
+                        Adresse = reader.GetString("adresse"),
+                        DateEmb = reader.GetString("date_embauche"),
+                        TauxHor = reader.GetInt32("taux"),
+                        Photo = reader.GetString("photo"),
+                        Statut = reader.GetString("statut"),
+                    };
+
+                    listeEmploye.Add(unEmploye);
+                }
+
+                reader.Close();
+                con.Close();
+
+                return listeEmploye;
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+                return null;
+            }
+        }
+
+
+        public void AjouterEmploye(string nom, string prenom, DateFormat date_naissance, string email, string adresse, DateFormat dateEmbauche, int taux, string photo, string statut)
+        {
+            try
+            {
+
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO employe values(null, @nom, @prenom, @date_naissance, @email, @adresse, @date_embauche, @taux, @photo, @statut)";
+
+                commande.Parameters.AddWithValue("@nom", nom);
+                commande.Parameters.AddWithValue("@prenom", prenom);
+                commande.Parameters.AddWithValue("@date_naissance", date_naissance);
+                commande.Parameters.AddWithValue("@email", email);
+                commande.Parameters.AddWithValue("@adresse", adresse);
+                commande.Parameters.AddWithValue("@date_embauche", dateEmbauche);
+                commande.Parameters.AddWithValue("@taux", taux);
+                commande.Parameters.AddWithValue("@photo", photo);
+                commande.Parameters.AddWithValue("@statut", statut);
+
+
+                con.Open();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception)
+            {
+                con.Close();
+            }
+        }
+
     }
 }

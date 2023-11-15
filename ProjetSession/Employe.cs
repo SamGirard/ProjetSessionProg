@@ -10,7 +10,7 @@ namespace ProjetSession
 {
     internal class Employe : INotifyPropertyChanged
     {
-        int matricule;
+        string matricule;
         string nom;
         string prenom;
         string dateNaiss;
@@ -21,7 +21,7 @@ namespace ProjetSession
         string photo;
         string statut;
 
-        public int Matricule
+        public string Matricule
         {
             get { return matricule; }
             set { matricule = value; this.OnPropertyChanged(); }

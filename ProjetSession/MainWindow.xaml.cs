@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,13 @@ namespace ProjetSession
             {
                 case "iListeProjet":
                     mainFrame.Navigate(typeof(PageAfficherProjet));
+                    break;
+
+
+                case "iAjoutEmpl":
+                    AjouterEmploye dialog = new AjouterEmploye();
+                    
+        
                     break;
 
                 default:
@@ -63,7 +71,7 @@ namespace ProjetSession
             dialog.Title = "Créer un nouveau projet";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
-            dialog.Content;
+            //dialog.Content;
         }
     }
 }
