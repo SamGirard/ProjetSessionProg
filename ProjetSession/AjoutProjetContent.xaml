@@ -13,21 +13,21 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical">  
 
-            <TextBox x:Name="tbTitre" PlaceholderText="Titre"/>
+            <TextBox x:Name="tbTitre" Header="Titre"/>
             <TextBlock x:Name="errTitre" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
             
-            <CalendarDatePicker x:Name="cdpDate" Header="Date" PlaceholderText="Choisissez une date" HorizontalAlignment="Stretch"/>
+            <CalendarDatePicker x:Name="cdpDate" Header="Choisissez une date" HorizontalAlignment="Stretch"/>
             <TextBlock x:Name="errDate" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
-            <ComboBox x:Name="cbClient" DisplayMemberPath="Nom" HorizontalAlignment="Stretch" PlaceholderText="Client" SelectedIndex="-1" x:DefaultBindMode="OneWay">
+            <ComboBox x:Name="cbClient" DisplayMemberPath="Nom" HorizontalAlignment="Stretch" Header="Client" SelectedIndex="-1" x:DefaultBindMode="OneWay">
                 
             </ComboBox>
             <TextBlock x:Name="errClientt" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
-            <TextBox x:Name="tbDescription" PlaceholderText="Description"/>
+            <TextBox x:Name="tbDescription" Header="Description"/>
             <TextBlock x:Name="errDesc" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
             
-            <TextBox x:Name="tbNbEmploye" PlaceholderText="Nombre d'employé requis"/>
+            <TextBox x:Name="tbNbEmploye" Header="Nombre d'employé requis"/>
             <TextBlock x:Name="errNbEmploye" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
         
