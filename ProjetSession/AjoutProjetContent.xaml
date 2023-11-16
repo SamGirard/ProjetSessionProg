@@ -9,57 +9,33 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">  
 
-        <!--Row 0-->
-        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-            <TextBox x:Name="tbIdProjet" Header="Id du projet"/>
+            <!--Row 0-->
+            <TextBox x:Name="tbIdProjet" Width="400" Header="Id du projet"/>
             <TextBlock x:Name="idProjetVide" Foreground="red" FontWeight="Bold"/>
-        </StackPanel>
+   
 
-        <StackPanel Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
             <TextBox x:Name="tbIdClient" Header="Id du client"/>
             <TextBlock x:Name="idClientVide" Foreground="red" FontWeight="Bold"/>
-        </StackPanel>
 
         <!--Row 1-->
-        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBox x:Name="tbTitre" Header="Titre"/>
             <TextBlock x:Name="titreVide" Foreground="red" FontWeight="Bold"/>
-        </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="2">
             <CalendarDatePicker></CalendarDatePicker>
             <TextBlock x:Name="dateVide" Foreground="red" FontWeight="Bold"/>
-        </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="3">
             <ComboBox x:Name="cbClient" HorizontalAlignment="Stretch" Header="Client" SelectedIndex="-1" x:DefaultBindMode="OneWay">
                 
             </ComboBox>
             <TextBlock x:Name="clientVide" Foreground="red" FontWeight="Bold"/>
-        </StackPanel>
 
         <!--Row 2-->
-        <StackPanel Grid.Row="2" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="3">
             <TextBox x:Name="tbDescription" Header="Description"/>
             <TextBlock x:Name="descriptionVide" Foreground="red" FontWeight="Bold"/>
-        </StackPanel>
         
         <!--Row 3-->
-        
+        </StackPanel>
     </Grid>
 </ContentDialog>
