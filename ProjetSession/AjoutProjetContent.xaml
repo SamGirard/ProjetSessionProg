@@ -17,12 +17,7 @@
             <TextBlock x:Name="errClient" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
             <TextBox x:Name="tbTitre" PlaceholderText="Titre"/>
-            <TextBlock x:Name="errTitre" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
-
-
-
-
-            
+            <TextBlock x:Name="errTitre" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock
             <CalendarDatePicker x:Name="cdpDate" Header="Date" PlaceholderText="Choisissez une date" HorizontalAlignment="Stretch"/>
 
             <TextBlock x:Name="dateVide" Foreground="red" FontWeight="Bold"/>
