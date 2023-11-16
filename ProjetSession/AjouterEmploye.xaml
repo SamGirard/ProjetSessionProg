@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<ContentDialog
     x:Class="ProjetSession.AjouterEmploye"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,7 +8,8 @@
     mc:Ignorable="d">
 
     <Grid>
-        <TextBlock FontSize="20pt" Margin="0 0 0 20">Entrer les informations</TextBlock>
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+            <TextBlock FontSize="20pt" Margin="0 0 0 20">Entrer les informations</TextBlock>
         
         <TextBox x:Name="tbxNom" PlaceholderText="Nom"></TextBox>
         <TextBlock x:Name="errNom" Foreground="Red" FontSize="12pt" Margin="0 10 0 30"></TextBlock>
@@ -39,6 +40,7 @@
             <x:String>Permanent</x:String>
         </ComboBox>
         <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12pt" Margin="0 10 0 30"></TextBlock>
+      </StackPanel>
 
     </Grid>
-</UserControl>
+</ContentDialog>
