@@ -30,7 +30,41 @@ namespace ProjetSession
             if (string.IsNullOrEmpty(tbxNom.Text))
             {
                 erreur = true;
-                errNom.Text = champVide;
+                errNom.Text = "Le champ nom est obligatoire";
+            }
+            else
+            {
+                errNom.Text = "";
+            }
+
+            if (string.IsNullOrEmpty(tbxEmail.Text))
+            {
+                erreur = true;
+                errEmail.Text = "Le champ email est obligatoire";
+            }
+            else
+            {
+                errEmail.Text = "";
+            }
+
+            if (string.IsNullOrEmpty(tbxAdresse.Text))
+            {
+                erreur = true;
+                errAdresse.Text = "Le champ adresse est obligatoire";
+            }
+            else
+            {
+                errAdresse.Text = "";
+            }
+
+            if (string.IsNullOrEmpty(tbxTel.Text))
+            {
+                erreur = true;
+                errTel.Text = "Le champ numéro de téléphone est obligatoire";
+            }
+            else
+            {
+                errTel.Text = "";
             }
 
         }
