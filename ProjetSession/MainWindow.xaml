@@ -21,7 +21,7 @@
                 <NavigationViewItem Content="Créer un nouveau projet" x:Name="iAjoutProjet" Tapped="iAjoutProjet_Tapped" SelectsOnInvoked="False" Icon="Add"/>
                 <NavigationViewItem Content="Ajouter un nouvel employé" x:Name="iAjoutEmpl" Tapped="iAjoutEmpl_Tapped" SelectsOnInvoked="False" Icon="AddFriend"/>
                 <NavigationViewItem Content="Ajouter un nouveau client" x:Name="iAjoutClient" Tapped="iAjoutClient_Tapped" SelectsOnInvoked="False" Icon="AddFriend"/>
-                <TextBlock x:Name="dialogAjout"/>
+                <TextBlock x:Name="dialogAjout" IsHitTestVisible="False"/>
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
