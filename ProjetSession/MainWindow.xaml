@@ -19,7 +19,7 @@
                 <NavigationViewItemSeparator/>
                 <NavigationViewItemHeader Content="Ajouter"/>
                 <NavigationViewItem Content="Ajouter un nouveau projet" x:Name="iAjoutProjet" Tapped="iAjoutProjet_Tapped" SelectsOnInvoked="False" Icon="Add"/>
-                <NavigationViewItem Content="Ajouter un nouvel employé" x:Name="iAjoutEmpl" Tapped="iAjoutEmpl_Tapped" Icon="AddFriend"/>
+                <NavigationViewItem Content="Ajouter un nouvel employé" x:Name="iAjoutEmpl" Tapped="iAjoutEmpl_Tapped" SelectsOnInvoked="False" Icon="AddFriend"/>
                 <NavigationViewItem Content="Ajouter un nouveau client" x:Name="iAjoutClient" Icon="AddFriend"/>
                 <TextBlock x:Name="dialogAjout"/>
             </NavigationView.MenuItems>

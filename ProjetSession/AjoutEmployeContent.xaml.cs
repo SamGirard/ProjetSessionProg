@@ -1,11 +1,3 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,11 +5,19 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Navigation;
+using Microsoft.WindowsAppSDK.Runtime.Packages;
+using Microsoft.VisualBasic;
 
 namespace ProjetSession
 {
-    public sealed partial class AjouterEmploye : ContentDialog
+    public sealed partial class AjoutEmployeContent : ContentDialog
     {
 
         string nom = "";
@@ -29,12 +29,10 @@ namespace ProjetSession
         string photo = "";
         string statut = "";
 
-
-        public AjouterEmploye()
+        public AjoutEmployeContent()
         {
             this.InitializeComponent();
         }
-
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
@@ -45,7 +43,8 @@ namespace ProjetSession
                 errNom.Text = "Le nom est vide";
                 erreur = true;
             }
-            else {
+            else
+            {
                 errNom.Text = "";
                 nom = tbxNom.Text;
             }

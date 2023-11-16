@@ -130,7 +130,7 @@ namespace ProjetSession
                 {
                     Employe unEmploye = new Employe()
                     {
-                        Matricule = reader.GetString("matricule"),
+                        Matricule = Convert.ToInt32(reader.GetString("matricule")),
                         Nom = reader.GetString("nom"),
                         Prenom = reader.GetString("prenom"),
                         DateNaiss = reader.GetString("date_naissance"),
