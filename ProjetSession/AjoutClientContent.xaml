@@ -15,17 +15,19 @@
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
                 <TextBlock FontSize="12pt" Margin="0 0 0 20">Entrer les informations suivantes</TextBlock>
 
-                <TextBox x:Name="tbxNom" Header="Nom"></TextBox>
-                <TextBlock x:Name="errNom" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
+                <TextBox x:Name="tbxNom" Header="Nom" PlaceholderText="Entrez nom complet"/>
+                <TextBlock x:Name="errNom" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"/>
 
-                <TextBox x:Name="tbxEmail" Header="Email"></TextBox>
-                <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
+                <TextBox x:Name="tbxEmail" Header="Email" PlaceholderText="example@gmail.com"/>
+                <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"/>
 
-                <TextBox x:Name="tbxAdresse" Header="Adresse"></TextBox>
-                <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
+                <TextBox x:Name="tbxAdresse" Header="Adresse" PlaceholderText="Entrez l'adresse"/>
+                <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"/>
 
-                <TextBox x:Name="tbxTel" Header="Numéro de téléphone"></TextBox>
-                <TextBlock x:Name="errTel" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
+                <TextBox x:Name="tbxTel" Header="Numéro de téléphone" TextChanged="tbxTel_TextChanged" MaxLength="14" PlaceholderText="(   )-   -    "/>
+                <TextBlock x:Name="errTel" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"/>
+
+
 
             </StackPanel>
         </ScrollViewer>

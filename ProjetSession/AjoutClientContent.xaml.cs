@@ -68,5 +68,26 @@ namespace ProjetSession
             }
 
         }
+
+        private void tbxTel_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string input = tbxTel.Text;
+
+            string digitsOnly = new string(input.Where(char.IsDigit).ToArray());
+
+            if (digitsOnly.Length >= 3)
+            {
+                digitsOnly = $"({digitsOnly.Substring(0, 3)})-{digitsOnly.Substring(3)}";
+            }
+
+            if (digitsOnly.Length >= 7)
+            {
+                digitsOnly = $"{digitsOnly.Substring(0, 7)}-{digitsOnly.Substring(7)}";
+            }
+
+            // Mettre à jour le texte dans le TextBox
+            tbxTel.Text = digitsOnly;
+            tbxTel.SelectionStart = digitsOnly.Length;
+        }
     }
 }
