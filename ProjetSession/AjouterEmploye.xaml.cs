@@ -44,6 +44,7 @@ namespace ProjetSession
             {
                 errNom.Text = "Le nom est vide";
                 erreur = true;
+                args.Cancel = true;
             }
             else {
                 errNom.Text = "";
@@ -54,6 +55,7 @@ namespace ProjetSession
             {
                 errPrenom.Text = "Le prenom est vide";
                 erreur = true;
+                args.Cancel = true;
             }
             else
             {
@@ -66,6 +68,7 @@ namespace ProjetSession
             {
                 errEmail.Text = "L'email est vide";
                 erreur = true;
+                args.Cancel = true;
             }
             else
             {
@@ -78,6 +81,7 @@ namespace ProjetSession
             {
                 errAdresse.Text = "L'adresse est vide";
                 erreur = true;
+                args.Cancel = true;
             }
             else
             {
@@ -90,6 +94,7 @@ namespace ProjetSession
             {
                 errTaux.Text = "Le taux est vide";
                 erreur = true;
+                args.Cancel = true;
             }
             else errTaux.Text = "";
 
@@ -99,6 +104,7 @@ namespace ProjetSession
             {
                 errPhoto.Text = "La photo est vide";
                 erreur = true;
+                args.Cancel = true;
             }
             else
             {
@@ -111,6 +117,7 @@ namespace ProjetSession
             {
                 errStatut.Text = "Le statut est vide";
                 erreur = true;
+                args.Cancel = true;
             }
             else
             {
