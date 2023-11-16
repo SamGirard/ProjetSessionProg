@@ -74,6 +74,7 @@ namespace ProjetSession
             dialog.Title = "Ajouter un employé";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Close;
             ContentDialogResult result = await dialog.ShowAsync();
         }
     }
