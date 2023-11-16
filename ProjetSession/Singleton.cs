@@ -151,7 +151,7 @@ namespace ProjetSession
         }
 
 
-        public void AjouterEmploye(string nom, string prenom, DateFormat date_naissance, string email, string adresse, DateFormat dateEmbauche, int taux, string photo, string statut)
+        public void AjouterEmploye(string nom, string prenom, DateTime date_naissance, string email, string adresse, DateTime dateEmbauche, int taux, string photo, string statut)
         {
             try
             {
@@ -168,6 +168,36 @@ namespace ProjetSession
                 commande.Parameters.AddWithValue("@date_embauche", dateEmbauche);
                 commande.Parameters.AddWithValue("@taux", taux);
                 commande.Parameters.AddWithValue("@photo", photo);
+                commande.Parameters.AddWithValue("@statut", statut);
+
+
+                con.Open();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception)
+            {
+                con.Close();
+            }
+        }
+
+
+        public void AjouterProjet(string titre, DateTime dateDebut, string client, string description, int budget, int nbEmployé, string statut)
+        {
+            try
+            {
+
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO projet values(null, @titre, @date_debut, @description, @budget, @nbEmploye, null, @client, @statut)";
+
+                commande.Parameters.AddWithValue("@titre", titre);
+                commande.Parameters.AddWithValue("@date_debut", dateDebut);
+                commande.Parameters.AddWithValue("@date_naissance", client);
+                commande.Parameters.AddWithValue("@email", description);
+                commande.Parameters.AddWithValue("@adresse", budget);
+                commande.Parameters.AddWithValue("@date_embauche", nbEmployé);
                 commande.Parameters.AddWithValue("@statut", statut);
 
 

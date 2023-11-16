@@ -63,7 +63,8 @@ namespace ProjetSession
             dialog.Title = "Créer un nouveau projet";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
-            ContentDialogResult result = await dialog.ShowAsync();
+            dialog.DefaultButton = ContentDialogButton.Close;
+            await dialog.ShowAsync();
         }
 
 

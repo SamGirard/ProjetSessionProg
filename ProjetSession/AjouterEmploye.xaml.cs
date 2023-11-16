@@ -22,10 +22,10 @@ namespace ProjetSession
 
         string nom = "";
         string prenom = "";
-        DateFormat dateNaissance;
+        DateTime dateNaissance;
         string email = "";
         string adresse = "";
-        DateFormat dateEmbauche;
+        DateTime dateEmbauche;
         string photo = "";
         string statut = "";
 
