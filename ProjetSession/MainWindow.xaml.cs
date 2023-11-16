@@ -63,6 +63,7 @@ namespace ProjetSession
             dialog.Title = "Créer un nouveau projet";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
             ContentDialogResult result = await dialog.ShowAsync();
         }
 
@@ -74,8 +75,19 @@ namespace ProjetSession
             dialog.Title = "Ajouter un employé";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Close;
-            await dialog.ShowAsync();
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            ContentDialogResult result = await dialog.ShowAsync();
+        }
+
+        private async void iAjoutClient_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            AjoutClientContent dialog = new AjoutClientContent();
+            dialog.XamlRoot = dialogAjout.XamlRoot;
+            dialog.Title = "Ajouter un employé";
+            dialog.PrimaryButtonText = "Ajouter";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            ContentDialogResult result = await dialog.ShowAsync();
         }
     }
 }
