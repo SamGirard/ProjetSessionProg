@@ -20,6 +20,7 @@ namespace ProjetSession
         public AjoutProjetContent()
         {
             this.InitializeComponent();
+            cbClient.ItemsSource = Singleton.GetInstance().GetListeClient();
         }
 
 

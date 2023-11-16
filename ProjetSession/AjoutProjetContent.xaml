@@ -19,26 +19,24 @@
             <TextBox x:Name="tbIdClient" Header="Id du client"/>
             <TextBlock x:Name="idClientVide" Foreground="red" FontWeight="Bold"/>
 
-        <!--Row 1-->
+            <!--Row 1-->
             <TextBox x:Name="tbTitre" Header="Titre"/>
             <TextBlock x:Name="titreVide" Foreground="red" FontWeight="Bold"/>
 
-            
-            <CalendarDatePicker>
-                
+
+            <CalendarDatePicker x:Name="cdpDate" Header="Date" PlaceholderText="Choisissez une date" HorizontalAlignment="Stretch">
             </CalendarDatePicker>
             <TextBlock x:Name="dateVide" Foreground="red" FontWeight="Bold"/>
 
-            <ComboBox x:Name="cbClient" HorizontalAlignment="Stretch" Header="Client" SelectedIndex="-1" x:DefaultBindMode="OneWay">
+            <ComboBox x:Name="cbClient" HorizontalAlignment="Stretch" Header="Client" SelectedIndex="-1" x:DefaultBindMode="OneWay" DisplayMemberPath="Nom">
                 
             </ComboBox>
             <TextBlock x:Name="clientVide" Foreground="red" FontWeight="Bold"/>
 
-        <!--Row 2-->
+            <!--Row 2-->
             <TextBox x:Name="tbDescription" Header="Description"/>
             <TextBlock x:Name="descriptionVide" Foreground="red" FontWeight="Bold"/>
         
-        <!--Row 3-->
         </StackPanel>
     </Grid>
 </ContentDialog>
