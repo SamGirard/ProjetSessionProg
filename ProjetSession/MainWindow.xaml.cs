@@ -65,15 +65,5 @@ namespace ProjetSession
             dialog.CloseButtonText = "Annuler";
             ContentDialogResult result = await dialog.ShowAsync();
         }
-
-        private async void iAjoutEmpl_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            AjouterEmploye dialog = new AjouterEmploye();
-            dialog.XamlRoot = dialogAjout.XamlRoot;
-            dialog.Title = "Ajouter un employé";
-            dialog.PrimaryButtonText = "Ajouter";
-            dialog.CloseButtonText = "Annuler";
-            ContentDialogResult result = await dialog.ShowAsync();
-        }
     }
 }
