@@ -6,39 +6,34 @@
     xmlns:local="using:ProjetSession"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    PrimaryButtonText="Ajouter"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical">  
 
-            <!--Row 0-->
-            <TextBox x:Name="tbIdProjet" Width="400" Header="Id du projet"/>
-            <TextBlock x:Name="idProjetVide" Foreground="red" FontWeight="Bold"/>
-   
+            <TextBox x:Name="tbIdClient" PlaceholderText="Identifiant du client"/>
+            <TextBlock x:Name="errClient" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
-            <TextBox x:Name="tbIdClient" Header="Id du client"/>
-            <TextBlock x:Name="idClientVide" Foreground="red" FontWeight="Bold"/>
+            <TextBox x:Name="tbTitre" PlaceholderText="Titre"/>
+            <TextBlock x:Name="errTitre" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
-        <!--Row 1-->
-            <TextBox x:Name="tbTitre" Header="Titre"/>
-            <TextBlock x:Name="titreVide" Foreground="red" FontWeight="Bold"/>
 
-            
-            <CalendarDatePicker>
-                
-            </CalendarDatePicker>
-            <TextBlock x:Name="dateVide" Foreground="red" FontWeight="Bold"/>
+            <CalendarDatePicker Width="400" PlaceholderText="Date"></CalendarDatePicker>
+            <TextBlock x:Name="errDate" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
-            <ComboBox x:Name="cbClient" HorizontalAlignment="Stretch" Header="Client" SelectedIndex="-1" x:DefaultBindMode="OneWay">
-                
+            <ComboBox x:Name="cbClient" HorizontalAlignment="Stretch" PlaceholderText="Client" SelectedIndex="-1" x:DefaultBindMode="OneWay">
+
             </ComboBox>
-            <TextBlock x:Name="clientVide" Foreground="red" FontWeight="Bold"/>
+            <TextBlock x:Name="errClientt" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
-        <!--Row 2-->
-            <TextBox x:Name="tbDescription" Header="Description"/>
-            <TextBlock x:Name="descriptionVide" Foreground="red" FontWeight="Bold"/>
-        
-        <!--Row 3-->
+            <TextBox x:Name="tbDescription" PlaceholderText="Description"/>
+            <TextBlock x:Name="errDesc" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
+
+            <TextBox x:Name="tbNbEmploye" PlaceholderText="Nombre d'employé requis"/>
+            <TextBlock x:Name="errNbEmploye" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
+
         </StackPanel>
     </Grid>
 </ContentDialog>
