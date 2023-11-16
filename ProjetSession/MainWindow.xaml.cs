@@ -40,6 +40,9 @@ namespace ProjetSession
                     
         
                     break;
+                case "iAjoutProjet":
+                    mainFrame.Navigate(typeof(PageAjoutProjet));
+                    break;
 
                 default:
                     break;
@@ -64,14 +67,6 @@ namespace ProjetSession
 
         }
 
-        private async void iAjoutProjet_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            AjoutProjetContent dialog = new AjoutProjetContent();
-            dialog.XamlRoot = dialogAjout.XamlRoot;
-            dialog.Title = "Créer un nouveau projet";
-            dialog.PrimaryButtonText = "Ajouter";
-            dialog.CloseButtonText = "Annuler";
-            ContentDialogResult result = await dialog.ShowAsync();
-        }
+
     }
 }
