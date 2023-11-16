@@ -51,9 +51,22 @@ namespace ProjetSession
 
         }
 
-        private void iDeco_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void iDeco_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            /*connexion dialog = new connexion();
+            dialog.XamlRoot = dialogAjout.XamlRoot;
+            dialog.Title = "Se connecter";
+            dialog.PrimaryButtonText = "Connexion";
+            dialog.CloseButtonText = "Annuler";
+            await dialog.ShowAsync();
 
+
+            if (connexions == true)
+            {
+                iAjoutProjet.IsEnabled = true;
+                iAjoutClient.IsEnabled = true;
+                iAjoutEmpl.IsEnabled = true;
+            }*/
         }
 
         private async void iAjoutProjet_Tapped(object sender, TappedRoutedEventArgs e)
