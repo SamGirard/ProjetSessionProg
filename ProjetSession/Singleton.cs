@@ -14,10 +14,9 @@ namespace ProjetSession
         private ObservableCollection<Projet> listeProjet;
         private ObservableCollection<Client> listeClient;
         private ObservableCollection<Employe> listeEmploye;
+        MySqlConnection con;
 
         private static Singleton instance;
-
-        MySqlConnection con;
 
         private Singleton()
         {
@@ -37,6 +36,7 @@ namespace ProjetSession
 
         public ObservableCollection<Projet> GetListeProjet()
         {
+            listeProjet.Clear();
             try
             {
                 MySqlCommand commande = new MySqlCommand();
@@ -64,22 +64,20 @@ namespace ProjetSession
 
                     listeProjet.Add(unProjet);
                 }
-
                 reader.Close();
-                con.Close();
-
-                return listeProjet;
+                con.Close();  
             }
             catch (Exception ex)
             {
                 con.Close();
-                return null;
             }
+            return listeProjet;
         }
 
 
         public ObservableCollection<Client> GetListeClient()
         {
+            listeClient.Clear();
             try
             {
                 MySqlCommand commande = new MySqlCommand();
@@ -102,21 +100,19 @@ namespace ProjetSession
 
                     listeClient.Add(unClient);
                 }
-
                 reader.Close();
                 con.Close();
-
-                return listeClient;
             }
             catch (Exception ex)
             {
                 con.Close();
-                return null;
             }
+            return listeClient;
         }
 
         public ObservableCollection<Employe> GetListeEmploye()
         {
+            listeEmploye.Clear();
             try
             {
                 MySqlCommand commande = new MySqlCommand();
@@ -130,7 +126,7 @@ namespace ProjetSession
                 {
                     Employe unEmploye = new Employe()
                     {
-                        Matricule = Convert.ToInt32(reader.GetString("matricule")),
+                        Matricule = reader.GetString("matricule"),
                         Nom = reader.GetString("nom"),
                         Prenom = reader.GetString("prenom"),
                         DateNaiss = reader.GetString("date_naissance"),
@@ -144,17 +140,14 @@ namespace ProjetSession
 
                     listeEmploye.Add(unEmploye);
                 }
-
                 reader.Close();
                 con.Close();
-
-                return listeEmploye;
             }
             catch (Exception ex)
             {
                 con.Close();
-                return null;
             }
+            return listeEmploye;
         }
 
 

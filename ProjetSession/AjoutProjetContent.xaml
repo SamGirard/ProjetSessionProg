@@ -23,7 +23,10 @@
             <TextBox x:Name="tbTitre" Header="Titre"/>
             <TextBlock x:Name="titreVide" Foreground="red" FontWeight="Bold"/>
 
-            <CalendarDatePicker></CalendarDatePicker>
+            
+            <CalendarDatePicker>
+                
+            </CalendarDatePicker>
             <TextBlock x:Name="dateVide" Foreground="red" FontWeight="Bold"/>
 
             <ComboBox x:Name="cbClient" HorizontalAlignment="Stretch" Header="Client" SelectedIndex="-1" x:DefaultBindMode="OneWay">
