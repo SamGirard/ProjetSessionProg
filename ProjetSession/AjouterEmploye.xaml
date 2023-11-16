@@ -11,39 +11,38 @@
     <Grid>
         <ScrollViewer>
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-            <TextBlock FontSize="12pt" Margin="0 0 0 20">Entrer les informations</TextBlock>
-        
-        <TextBox x:Name="tbxNom" PlaceholderText="Nom"></TextBox>
-        <TextBlock x:Name="errNom" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
+                <TextBlock FontSize="12pt" Margin="0 0 0 20">Entrer les informations</TextBlock>
 
-        <TextBox x:Name="tbxPrenom" PlaceholderText="Prénom"></TextBox>
-        <TextBlock x:Name="errPrenom" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
+                <TextBox x:Name="tbxNom" PlaceholderText="Nom"></TextBox>
+                <TextBlock x:Name="errNom" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
-        <CalendarDatePicker x:Name="dtDateNaiss" Width="400" PlaceholderText="Date de naissance"></CalendarDatePicker>
-        <TextBlock x:Name="errDate" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
+                <TextBox x:Name="tbxPrenom" PlaceholderText="Prénom"></TextBox>
+                <TextBlock x:Name="errPrenom" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
 
-        <TextBox x:Name="tbxEmail" PlaceholderText="Email"></TextBox>
-        <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
+                <CalendarDatePicker x:Name="dtDateNaiss" Width="400" PlaceholderText="Date de naissance"></CalendarDatePicker>
+                <TextBlock x:Name="errDate" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
 
-        <TextBox x:Name="tbxAdresse" PlaceholderText="Adresse"></TextBox>
-        <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
+                <TextBox x:Name="tbxEmail" PlaceholderText="Email"></TextBox>
+                <TextBlock x:Name="errEmail" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
 
-        <CalendarDatePicker x:Name="calDateEmb" Width="400" PlaceholderText="Date d'embauche"></CalendarDatePicker>
-        <TextBlock x:Name="errEmbauche" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
+                <TextBox x:Name="tbxAdresse" PlaceholderText="Adresse"></TextBox>
+                <TextBlock x:Name="errAdresse" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
 
-        <TextBox x:Name="tbxTaux" PlaceholderText="Taux"></TextBox>
-        <TextBlock x:Name="errTaux" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
+                <CalendarDatePicker x:Name="calDateEmb" Width="400" PlaceholderText="Date d'embauche"></CalendarDatePicker>
+                <TextBlock x:Name="errEmbauche" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
 
-        <TextBox x:Name="tbxPhoto" PlaceholderText="Photo"></TextBox>
-        <TextBlock x:Name="errPhoto" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
+                <TextBox x:Name="tbxTaux" PlaceholderText="Taux"></TextBox>
+                <TextBlock x:Name="errTaux" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
 
-        <ComboBox x:Name="cbxStatut" Width="400" PlaceholderText="Statut">
-            <x:String>Journalier</x:String>
-            <x:String>Permanent</x:String>
-        </ComboBox>
-        <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
-      </StackPanel>
+                <TextBox x:Name="tbxPhoto" PlaceholderText="Photo"></TextBox>
+                <TextBlock x:Name="errPhoto" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
+
+                <ComboBox x:Name="cbxStatut" Width="400" PlaceholderText="Statut">
+                    <x:String>Journalier</x:String>
+                    <x:String>Permanent</x:String>
+                </ComboBox>
+                <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
+            </StackPanel>
         </ScrollViewer>
-
     </Grid>
 </ContentDialog>
