@@ -69,7 +69,7 @@ namespace ProjetSession
 
         private async void iAjoutEmpl_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            AjoutEmployeContent dialog = new AjoutEmployeContent();
+            AjouterEmploye dialog = new AjouterEmploye();
             dialog.XamlRoot = dialogAjout.XamlRoot;
             dialog.Title = "Ajouter un employé";
             dialog.PrimaryButtonText = "Ajouter";
