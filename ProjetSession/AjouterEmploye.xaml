@@ -5,14 +5,15 @@
     xmlns:local="using:ProjetSession"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Padding="10">
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-            <TextBlock FontSize="20pt" Margin="0 0 0 20">Entrer les informations</TextBlock>
+            <TextBlock FontSize="12pt" Margin="0 0 0 20">Entrer les informations</TextBlock>
         
         <TextBox x:Name="tbxNom" PlaceholderText="Nom"></TextBox>
-        <TextBlock x:Name="errNom" Foreground="Red" FontSize="12pt" Margin="0 10 0 30"></TextBlock>
+        <TextBlock x:Name="errNom" Foreground="Red" FontSize="12pt" Margin="0 10 0 30" Width="400"></TextBlock>
 
         <TextBox x:Name="tbxPrenom" PlaceholderText="Prénom"></TextBox>
         <TextBlock x:Name="errPrenom" Foreground="Red" FontSize="12pt" Margin="0 10 0 30"></TextBlock>
