@@ -57,37 +57,28 @@ namespace ProjetSession
 
         private async void iDeco_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var connexions = false;
-
             connexion dialog = new connexion();
             dialog.XamlRoot = dialogAjout.XamlRoot;
             dialog.Title = "Se connecter";
             dialog.PrimaryButtonText = "Connexion";
             dialog.CloseButtonText = "Annuler";
-            await dialog.ShowAsync();
             ContentDialogResult result = await dialog.ShowAsync();
 
 
             if (result == ContentDialogResult.Primary)
             {
-                var erreur = false;
-
                 string utilisateur = dialog.User;
                 string motDePasse = dialog.Mdp;
 
+                bool estConnecter = Singleton.GetInstance().verif_Admin(utilisateur, motDePasse);
 
-
-                if (erreur == false)
+                if (estConnecter == true)
                 {
-                    Singleton.GetInstance().verif_Admin(utilisateur, motDePasse);
+                    iAjoutProjet.IsEnabled = true;
+                    iAjoutClient.IsEnabled = true;
+                    iAjoutEmpl.IsEnabled = true;
+                    iDeco.Content = "Se déconnecter";
                 }
-            }
-
-            if (connexions == true)
-            {
-                iAjoutProjet.IsEnabled = true;
-                iAjoutClient.IsEnabled = true;
-                iAjoutEmpl.IsEnabled = true;
             }
         }
 

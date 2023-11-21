@@ -36,11 +36,20 @@ namespace ProjetSession
 
             user = tbUtilisateur.Text;
             mdp = tbMotDePasse.Password;
+            bool infoValide = Singleton.GetInstance().verif_Admin(user, mdp);
 
-            if (user == "" || mdp == "")
+            if (string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(mdp))
             {
                 err.Text = "Les données entrées sont invalide";
                 args.Cancel = true;
+            }
+            else if(infoValide == false) {
+                err.Text = "Les données entrées sont invalide";
+                args.Cancel = true;
+            }
+            else
+            {
+                args.Cancel = false;
             }
         }
     }

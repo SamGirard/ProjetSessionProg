@@ -215,7 +215,7 @@ namespace ProjetSession
             }
         }
 
-        public bool verif_Admin(string utilisateur, String motDePasse)
+        public bool verif_Admin(string utilisateur, string motDePasse)
         {
             bool estConnecter = false;
             try
@@ -245,6 +245,25 @@ namespace ProjetSession
                 con.Close();
             }
 
+            if (estConnecter == true)
+            {
+                try
+                {
+                    MySqlCommand commande2 = new MySqlCommand();
+                    commande2.Connection = con;
+                    commande2.CommandText = "update admin set estConnecter = true WHERE utilisateur = @utilisateur";
+                    commande2.Parameters.AddWithValue("@utilisateur", utilisateur);
+
+                    con.Open();
+                    int i = commande2.ExecuteNonQuery();
+
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                }
+            }
             return estConnecter;
         }
 

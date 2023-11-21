@@ -13,7 +13,7 @@ CREATE TABLE employe(
     );
 
 CREATE TABLE client(
-    id_client INTEGER(3) UNIQUE PRIMARY KEY,
+    id_client VARCHAR(3) UNIQUE PRIMARY KEY,
     nom VARCHAR(50),
     adresse VARCHAR(100),
     numero_tel VARCHAR(30),
@@ -34,28 +34,34 @@ CREATE TABLE projet(
     FOREIGN KEY projet(id_client) REFERENCES client(id_client)
 );
 
+CREATE TABLE admin(
+    utilisateur VARCHAR(15),
+    motDePasse VARCHAR(255) UNIQUE,
+);
+
+alter table admin Add COLUMN estConnecter BOOL DEFAULT(false);
 -----------------------------TRIGGER---------------------------------
 
-/*Trigger pour le matricule de l'employe*/
-DELIMITER  //
-CREATE TRIGGER matriculeEmp BEFORE INSERT
-    on employe
-    FOR EACH ROW
-    BEGIN
-        SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 0, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
-    end //
-DELIMITER ;
 
 /*Trigger pour l'identifiant du client*/
 DELIMITER  //
 CREATE TRIGGER identifiantClient BEFORE INSERT
     on client
     FOR EACH ROW
-    BEGIN
-        SET NEW.idClient = FLOOR(rand()*899) + 100;
-    end //
+BEGIN
+    SET NEW.id_client = FLOOR(rand()*899) + 100;
+end //
 DELIMITER ;
 
+/*Trigger pour le numéro de projet*/
+DELIMITER  //
+CREATE TRIGGER numeroProjet BEFORE INSERT
+    on projet
+    FOR EACH ROW
+BEGIN
+    SET NEW.id_projet = CONCAT(UPPER(NEW.id_client), '-', FLOOR(rand()*89) + 10, '-', YEAR(NEW.date_debut));
+end //
+DELIMITER ;
 
 /*Trigger pour le numéro de projet*/
 DELIMITER  //
@@ -89,4 +95,17 @@ BEGIN
 end //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE afficher_projets()
+BEGIN
+    SELECT * FROM projet;
+end //
+DELIMITER ;
+-----------------------------INSERTION DE DONNÉE-----------------------------
+
+INSERT INTO client VALUES (null, 'Jean Lamontage', '47 rue bouol', '819-555-4443', 'email@email.xom');
+
+INSERT INTO projet VALUES (null, 'test', '2020-12-19', 'Descpription', 20000, 4, 15000, '811', 'Terminé');
+
+INSERT INTO admin VALUES ('admin', 'admin');
 
