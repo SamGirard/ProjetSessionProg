@@ -22,6 +22,15 @@ namespace ProjetSession
         public MainWindow()
         {
             this.InitializeComponent();
+            bool connecter = Singleton.GetInstance().valideConnection();
+
+            if(connecter == true)
+            {
+                iAjoutProjet.IsEnabled = true;
+                iAjoutClient.IsEnabled = true;
+                iAjoutEmpl.IsEnabled = true;
+                iDeco.Content = "Se déconnecter";
+            }
         }
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -57,28 +66,52 @@ namespace ProjetSession
 
         private async void iDeco_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            connexion dialog = new connexion();
-            dialog.XamlRoot = dialogAjout.XamlRoot;
-            dialog.Title = "Se connecter";
-            dialog.PrimaryButtonText = "Connexion";
-            dialog.CloseButtonText = "Annuler";
-            ContentDialogResult result = await dialog.ShowAsync();
+            if(Singleton.GetInstance().valideConnection() == false) { 
+                connexion dialog = new connexion();
+                dialog.XamlRoot = dialogAjout.XamlRoot;
+                dialog.Title = "Se connecter";
+                dialog.PrimaryButtonText = "Connexion";
+                dialog.CloseButtonText = "Annuler";
+                ContentDialogResult result = await dialog.ShowAsync();
 
 
-            if (result == ContentDialogResult.Primary)
-            {
-                string utilisateur = dialog.User;
-                string motDePasse = dialog.Mdp;
-
-                bool estConnecter = Singleton.GetInstance().verif_Admin(utilisateur, motDePasse);
-
-                if (estConnecter == true)
+                if (result == ContentDialogResult.Primary)
                 {
-                    iAjoutProjet.IsEnabled = true;
-                    iAjoutClient.IsEnabled = true;
-                    iAjoutEmpl.IsEnabled = true;
-                    iDeco.Content = "Se déconnecter";
+                    string utilisateur = dialog.User;
+                    string motDePasse = dialog.Mdp;
+
+                    bool estConnecter = Singleton.GetInstance().verif_Admin(utilisateur, motDePasse);
+
+                    if (estConnecter == true)
+                    {
+                        iAjoutProjet.IsEnabled = true;
+                        iAjoutClient.IsEnabled = true;
+                        iAjoutEmpl.IsEnabled = true;
+                        iDeco.Content = "Se déconnecter";
+                    }
                 }
+            } 
+            else
+            {
+                ContentDialog dialog2 = new ContentDialog();
+                dialog2.XamlRoot = mainFrame.XamlRoot;
+                dialog2.Title = "Déconnexion";
+                dialog2.PrimaryButtonText = "Oui";
+                dialog2.CloseButtonText = "Annuler";
+                dialog2.DefaultButton = ContentDialogButton.Close;
+                dialog2.Content = "Voulez-vous vraiment vous déconnecter?";
+
+                var result2 = await dialog2.ShowAsync();
+
+                if(result2 == ContentDialogResult.Primary)
+                {
+                    Singleton.GetInstance().deconnexion();
+                    iAjoutProjet.IsEnabled = false;
+                    iAjoutClient.IsEnabled = false;
+                    iAjoutEmpl.IsEnabled = false;
+                    iDeco.Content = "Se Connecter";
+                }
+
             }
         }
 

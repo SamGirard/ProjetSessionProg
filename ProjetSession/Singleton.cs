@@ -251,7 +251,7 @@ namespace ProjetSession
                 {
                     MySqlCommand commande2 = new MySqlCommand();
                     commande2.Connection = con;
-                    commande2.CommandText = "update admin set estConnecter = true WHERE utilisateur = @utilisateur";
+                    commande2.CommandText = "UPDATE admin SET estConnecter = true WHERE utilisateur = @utilisateur";
                     commande2.Parameters.AddWithValue("@utilisateur", utilisateur);
 
                     con.Open();
@@ -265,6 +265,57 @@ namespace ProjetSession
                 }
             }
             return estConnecter;
+        }
+
+        public bool valideConnection()
+        {
+            bool estConnecter = false;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT estConnecter FROM admin";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.GetInt32("estConnecter") == 1)
+                    {
+                        estConnecter = true;
+                        break;
+                    }
+
+                }
+                reader.Close();
+                con.Close();
+            }
+
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            return estConnecter;
+        }
+
+        public void deconnexion()
+        {
+            try
+            {
+                MySqlCommand commande2 = new MySqlCommand();
+                commande2.Connection = con;
+                commande2.CommandText = "UPDATE admin SET estConnecter = false WHERE 1 = 1";
+
+                con.Open();
+                int i = commande2.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
         }
 
     }
