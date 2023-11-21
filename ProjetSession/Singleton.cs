@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace ProjetSession
             listeProjet = new ObservableCollection<Projet>();
             listeClient = new ObservableCollection<Client>();
             listeEmploye = new ObservableCollection<Employe>();
-            con = new MySqlConnection("Server=cours.cegep3r.info;Database=2172853-girard-samuel;Uid=2172853;Pwd=2172853");
+            con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq19;Uid=2172853;Pwd=2172853");
         }
 
         public static Singleton GetInstance()
@@ -39,9 +40,9 @@ namespace ProjetSession
             listeProjet.Clear();
             try
             {
-                MySqlCommand commande = new MySqlCommand();
+                MySqlCommand commande = new MySqlCommand("afficher_projets");
                 commande.Connection = con;
-                commande.CommandText = "SELECT * FROM projet";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
 
                 con.Open();
                 MySqlDataReader reader = commande.ExecuteReader();
@@ -50,22 +51,22 @@ namespace ProjetSession
                 {
                     Projet unProjet = new Projet()
                     {
-                        IdProjet = reader.GetString("numero"),
+                        IdProjet = reader.GetString("id_projet"),
                         Titre = reader.GetString("titre"),
                         DateDebut = reader.GetString("date_debut"),
                         Description = reader.GetString("description"),
                         Budget = reader.GetInt32("budget"),
-                        NbEmploye = reader.GetInt32("nb_employeRequis"),
+                        NbEmploye = reader.GetInt32("nb_employe"),
                         TotalSal = reader.GetInt32("salaireTotal"),
-                        IdCLient = reader.GetString("client"),
-                        Statut = reader.GetString("status"),
+                        IdCLient = reader.GetString("id_client"),
+                        Statut = reader.GetString("statut"),
 
                     };
 
                     listeProjet.Add(unProjet);
                 }
                 reader.Close();
-                con.Close();  
+                con.Close();
             }
             catch (Exception ex)
             {
@@ -91,7 +92,7 @@ namespace ProjetSession
                 {
                     Client unClient = new Client()
                     {
-                        Id_Client = reader.GetString("identifiant"),
+                        Id_Client = reader.GetString("id_client"),
                         Nom = reader.GetString("nom"),
                         Adresse = reader.GetString("adresse"),
                         Num_Tel = reader.GetString("numero_tel"),
@@ -102,12 +103,14 @@ namespace ProjetSession
                 }
                 reader.Close();
                 con.Close();
+
+                return listeClient;
             }
             catch (Exception ex)
             {
                 con.Close();
+                return null;
             }
-            return listeClient;
         }
 
         public ObservableCollection<Employe> GetListeEmploye()
@@ -210,6 +213,39 @@ namespace ProjetSession
             {
                 con.Close();
             }
+        }
+
+        public bool verif_Admin(string utilisateur, String motDePasse)
+        {
+            bool estConnecter = false;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT * FROM admin";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (utilisateur == reader.GetString("utilisateur") && motDePasse == reader.GetString("motDePasse"))
+                    {
+                        estConnecter = true;
+                        break;
+                    }
+
+                }
+                reader.Close();
+                con.Close();
+            }
+
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return estConnecter;
         }
 
     }

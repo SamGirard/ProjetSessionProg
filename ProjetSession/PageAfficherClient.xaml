@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="ProjetSession.PageAfficherClient"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ProjetSession"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" Margin="30 30 30 30">
+                <TextBlock FontSize="50pt" FontWeight="Bold" HorizontalAlignment="Left">Les Clients</TextBlock>
+                <ListView x:Name="lvListe" Margin="0 50 0 50" IsItemClickEnabled="False" CanDragItems="True" AllowDrop="True" CanReorderItems="True" SelectionMode="Single">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:Client">
+                            <StackPanel CornerRadius="10" Padding="10" Orientation="Vertical" Height="100" Margin="10 10 10 20">
+                                <TextBlock Text="{x:Bind Id_Client}" FontWeight="Light" FontSize="15pt" Foreground="WhiteSmoke"/>
+                                <TextBlock Text="{x:Bind Nom}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
+                                <TextBlock FontSize="25pt" Foreground="White" Text="{x:Bind Num_Tel}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
