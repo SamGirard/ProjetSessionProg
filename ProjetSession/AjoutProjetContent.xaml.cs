@@ -27,8 +27,8 @@ namespace ProjetSession
         DateTime dateDebut;
         string client = "";
         string description = "";
-        string budget = "";
-        string nbEmploye = "";
+        int budget;
+        int nbEmploye;
         string status = "";
         
 
@@ -42,7 +42,12 @@ namespace ProjetSession
                 errTitre.Text = "Le titre est vide";
                 args.Cancel = true;
             }
-            else errTitre.Text = "";
+            else
+            {
+                tbTitre.Text = titre;
+                errTitre.Text = "";
+            }
+            
 
 
             if (cdpDate.Date == DateTimeOffset.MinValue)
@@ -51,7 +56,11 @@ namespace ProjetSession
                 errDate.Text = "La date est vide";
                 args.Cancel = true;
             }
-            else errDate.Text = "";
+            else
+            {
+                cdpDate.Date = dateDebut;
+                errDate.Text = "";
+            }
 
 
             if (cbClient.SelectedIndex == -1)
@@ -60,7 +69,11 @@ namespace ProjetSession
                 errClient.Text = "Le client est vide";
                 args.Cancel = true;
             }
-            else errClient.Text = "";
+            else
+            {
+                cbClient.SelectedItem = client;
+                errClient.Text = "";
+            }
 
 
             if (tbDescription.Text == "")
@@ -69,7 +82,11 @@ namespace ProjetSession
                 errDesc.Text = "La description est vide";
                 args.Cancel = true;
             }
-            else errDesc.Text = "";
+            else
+            {
+                tbDescription.Text = description;
+                errDesc.Text = "";
+            }
 
 
             if (tbBudget.Text == "")
@@ -78,7 +95,11 @@ namespace ProjetSession
                 errBudget.Text = "Le budget est vide";
                 args.Cancel = true;
             }
-            else errBudget.Text = "";
+            else
+            {
+                budget = Convert.ToInt32(tbBudget.Text);
+                errBudget.Text = "";
+            }
 
 
             if (tbNbEmploye.Text == "")
@@ -87,7 +108,11 @@ namespace ProjetSession
                 errNbEmploye.Text = "Le nombre d'employé est vide";
                 args.Cancel = true;
             }
-            else errNbEmploye.Text = "";
+            else
+            {
+                budget = Convert.ToInt32(tbNbEmploye.Text);
+                errNbEmploye.Text = "";
+            }
 
 
             if (cbStatut.SelectedIndex == -1)
@@ -96,16 +121,17 @@ namespace ProjetSession
                 errStatut.Text = "Le status est vide";
                 args.Cancel = true;
             }
-            else errStatut.Text = "";
-
-
-
-            if(erreur == false)
+            else
             {
-                int iNbEmplo = Convert.ToInt32(nbEmploye);
-                int iBudget = Convert.ToInt32(budget);
+                cbStatut.SelectedItem = status;
+                errStatut.Text = "";
+            }
 
-                Singleton.GetInstance().AjouterProjet(titre, dateDebut, client, description, iBudget, iNbEmplo, status);
+
+
+            if (erreur == false)
+            {
+                Singleton.GetInstance().AjouterProjet(titre, dateDebut, client, description, budget, nbEmploye, status);
             }
         }
     }

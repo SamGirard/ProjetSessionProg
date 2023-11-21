@@ -193,14 +193,14 @@ namespace ProjetSession
 
                 MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "INSERT INTO projet values(null, @titre, @date_debut, @description, @budget, @nbEmploye, null, @client, @statut)";
+                commande.CommandText = "INSERT INTO projet values(null, @titre, @date_debut, @description, @budget, @nbEmploye, null, @statut, @client)";
 
                 commande.Parameters.AddWithValue("@titre", titre);
-                commande.Parameters.AddWithValue("@date_debut", dateDebut);
-                commande.Parameters.AddWithValue("@date_naissance", client);
-                commande.Parameters.AddWithValue("@email", description);
-                commande.Parameters.AddWithValue("@adresse", budget);
-                commande.Parameters.AddWithValue("@date_embauche", nbEmployé);
+                commande.Parameters.AddWithValue("@date_debut", dateDebut.ToString("yyyy-MM-dd"));
+                commande.Parameters.AddWithValue("@id_client", client);
+                commande.Parameters.AddWithValue("@description", description);
+                commande.Parameters.AddWithValue("@budget", budget);
+                commande.Parameters.AddWithValue("@nb_employe", nbEmployé);
                 commande.Parameters.AddWithValue("@statut", statut);
 
 
