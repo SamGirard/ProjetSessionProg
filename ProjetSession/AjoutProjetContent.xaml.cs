@@ -44,7 +44,7 @@ namespace ProjetSession
             }
             else
             {
-                tbTitre.Text = titre;
+                titre = tbTitre.Text;
                 errTitre.Text = "";
             }
             
@@ -58,7 +58,7 @@ namespace ProjetSession
             }
             else
             {
-                cdpDate.Date = dateDebut;
+                dateDebut = cdpDate.Date.Value.Date;
                 errDate.Text = "";
             }
 
@@ -71,7 +71,7 @@ namespace ProjetSession
             }
             else
             {
-                cbClient.SelectedItem = client;
+                client = cbClient.SelectedItem.ToString();
                 errClient.Text = "";
             }
 
@@ -84,7 +84,7 @@ namespace ProjetSession
             }
             else
             {
-                tbDescription.Text = description;
+                description = tbDescription.Text;
                 errDesc.Text = "";
             }
 
@@ -110,7 +110,7 @@ namespace ProjetSession
             }
             else
             {
-                budget = Convert.ToInt32(tbNbEmploye.Text);
+                nbEmploye = Convert.ToInt32(tbNbEmploye.Text);
                 errNbEmploye.Text = "";
             }
 
@@ -123,7 +123,7 @@ namespace ProjetSession
             }
             else
             {
-                cbStatut.SelectedItem = status;
+                status = cbStatut.SelectedItem.ToString();
                 errStatut.Text = "";
             }
 

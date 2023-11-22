@@ -21,7 +21,7 @@
                 <TextBlock x:Name="errDate" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
                 <ComboBox x:Name="cbClient" DisplayMemberPath="Nom" HorizontalAlignment="Stretch" Header="Client" SelectedIndex="-1" x:DefaultBindMode="OneWay">
-                
+                    <x:String></x:String>
                 </ComboBox>
                 <TextBlock x:Name="errClient" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 

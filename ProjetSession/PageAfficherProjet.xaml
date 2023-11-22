@@ -23,9 +23,15 @@
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local:Projet">
                             <StackPanel CornerRadius="10" Padding="10" Orientation="Vertical" Height="300" Width="300" Margin="30" HorizontalAlignment="Center">
-                                <TextBlock Text="{x:Bind IdProjet}" FontWeight="Light" FontSize="15pt" Foreground="WhiteSmoke"/>
+                                <TextBlock Text="{x:Bind IdProjet}" FontWeight="Light" FontSize="12pt" Foreground="WhiteSmoke"/>
                                 <TextBlock Text="{x:Bind Titre}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
-                                <TextBlock FontSize="25pt" Foreground="White" Text="{x:Bind DateDebut}"/>
+                                <TextBlock Text="{x:Bind Description}" FontWeight="Light" FontSize="15pt" Foreground="White" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+                                
+                                <TextBlock FontSize="20pt" Foreground="White" Margin="0 10 0 0" Text="{x:Bind DateDebut}"/>
+                                <TextBlock Text="{x:Bind Budget}" FontWeight="Light" FontSize="15pt" Foreground="WhiteSmoke"/>
+                                <TextBlock Text="{x:Bind TotalSal}" FontWeight="Light" FontSize="15pt" Foreground="WhiteSmoke"/>
+                                <TextBlock Text="{x:Bind Statut}" FontWeight="Light" FontSize="15pt" Foreground="WhiteSmoke"/>
+
                             </StackPanel>
                         </DataTemplate>
                     </GridView.ItemTemplate>

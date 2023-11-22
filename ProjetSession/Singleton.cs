@@ -188,8 +188,24 @@ namespace ProjetSession
 
         public void AjouterProjet(string titre, DateTime dateDebut, string client, string description, int budget, int nbEmployé, string statut)
         {
+            string idClient = "";
             try
             {
+                MySqlCommand commande2 = new MySqlCommand();
+                commande2.Connection = con;
+                commande2.CommandText = "SELECT id_client FROM client WHERE nom LIKE @client";
+                commande2.Parameters.AddWithValue("@client", client);
+
+                con.Open();
+
+                MySqlDataReader reader = commande2.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    idClient = reader.GetString("id_client");
+                }
+                reader.Close();
+
 
                 MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
@@ -202,9 +218,8 @@ namespace ProjetSession
                 commande.Parameters.AddWithValue("@budget", budget);
                 commande.Parameters.AddWithValue("@nb_employe", nbEmployé);
                 commande.Parameters.AddWithValue("@statut", statut);
+                commande.Parameters.AddWithValue("@client", idClient);
 
-
-                con.Open();
                 commande.ExecuteNonQuery();
 
                 con.Close();
