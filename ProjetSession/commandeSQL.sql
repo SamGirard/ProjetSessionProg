@@ -73,6 +73,14 @@ CREATE TRIGGER numeroProjet BEFORE INSERT
     end //
 DELIMITER ;
 
+DELIMITER  //
+CREATE TRIGGER matriculeEmp before insert
+    on employe
+    for each row
+BEGIN
+    SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 1, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
+end;
+DELIMITER ;
 -----------------------------Procédures (fait par isaac)---------------------------------
 DELIMITER //
 CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
@@ -142,3 +150,20 @@ INSERT INTO projet VALUES(null, 'Projet Solaris', '2023-02-20', 'Développement 
 INSERT INTO projet VALUES(null, 'Projet GreenCity', '2023-03-10', 'Planification et mise en œuvre d\'infrastructures durables pour les villes', 150000, 2, null, 809, 'En cours');
 INSERT INTO projet VALUES(null, 'Projet AquaNet', '2023-04-05', 'Création d\'un réseau de surveillance des ressources marines', 100000, 5, null, 262, 'Terminé');
 INSERT INTO projet VALUES(null, 'Projet QuantumSys', '2023-05-12', 'Développement d\'un système de traitement quantique pour l\'analyse de données complexes', 180000, 1, null, 961, 'En cours');
+
+
+INSERT INTO employe VALUES(null, 'Smith', 'John', '1990-05-15', 'john.smith@email.com', '123 Main Street', '2022-02-01', 20.50, 'lien_vers_photo1.jpg', 'Permanent');
+INSERT INTO employe VALUES(null, 'Johnson', 'Alice', '1988-09-20', 'alice.johnson@email.com', '456 Oak Avenue', '2021-07-15', 18.75, 'lien_vers_photo2.jpg', 'Permanent');
+INSERT INTO employe VALUES(null, 'Martin', 'David', '1995-03-10', 'david.martin@email.com', '789 Pine Road', '2023-01-10', 22.00, 'lien_vers_photo3.jpg', 'Journalier');
+INSERT INTO employe VALUES(null, 'Gagnon', 'Émilie', '1992-11-05', 'emilie.gagnon@email.com', '101 Cedar Lane', '2022-09-03', 19.25, 'lien_vers_photo4.jpg', 'Permanent');
+INSERT INTO employe VALUES(null, 'Lefevre', 'Pierre', '1987-07-25', 'pierre.lefevre@email.com', '202 Birch Street', '2021-05-12', 21.75, 'lien_vers_photo5.jpg', 'Journalier');
+INSERT INTO employe VALUES(null, 'Dubois', 'Sophie', '1993-08-12', 'sophie.dubois@email.com', '234 Elm Street', '2022-04-05', 21.00, 'lien_vers_photo6.jpg', 'Permanent');
+INSERT INTO employe VALUES(null, 'Bergeron', 'Alexandre', '1991-02-28', 'alexandre.bergeron@email.com', '567 Maple Avenue', '2021-10-20', 19.50, 'lien_vers_photo7.jpg', 'Permanent');
+INSERT INTO employe VALUES(null, 'Lavoie', 'Élodie', '1994-06-18', 'elodie.lavoie@email.com', '890 Cedar Road', '2023-03-15', 22.50, 'lien_vers_photo8.jpg', 'Journalier');
+INSERT INTO employe VALUES(null, 'Renaud', 'David', '1989-12-03', 'david.renaud@email.com', '111 Oak Lane', '2022-01-02', 20.75, 'lien_vers_photo9.jpg', 'Permanent');
+INSERT INTO employe VALUES(null, 'Boucher', 'Caroline', '1990-04-30', 'caroline.boucher@email.com', '222 Pine Street', '2021-08-10', 18.25, 'lien_vers_photo10.jpg', 'Journalier');
+INSERT INTO employe VALUES(null, 'Tremblay', 'Étienne', '1992-03-22', 'etienne.tremblay@email.com', '345 Cedar Avenue', '2022-06-08', 23.00, 'lien_vers_photo11.jpg', 'Permanent');
+INSERT INTO employe VALUES(null, 'Girard', 'Isabelle', '1996-09-14', 'isabelle.girard@email.com', '678 Birch Road', '2021-12-01', 18.00, 'lien_vers_photo12.jpg', 'Journalier');
+INSERT INTO employe VALUES(null, 'Bélanger', 'Maxime', '1988-05-31', 'maxime.belanger@email.com', '901 Elm Lane', '2023-02-14', 24.50, 'lien_vers_photo13.jpg', 'Permanent');
+INSERT INTO employe VALUES(null, 'Lévesque', 'Sophie', '1995-11-10', 'sophie.levesque@email.com', '222 Oak Avenue', '2022-04-20', 19.75, 'lien_vers_photo14.jpg', 'Permanent');
+INSERT INTO employe VALUES(null, 'Lamontagne', 'Gabriel', '1990-07-05', 'gabriel.lamontagne@email.com', '333 Pine Street', '2021-09-15', 21.25, 'lien_vers_photo15.jpg', 'Journalier');
