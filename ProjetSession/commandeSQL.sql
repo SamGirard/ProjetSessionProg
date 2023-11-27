@@ -74,7 +74,7 @@ BEGIN
     SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 1, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
 end;
 DELIMITER ;
------------------------------Procédures---------------------------------
+-----------------------------PROCEDURES---------------------------------
 /*(fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
