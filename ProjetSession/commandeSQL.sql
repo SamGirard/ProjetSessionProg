@@ -1,4 +1,27 @@
 -----------------------------CRÉATION DES TABLES (fait par sam)-------------------------------
+CREATE TABLE client(
+    id_client VARCHAR(3) UNIQUE PRIMARY KEY,
+    nom VARCHAR(50),
+    adresse VARCHAR(100),
+    numero_tel VARCHAR(30),
+    email VARCHAR(150)
+);
+
+CREATE TABLE projet
+(
+    id_projet    VARCHAR(11) PRIMARY KEY UNIQUE,
+    titre        VARCHAR(100),
+    date_debut   DATE,
+    description  VARCHAR(255),
+    budget       DOUBLE,
+    nb_employe   INT,
+    salaireTotal DOUBLE,
+    id_client    VARCHAR(3),
+    statut       ENUM ('Terminé', 'En cours'),
+    CHECK (nb_employe <= 5),
+    FOREIGN KEY projet (id_client) REFERENCES client (id_client)
+);
+
 CREATE TABLE employe(
     matricule VARCHAR(10) UNIQUE PRIMARY KEY,
     nom VARCHAR(50),
@@ -14,31 +37,10 @@ CREATE TABLE employe(
     FOREIGN KEY employe(id_projet) REFERENCES projet(id_projet)
     );
 
-CREATE TABLE client(
-    id_client VARCHAR(3) UNIQUE PRIMARY KEY,
-    nom VARCHAR(50),
-    adresse VARCHAR(100),
-    numero_tel VARCHAR(30),
-    email VARCHAR(150)
-);
-
-CREATE TABLE projet(
-    id_projet VARCHAR(11) PRIMARY KEY UNIQUE,
-    titre VARCHAR(100),
-    date_debut DATE,
-    description VARCHAR(255),
-    budget DOUBLE,
-    nb_employe INT,
-    salaireTotal DOUBLE,
-    id_client VARCHAR(3),
-    statut ENUM('Terminé', 'En cours'),
-    CHECK (nb_employe <= 5),
-    FOREIGN KEY projet(id_client) REFERENCES client(id_client)
-);
 
 CREATE TABLE admin(
     utilisateur VARCHAR(15),
-    motDePasse VARCHAR(255) UNIQUE,
+    motDePasse VARCHAR(255) UNIQUE
 );
 
 alter table admin Add COLUMN estConnecter BOOL DEFAULT(false);
