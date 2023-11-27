@@ -127,3 +127,18 @@ INSERT INTO client VALUES(null, 'Élodie Gagnon', '222 Rue de la Fiction', '555-
 INSERT INTO client VALUES(null, 'Gabriel Richard', '333 Avenue de l\'Imagination', '555-7890', 'gabriel.richard@email.com');
 
 
+INSERT INTO projet VALUES(null, 'Projet Alpha', '2023-01-15', 'Développement d\'une application mobile innovante', 10000, 3, null, 464, 'En cours');
+INSERT INTO projet VALUES(null, 'Projet Beta', '2023-02-20', 'Conception d\'un système de gestion de base de données avancé', 15000, 4, null, 961, 'Terminé');
+INSERT INTO projet VALUES(null, 'Projet Gamma', '2023-03-10', 'Création d\'un site web interactif pour une entreprise locale', 20000, 2, null, 961, 'En cours');
+INSERT INTO projet VALUES(null, 'Projet Delta', '2023-04-05', 'Déploiement d\'un réseau de capteurs pour la surveillance environnementale', 12000, 5, null, 507, 'Terminé');
+INSERT INTO projet VALUES(null, 'Projet Epsilon', '2023-05-12', 'Développement d\'un algorithme d\'intelligence artificielle pour l\'analyse de données', 18000, 1, null, 176, 'En cours');
+INSERT INTO projet VALUES(null, 'Projet Visionnaire', '2023-01-15', 'Développement d\'une technologie révolutionnaire pour la réalité augmentée', 100000, 3, null, 811, 'En cours');
+INSERT INTO projet VALUES(null, 'Projet Horizon', '2023-02-20', 'Construction d\'un centre de recherche spatial pour l\'exploration interplanétaire', 500000, 4, null, 344, 'Terminé');
+INSERT INTO projet VALUES(null, 'Projet Renaissance', '2023-03-10', 'Restauration numérique de trésors artistiques mondiaux', 75000, 2, null, 262, 'En cours');
+INSERT INTO projet VALUES(null, 'Projet Éco-Innovant', '2023-04-05', 'Développement d\'une solution durable pour la gestion des déchets', 120000, 5, null, 518, 'Terminé');
+INSERT INTO projet VALUES(null, 'Projet Quantum', '2023-05-12', 'Recherche avancée en informatique quantique pour la cryptographie', 200000, 1, null, 835, 'En cours');
+INSERT INTO projet VALUES(null, 'Projet FusionTech', '2023-01-15', 'Intégration de technologies émergentes pour la transformation numérique', 80000, 3, null, 492, 'En cours');
+INSERT INTO projet VALUES(null, 'Projet Solaris', '2023-02-20', 'Développement d\'une solution d\'énergie solaire intelligente', 120000, 4, null, 433, 'Terminé');
+INSERT INTO projet VALUES(null, 'Projet GreenCity', '2023-03-10', 'Planification et mise en œuvre d\'infrastructures durables pour les villes', 150000, 2, null, 809, 'En cours');
+INSERT INTO projet VALUES(null, 'Projet AquaNet', '2023-04-05', 'Création d\'un réseau de surveillance des ressources marines', 100000, 5, null, 262, 'Terminé');
+INSERT INTO projet VALUES(null, 'Projet QuantumSys', '2023-05-12', 'Développement d\'un système de traitement quantique pour l\'analyse de données complexes', 180000, 1, null, 961, 'En cours');
