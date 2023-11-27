@@ -42,11 +42,11 @@ CREATE TABLE admin(
 );
 
 alter table admin Add COLUMN estConnecter BOOL DEFAULT(false);
------------------------------TRIGGER (fait par sam)---------------------------------
+-----------------------------TRIGGER---------------------------------
 
 
-/*Trigger pour l'identifiant du client*/
-DELIMITER  //
+/*Trigger pour l'identifiant du client (fait par sam)*/
+DELIMITER  // 
 CREATE TRIGGER identifiantClient BEFORE INSERT
     on client
     FOR EACH ROW
@@ -55,7 +55,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*Trigger pour le numéro de projet*/
+/*Trigger pour le numéro de proje (fait par sam)t*/
 DELIMITER  //
 CREATE TRIGGER numeroProjet BEFORE INSERT
     on projet
@@ -65,6 +65,7 @@ BEGIN
 end //
 DELIMITER ;
 
+/*(fait par sam)*/
 DELIMITER  //
 CREATE TRIGGER matriculeEmp before insert
     on employe
@@ -73,7 +74,8 @@ BEGIN
     SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 1, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
 end;
 DELIMITER ;
------------------------------Procédures (fait par isaac)---------------------------------
+-----------------------------PROCEDURES---------------------------------
+/*(fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
 BEGIN
@@ -81,6 +83,7 @@ BEGIN
 end //
 DELIMITER ;
 
+/*(fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_client(IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
 BEGIN
@@ -88,6 +91,7 @@ BEGIN
 end //
 DELIMITER ;
 
+/*(fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_projet(IN titre VARCHAR(50), IN date_debut DATE, IN description VARCHAR(255), IN budget DOUBLE, IN nbEmpl INT, IN salairTot DOUBLE, IN id_client VARCHAR(3), IN statut VARCHAR(20))
 BEGIN
@@ -95,12 +99,6 @@ BEGIN
 end //
 DELIMITER ;
 
-DELIMITER //
-CREATE PROCEDURE afficher_projets()
-BEGIN
-    SELECT * FROM projet;
-end //
-DELIMITER ;
 -----------------------------INSERTION DE DONNÉE (fait par sam)-----------------------------
 
 INSERT INTO client VALUES (null, 'Jean Lamontage', '47 rue bouol', '819-555-4443', 'email@email.xom');
