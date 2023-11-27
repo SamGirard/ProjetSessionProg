@@ -109,20 +109,5 @@ INSERT INTO projet VALUES (null, 'test', '2020-12-19', 'Descpription', 20000, 4,
 
 INSERT INTO admin VALUES ('admin', 'admin');
 
-INSERT INTO client VALUES(null, 'John Doe', '123 Rue de la Fiction', '555-1234', 'john.doe@email.com');
-INSERT INTO client VALUES(null, 'Jane Smith', '456 Avenue de l\'Imagination', '555-5678', 'jane.smith@email.com');
-INSERT INTO client VALUES(null, 'Bob Johnson', '789 Boulevard de l\'Illusion', '555-9012', 'bob.johnson@email.com');
-INSERT INTO client VALUES(null, 'Alice Brown', '101 Rue de l\'Évasion', '555-3456', 'alice.brown@email.com');
-INSERT INTO client VALUES(null, 'Charlie Davis', '202 Avenue du Rêve', '555-7890', 'charlie.davis@email.com');
-INSERT INTO client VALUES(null, 'Émilie Martin', '234 Rue de l\'Imagination', '555-1234', 'emilie.martin@email.com');
-INSERT INTO client VALUES(null, 'François Dupont', '567 Avenue de la Fiction', '555-5678', 'francois.dupont@email.com');
-INSERT INTO client VALUES(null, 'Sophie Tremblay', '890 Boulevard du Rêve', '555-9012', 'sophie.tremblay@email.com');
-INSERT INTO client VALUES(null, 'Pierre Lefevre', '111 Rue de l\'Évasion', '555-3456', 'pierre.lefevre@email.com');
-INSERT INTO client VALUES(null, 'Isabelle Girard', '222 Avenue de l\'Illusion', '555-7890', 'isabelle.girard@email.com');
-INSERT INTO client VALUES(null, 'Alexandre Dubois', '345 Rue de l\'Évasion', '555-1234', 'alexandre.dubois@email.com');
-INSERT INTO client VALUES(null, 'Caroline Berger', '678 Avenue du Rêve', '555-5678', 'caroline.berger@email.com');
-INSERT INTO client VALUES(null, 'David Lambert', '901 Boulevard de l\'Illusion', '555-9012', 'david.lambert@email.com');
-INSERT INTO client VALUES(null, 'Élodie Gagnon', '222 Rue de la Fiction', '555-3456', 'elodie.gagnon@email.com');
-INSERT INTO client VALUES(null, 'Gabriel Richard', '333 Avenue de l\'Imagination', '555-7890', 'gabriel.richard@email.com');
 
 
