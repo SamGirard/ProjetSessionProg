@@ -63,16 +63,6 @@ BEGIN
 end //
 DELIMITER ;
 
-/*Trigger pour le numéro de projet*/
-DELIMITER  //
-CREATE TRIGGER numeroProjet BEFORE INSERT
-    on projet
-    FOR EACH ROW
-    BEGIN
-        SET NEW.numero = CONCAT(UPPER(NEW.client), '-', FLOOR(rand()*89) + 10, '-', YEAR(NEW.date_debut));
-    end //
-DELIMITER ;
-
 -----------------------------Procédures (fait par isaac)---------------------------------
 DELIMITER //
 CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
