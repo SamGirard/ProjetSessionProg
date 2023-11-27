@@ -89,9 +89,9 @@ end //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE p_ajout_projet(IN id VARCHAR(3), IN titre VARCHAR(50), IN date_debut DATE, IN description VARCHAR(255), IN budget DOUBLE, IN nbEmpl INT, IN salairTot DOUBLE, IN id_client VARCHAR(3), IN statut VARCHAR(20))
+CREATE PROCEDURE p_ajout_projet(IN titre VARCHAR(50), IN date_debut DATE, IN description VARCHAR(255), IN budget DOUBLE, IN nbEmpl INT, IN salairTot DOUBLE, IN id_client VARCHAR(3), IN statut VARCHAR(20))
 BEGIN
-    INSERT into client VALUES(id, titre, date_debut, description, budget, nbEmpl, salairTot, id_client, statut);
+    INSERT into client VALUES(null, titre, date_debut, description, budget, nbEmpl, salairTot, id_client, statut);
 end //
 DELIMITER ;
 
