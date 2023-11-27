@@ -9,7 +9,9 @@ CREATE TABLE employe(
     date_embauche DATE,
     taux DOUBLE,
     photo VARCHAR(1000),
-    statut ENUM('Journalier', 'Permanent')
+    id_projet VARCHAR(11),
+    statut ENUM('Journalier', 'Permanent'),
+    FOREIGN KEY employe(id_projet) REFERENCES projet(id_projet)
     );
 
 CREATE TABLE client(
