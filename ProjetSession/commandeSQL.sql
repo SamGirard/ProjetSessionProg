@@ -119,6 +119,7 @@ SELECT * FROM projet;
 
 -----------------------------FONCTIONS-----------------------------
 /*Function pour calculer automatiquement le salaire total par heure des employés du projet (fait par isaac)*/
+/*Va devoir relier la function au trigger ou procedure qui va venir le insert automatiquement dans table projet*/
 DELIMITER //
 CREATE FUNCTION f_salTot(id VARCHAR(11)) RETURNS DOUBLE
 BEGIN
