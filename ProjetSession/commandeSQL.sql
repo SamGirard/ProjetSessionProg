@@ -1,4 +1,4 @@
------------------------------CRÉATION DES TABLES-------------------------------
+-----------------------------CRÉATION DES TABLES (fait par sam)-------------------------------
 CREATE TABLE employe(
     matricule VARCHAR(10) UNIQUE PRIMARY KEY,
     nom VARCHAR(50),
@@ -40,7 +40,7 @@ CREATE TABLE admin(
 );
 
 alter table admin Add COLUMN estConnecter BOOL DEFAULT(false);
------------------------------TRIGGER---------------------------------
+-----------------------------TRIGGER (fait par sam)---------------------------------
 
 
 /*Trigger pour l'identifiant du client*/
@@ -73,25 +73,25 @@ CREATE TRIGGER numeroProjet BEFORE INSERT
     end //
 DELIMITER ;
 
------------------------------Procédures---------------------------------
+-----------------------------Procédures (fait par isaac)---------------------------------
 DELIMITER //
-CREATE PROCEDURE p_ajout_employe(IN matricule VARCHAR(10), IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
+CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
 BEGIN
-    INSERT into employe VALUES(matricule, nom, prenom, dateNaiss, email, adresse, date_embauche, taux, photo, statut);
+    INSERT into employe VALUES(null, nom, prenom, dateNaiss, email, adresse, date_embauche, taux, photo, statut);
 end //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE p_ajout_client(IN id VARCHAR(3), IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
+CREATE PROCEDURE p_ajout_client(IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
 BEGIN
-    INSERT into client VALUES(id, nom, adresse, numero_tel, email);
+    INSERT into client VALUES(null, nom, adresse, numero_tel, email);
 end //
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE p_ajout_projet(IN id VARCHAR(3), IN titre VARCHAR(50), IN date_debut DATE, IN description VARCHAR(255), IN budget DOUBLE, IN nbEmpl INT, IN salairTot DOUBLE, IN id_client VARCHAR(3), IN statut VARCHAR(20))
+CREATE PROCEDURE p_ajout_projet(IN titre VARCHAR(50), IN date_debut DATE, IN description VARCHAR(255), IN budget DOUBLE, IN nbEmpl INT, IN salairTot DOUBLE, IN id_client VARCHAR(3), IN statut VARCHAR(20))
 BEGIN
-    INSERT into client VALUES(id, titre, date_debut, description, budget, nbEmpl, salairTot, id_client, statut);
+    INSERT into client VALUES(null, titre, date_debut, description, budget, nbEmpl, salairTot, id_client, statut);
 end //
 DELIMITER ;
 
@@ -101,7 +101,7 @@ BEGIN
     SELECT * FROM projet;
 end //
 DELIMITER ;
------------------------------INSERTION DE DONNÉE-----------------------------
+-----------------------------INSERTION DE DONNÉE (fait par sam)-----------------------------
 
 INSERT INTO client VALUES (null, 'Jean Lamontage', '47 rue bouol', '819-555-4443', 'email@email.xom');
 
