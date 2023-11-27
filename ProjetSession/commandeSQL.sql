@@ -65,16 +65,6 @@ BEGIN
 end //
 DELIMITER ;
 
-/*Trigger pour le numéro de projet*/
-DELIMITER  //
-CREATE TRIGGER numeroProjet BEFORE INSERT
-    on projet
-    FOR EACH ROW
-    BEGIN
-        SET NEW.numero = CONCAT(UPPER(NEW.client), '-', FLOOR(rand()*89) + 10, '-', YEAR(NEW.date_debut));
-    end //
-DELIMITER ;
-
 DELIMITER  //
 CREATE TRIGGER matriculeEmp before insert
     on employe
