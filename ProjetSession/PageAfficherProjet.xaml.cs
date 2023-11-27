@@ -22,7 +22,6 @@ namespace ProjetSession
         {
             this.InitializeComponent();
             gvListe.ItemsSource = Singleton.GetInstance().GetListeProjet();
-            
         }
 
 
