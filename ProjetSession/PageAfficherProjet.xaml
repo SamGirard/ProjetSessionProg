@@ -43,7 +43,7 @@
 
 
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                    <TextBlock x:Name="tblStatut" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt" Foreground="WhiteSmoke"/>
+                                    <TextBlock x:Name="tblStatutt" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt" Foreground="WhiteSmoke"/>
                                     <Ellipse x:Name="couleurStatut" Width="8" Height="8" Margin="0 2 0 0" Fill="Green" VerticalAlignment="Center"/>
                                 </StackPanel>
                                 
