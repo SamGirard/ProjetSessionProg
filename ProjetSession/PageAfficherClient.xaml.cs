@@ -27,7 +27,7 @@ namespace ProjetSession
             {
                 btModifier.Visibility = Visibility.Visible;
                 btDelete.Visibility = Visibility.Visible;
-                Frame rootFrame = Window.Current.Content as Frame; 
+                
             }
             else
             {

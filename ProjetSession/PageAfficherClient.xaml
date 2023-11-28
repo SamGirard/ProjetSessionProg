@@ -37,7 +37,7 @@
         </ScrollViewer>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="25">
-            <Button x:Name="btModifier" Click="btModifier_Click" IsEnabled="False">Modifier</Button>
+            <Button x:Name="btModifier" Click="btModifier_Click" IsEnabled="False" Margin="0 0 10 0">Modifier</Button>
             <Button x:Name="btDelete" Click="btDelete_Click" IsEnabled="False">Supprimer</Button>
             <TextBlock x:Name="validation"/>
         </StackPanel>
