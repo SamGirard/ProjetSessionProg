@@ -155,7 +155,7 @@ namespace ProjetSession
         }
 
 
-        public void AjouterEmploye(string nom, string prenom, DateTime date_naissance, string email, string adresse, DateTime dateEmbauche, int taux, string photo, string statut)
+        public void AjouterEmploye(string nom, string prenom, DateTime date_naissance, string email, string adresse, DateTime dateEmbauche, double taux, string photo, string statut)
         {
             try
             {

@@ -30,10 +30,9 @@
                                         <Image Source="{x:Bind Photo}" Stretch="UniformToFill"/>
                                     </Border>
 
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{x:Bind Prenom}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
-                                        <TextBlock Text="{x:Bind Nom}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
-                                    </StackPanel>
+                                    
+                                    <TextBlock Text="{x:Bind NomComplet}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
+                                    
 
                                     <TextBlock FontWeight="Light" FontSize="15pt" Foreground="White" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap">
                                         <Run Text="Date de naissance : "/>

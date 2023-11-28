@@ -76,6 +76,11 @@ namespace ProjetSession
             set { statut = value; this.OnPropertyChanged(); }
         }
 
+        public string NomComplet
+        {
+            get { return $"{prenom} {nom}"; }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
                 this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
