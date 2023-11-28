@@ -1,3 +1,4 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -5,6 +6,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.UI.Xaml.Shapes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -50,7 +52,10 @@ namespace ProjetSession
                     btModifier.IsEnabled = false;
                     btDelete.IsEnabled = false;
                 }
+                
             }
+
+            
         }
 
         private void btModifier_Click(object sender, RoutedEventArgs e)
@@ -61,6 +66,37 @@ namespace ProjetSession
         private void btDelete_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void statut_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock textBlock = sender as TextBlock;
+
+            if (textBlock != null)
+            {
+                // Accéder à l'Ellipse par son nom
+                Ellipse ellipse = FindName("couleur") as Ellipse;
+
+                if (ellipse != null)
+                {
+                    // Changer la couleur de l'Ellipse en fonction du Statut
+                    string statut = textBlock.Text;
+
+                    switch (statut)
+                    {
+                        case "En cours":
+                            ellipse.Fill = new SolidColorBrush(Colors.Red);
+                            break;
+                        case "Terminé":
+                            ellipse.Fill = new SolidColorBrush(Colors.Green);
+                            break;
+                        // Ajoutez d'autres cas selon vos besoins
+                        default:
+                            ellipse.Fill = new SolidColorBrush(Colors.Gray);
+                            break;
+                    }
+                }
+            }
         }
     }
 }
