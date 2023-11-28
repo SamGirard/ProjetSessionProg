@@ -47,6 +47,10 @@ namespace ProjetSession
                     mainFrame.Navigate(typeof(PageAfficherClient));
                     break;
 
+                case "iListeEmploye":
+                    mainFrame.Navigate(typeof(PageAfficherEmploye));
+                    break;
+
                 default:
                     break;
             }

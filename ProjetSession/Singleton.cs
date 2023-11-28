@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
 
 namespace ProjetSession
 {
@@ -229,6 +230,83 @@ namespace ProjetSession
                 con.Close();
             }
         }
+
+        public void AjouterEmploye(string nom, string prenom, DateTime date_naissance, string email, string adresse, DateTime date_embauche, double taux, string photo, string projet, string statut)
+        {
+            string idProjet = "";
+            try
+            {
+                MySqlCommand commande2 = new MySqlCommand();
+                commande2.Connection = con;
+                commande2.CommandText = "SELECT id_projet FROM projet WHERE titre LIKE @projet";
+                commande2.Parameters.AddWithValue("@id_projet", projet);
+
+                con.Open();
+
+                MySqlDataReader reader = commande2.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    idProjet = reader.GetString("id_projet");
+                }
+                reader.Close();
+
+
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO employe values(null, @nom, @prenom, @date_naissance, @email, @adresse, @date_embauche, @taux, @photo, @id_projet, @statut)";
+
+                commande.Parameters.AddWithValue("@nom", nom);
+                commande.Parameters.AddWithValue("@prenom", prenom);
+                commande.Parameters.AddWithValue("@date_naissance", date_naissance.ToString("yyyy-MM-dd"));
+                commande.Parameters.AddWithValue("@email", email);
+                commande.Parameters.AddWithValue("@adresse", adresse);
+                commande.Parameters.AddWithValue("@date_embauche", date_embauche.ToString("yyyy-MM-dd"));
+                commande.Parameters.AddWithValue("@taux", taux);
+                commande.Parameters.AddWithValue("@photo", photo);
+                commande.Parameters.AddWithValue("@id_projet", idProjet);
+                commande.Parameters.AddWithValue("@statut", statut);
+
+                commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception)
+            {
+                con.Close();
+            }
+        }
+
+        public List<string> GetNomsProjets()
+        {
+            List<string> titres = new List<string>();
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT titre FROM projet";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string titre = reader.GetString("titre");
+                    titres.Add(titre);
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return titres;
+        }
+
 
         public bool verif_Admin(string utilisateur, string motDePasse)
         {

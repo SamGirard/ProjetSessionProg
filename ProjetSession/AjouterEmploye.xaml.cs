@@ -33,6 +33,7 @@ namespace ProjetSession
         public AjouterEmploye()
         {
             this.InitializeComponent();
+            cbxProjet.ItemsSource = Singleton.GetInstance().GetNomsProjets();
         }
 
 
@@ -98,7 +99,29 @@ namespace ProjetSession
             }
             else errTaux.Text = "";
 
+            if (dtDateNaiss.Date == DateTimeOffset.MinValue)
+            {
+                erreur = true;
+                errDate.Text = "La date est vide";
+                args.Cancel = true;
+            }
+            else
+            {
+                dateNaissance = dtDateNaiss.Date.Value.Date;
+                errDate.Text = "";
+            }
 
+            if (calDateEmb.Date == DateTimeOffset.MinValue)
+            {
+                erreur = true;
+                errEmbauche.Text = "La date est vide";
+                args.Cancel = true;
+            }
+            else
+            {
+                dateEmbauche = calDateEmb.Date.Value.Date;
+                errEmbauche.Text = "";
+            }
 
             if (tbxPhoto.Text == "")
             {
@@ -129,8 +152,9 @@ namespace ProjetSession
             if (erreur == false)
             {
                 int intTaux = Convert.ToInt32(tbxTaux.Text);
+                string projet = cbxProjet.SelectedItem.ToString();
 
-                Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, intTaux, photo, statut);
+                Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, intTaux, photo, projet, statut);
             }
         }
     }

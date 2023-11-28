@@ -26,6 +26,7 @@ namespace ProjetSession
         public PageAfficherEmploye()
         {
             this.InitializeComponent();
+            gvListe.ItemsSource = Singleton.GetInstance().GetListeEmploye();
         }
     }
 }

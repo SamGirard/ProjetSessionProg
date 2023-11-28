@@ -41,6 +41,9 @@
                 <x:String>Journalier</x:String>
                 <x:String>Permanent</x:String>
             </ComboBox>
+
+            
+            
             <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
         </StackPanel>
 

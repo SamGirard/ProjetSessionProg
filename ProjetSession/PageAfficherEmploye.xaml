@@ -10,6 +10,52 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-       
+        <ScrollViewer>
+            <StackPanel Orientation="Vertical" Margin="30 30 30 30">
+                <TextBlock FontSize="50pt" FontWeight="Bold" HorizontalAlignment="Left">Les employés</TextBlock>
+                <GridView x:Name="gvListe" Margin="0 50 0 50" IsItemClickEnabled="False" CanDragItems="True" AllowDrop="True" CanReorderItems="True" SelectionMode="Single">
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3" HorizontalAlignment="center"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+
+                    <GridView.ItemTemplate>
+                        <DataTemplate x:DataType="local:Employe">
+                            <Border Margin="20 10 20 10">
+                                <StackPanel Orientation="Vertical" Height="300" Width="300" Margin="20" HorizontalAlignment="Center">
+                                    <TextBlock Text="{x:Bind Matricule}" FontSize="12pt" TextWrapping="Wrap" Foreground="White" Opacity="0.5" Margin="0 0 0 10" FontWeight="light"/>
+
+                                    <Border CornerRadius="10" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 10">
+                                        <Image Source="{x:Bind Photo}" Stretch="UniformToFill"/>
+                                    </Border>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{x:Bind Prenom}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
+                                        <TextBlock Text="{x:Bind Nom}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
+                                    </StackPanel>
+
+                                    <TextBlock FontWeight="Light" FontSize="15pt" Foreground="White" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap">
+                                        <Run Text="Date de naissance : "/>
+                                        <Run Text="{x:Bind DateNaiss}"></Run>
+                                    </TextBlock>
+
+                                    <TextBlock FontWeight="Light" FontSize="20pt" Foreground="WhiteSmoke">
+                                        <Run Text="Taux horaire : "/>
+                                        <Run Text="{x:Bind TauxHor}"></Run>
+                                        <Run Text="$/h"/>
+                                    </TextBlock>
+
+                                    <TextBlock FontWeight="Light" FontSize="15pt" Foreground="White" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap" Margin="0 10 0 0">
+                                        <Run Text="Statut : "/>
+                                        <Run Text="{x:Bind Statut}"></Run>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

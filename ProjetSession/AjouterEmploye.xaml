@@ -42,6 +42,11 @@
                     <x:String>Journalier</x:String>
                     <x:String>Permanent</x:String>
                 </ComboBox>
+
+                <ComboBox Header="Projet" x:Name="cbxProjet" Width="400" Margin="0 30 0 10">
+                    <x:String></x:String>
+                </ComboBox>
+
                 <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
             </StackPanel>
         </ScrollViewer>
