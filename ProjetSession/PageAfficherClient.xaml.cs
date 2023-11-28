@@ -34,10 +34,7 @@ namespace ProjetSession
                 btModifier.Visibility = Visibility.Collapsed;
                 btDelete.Visibility = Visibility.Collapsed;
             }
-
         }
-
-
 
         private void lvListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

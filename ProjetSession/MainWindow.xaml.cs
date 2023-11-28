@@ -19,6 +19,7 @@ namespace ProjetSession
 {
     public sealed partial class MainWindow : Window
     {
+        public event EventHandler<Boolean> ButtonDecoTapped;
         public MainWindow()
         {
             this.InitializeComponent();
