@@ -151,10 +151,10 @@ namespace ProjetSession
 
             if (erreur == false)
             {
-                int intTaux = Convert.ToInt32(tbxTaux.Text);
+                double dTaux = Convert.ToDouble(tbxTaux.Text);
                 string projet = cbxProjet.SelectedItem.ToString();
 
-                Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, intTaux, photo, projet, statut);
+                Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, dTaux, photo, projet, statut);
             }
         }
     }

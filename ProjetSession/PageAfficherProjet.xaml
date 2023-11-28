@@ -29,13 +29,13 @@
                                 <TextBlock Text="{x:Bind Description}" FontWeight="Light" FontSize="15pt" Foreground="White" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
                                 
                                 <TextBlock FontSize="20pt" Foreground="White" Margin="0 10 0 0" Text="{x:Bind DateDebut}"/>
-                                <TextBlock Text="{x:Bind Budget, Mode=OneWay}" FontWeight="Light" FontSize="20pt" Foreground="WhiteSmoke">
+                                <TextBlock FontWeight="Light" FontSize="20pt" Foreground="WhiteSmoke">
                                     <Run Text="Budget : "/>
                                     <Run Text="{x:Bind Budget}"></Run>
                                     <Run Text="$$"/>
                                 </TextBlock>
 
-                                <TextBlock Text="{x:Bind TotalSal, Mode=OneWay}" FontWeight="Light" FontSize="20pt" Margin="0 0 0 10" Foreground="WhiteSmoke">
+                                <TextBlock FontWeight="Light" FontSize="20pt" Margin="0 0 0 10" Foreground="WhiteSmoke">
                                     <Run Text="Salaire total : "/>
                                     <Run Text="{x:Bind TotalSal}"></Run>
                                     <Run Text="$$"/>

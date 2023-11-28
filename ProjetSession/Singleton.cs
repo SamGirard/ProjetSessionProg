@@ -61,7 +61,6 @@ namespace ProjetSession
                         TotalSal = reader.GetInt32("salaireTotal"),
                         IdCLient = reader.GetString("id_client"),
                         Statut = reader.GetString("statut"),
-
                     };
 
                     listeProjet.Add(unProjet);
@@ -152,38 +151,6 @@ namespace ProjetSession
                 con.Close();
             }
             return listeEmploye;
-        }
-
-
-        public void AjouterEmploye(string nom, string prenom, DateTime date_naissance, string email, string adresse, DateTime dateEmbauche, int taux, string photo, string statut)
-        {
-            try
-            {
-
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "INSERT INTO employe values(null, @nom, @prenom, @date_naissance, @email, @adresse, @date_embauche, @taux, @photo, @statut)";
-
-                commande.Parameters.AddWithValue("@nom", nom);
-                commande.Parameters.AddWithValue("@prenom", prenom);
-                commande.Parameters.AddWithValue("@date_naissance", date_naissance);
-                commande.Parameters.AddWithValue("@email", email);
-                commande.Parameters.AddWithValue("@adresse", adresse);
-                commande.Parameters.AddWithValue("@date_embauche", dateEmbauche);
-                commande.Parameters.AddWithValue("@taux", taux);
-                commande.Parameters.AddWithValue("@photo", photo);
-                commande.Parameters.AddWithValue("@statut", statut);
-
-
-                con.Open();
-                commande.ExecuteNonQuery();
-
-                con.Close();
-            }
-            catch (Exception)
-            {
-                con.Close();
-            }
         }
 
 
