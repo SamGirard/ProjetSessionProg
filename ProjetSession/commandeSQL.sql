@@ -44,9 +44,9 @@ CREATE TABLE admin(
 );
 
 alter table admin Add COLUMN estConnecter BOOL DEFAULT(false);
+
+
 -----------------------------TRIGGER---------------------------------
-
-
 /*Trigger pour l'identifiant du client (fait par sam)*/
 DELIMITER  // 
 CREATE TRIGGER identifiantClient BEFORE INSERT
@@ -76,8 +76,10 @@ BEGIN
     SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 1, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
 end;
 DELIMITER ;
------------------------------PROCEDURES---------------------------------
-/*(fait par isaac)*/
+
+
+-----------------------------PROCEDURES (a retravailler)---------------------------------
+/*Procédure pour ajouter employé (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
 BEGIN
@@ -85,7 +87,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*(fait par isaac)*/
+/*Procédure pour ajouter client (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_client(IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
 BEGIN
@@ -93,7 +95,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*(fait par isaac)*/
+/*Procédure pour ajouter projet (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_projet(IN titre VARCHAR(50), IN date_debut DATE, IN description VARCHAR(255), IN budget DOUBLE, IN nbEmpl INT, IN salairTot DOUBLE, IN id_client VARCHAR(3), IN statut VARCHAR(20))
 BEGIN
@@ -101,8 +103,34 @@ BEGIN
 end //
 DELIMITER ;
 
------------------------------INSERTION DE DONNÉE (fait par sam)-----------------------------
+-----------------------------LES VIEWS-----------------------------
+/*Vue pour afficher contenu de la table client (fait par isaac)*/
+CREATE VIEW afficher_client AS
+SELECT * FROM client;
 
+/*Vue pour afficher contenu de la table employé (fait par isaac)*/
+CREATE VIEW afficher_employe AS
+SELECT * FROM employe;
+
+/*Vue pour afficher contenu de la table projet (fait par isaac)*/
+CREATE VIEW afficher_projet AS
+SELECT * FROM projet;
+
+
+-----------------------------FONCTIONS-----------------------------
+/*Function pour calculer automatiquement le salaire total par heure des employés du projet (fait par isaac)*/
+/*Va devoir relier la function au trigger ou procedure qui va venir le insert automatiquement dans table projet*/
+DELIMITER //
+CREATE FUNCTION f_salTot(id VARCHAR(11)) RETURNS DOUBLE
+BEGIN
+    DECLARE salaire DOUBLE;
+    SELECT SUM(taux) INTO salaire FROM employe WHERE id_projet = id GROUP BY id_projet;
+    RETURNS salaire;
+end//
+DELIMITER ;
+
+
+-----------------------------INSERTION DE DONNÉE (fait par sam)-----------------------------
 INSERT INTO client VALUES (null, 'Jean Lamontage', '47 rue bouol', '819-555-4443', 'email@email.xom');
 
 INSERT INTO admin VALUES ('admin', 'admin', 0);
@@ -155,4 +183,5 @@ INSERT INTO employe VALUES(null, 'Tremblay', 'Étienne', '1992-03-22', 'etienne.
 INSERT INTO employe VALUES(null, 'Girard', 'Isabelle', '1996-09-14', 'isabelle.girard@email.com', '678 Birch Road', '2021-12-01', 18.00, 'lien_vers_photo12.jpg', '971-59-2023', 'Journalier');
 INSERT INTO employe VALUES(null, 'Bélanger', 'Maxime', '1988-05-31', 'maxime.belanger@email.com', '901 Elm Lane', '2023-02-14', 24.50, 'lien_vers_photo13.jpg', '970-42-2023', 'Permanent');
 INSERT INTO employe VALUES(null, 'Lévesque', 'Sophie', '1995-11-10', 'sophie.levesque@email.com', '222 Oak Avenue', '2022-04-20', 19.75, 'lien_vers_photo14.jpg', '970-42-2023', 'Permanent');
+
 
