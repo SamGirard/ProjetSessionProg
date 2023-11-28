@@ -56,9 +56,9 @@ namespace ProjetSession
                         Titre = reader.GetString("titre"),
                         DateDebut = reader.GetString("date_debut"),
                         Description = reader.GetString("description"),
-                        Budget = reader.GetInt32("budget"),
+                        Budget = reader.GetDouble("budget"),
                         NbEmploye = reader.GetInt32("nb_employe"),
-                        TotalSal = reader.GetInt32("salaireTotal"),
+                        TotalSal = reader.GetDouble("salaireTotal"),
                         IdCLient = reader.GetString("id_client"),
                         Statut = reader.GetString("statut"),
                     };
