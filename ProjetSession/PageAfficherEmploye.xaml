@@ -13,7 +13,7 @@
         <ScrollViewer>
             <StackPanel Orientation="Vertical" Margin="30 30 30 30">
                 <TextBlock FontSize="50pt" FontWeight="Bold" HorizontalAlignment="Left">Les employés</TextBlock>
-                <GridView x:Name="gvListe" Margin="0 50 0 50" IsItemClickEnabled="False" CanDragItems="True" AllowDrop="True" CanReorderItems="True" SelectionMode="Single">
+                <GridView x:Name="gvListe" Margin="0 50 0 50" IsItemClickEnabled="False" CanDragItems="True" AllowDrop="True" CanReorderItems="True" SelectionMode="Single" SelectedIndex="-1" SelectionChanged="gvListe_SelectionChanged">
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="3" HorizontalAlignment="center"/>
@@ -56,5 +56,11 @@
                 </GridView>
             </StackPanel>
         </ScrollViewer>
+        
+        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="25">
+            <Button x:Name="btModifier" Click="btModifier_Click" IsEnabled="False" Margin="0 0 10 0">Modifier</Button>
+            <Button x:Name="btDelete" Click="btDelete_Click" IsEnabled="False">Supprimer</Button>
+            <TextBlock x:Name="validation"/>
+        </StackPanel>
     </Grid>
 </Page>
