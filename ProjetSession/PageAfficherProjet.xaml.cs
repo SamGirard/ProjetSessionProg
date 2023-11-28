@@ -22,6 +22,7 @@ namespace ProjetSession
         {
             this.InitializeComponent();
             gvListe.ItemsSource = Singleton.GetInstance().GetListeProjet();
+
             if (Singleton.GetInstance().valideConnection())
             {
                 btModifier.Visibility = Visibility.Visible;
