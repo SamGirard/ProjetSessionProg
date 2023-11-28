@@ -27,7 +27,7 @@ namespace ProjetSession
             {
                 btModifier.Visibility = Visibility.Visible;
                 btDelete.Visibility = Visibility.Visible;
-                
+
             }
             else
             {
