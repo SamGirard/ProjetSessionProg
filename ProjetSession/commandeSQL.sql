@@ -103,6 +103,14 @@ BEGIN
 end //
 DELIMITER ;
 
+/*Procédure pour ajouter projet (fait par sam)*/
+DELIMITER //
+CREATE PROCEDURE afficher_projets()
+BEGIN
+    SELECT * FROM projet;
+end //
+DELIMITER ;
+
 -----------------------------LES VIEWS-----------------------------
 /*Vue pour afficher contenu de la table client (fait par isaac)*/
 CREATE VIEW afficher_client AS
