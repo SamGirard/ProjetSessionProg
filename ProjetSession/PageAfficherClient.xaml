@@ -10,21 +10,36 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ScrollViewer>
+        <!--*****************DEFINITION DES ROWS*****************-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <!--*****************AFFICHAGE DE LA LISTE*****************-->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="0">
             <StackPanel Orientation="Vertical" Margin="30 30 30 30">
                 <TextBlock FontSize="50pt" FontWeight="Bold" HorizontalAlignment="Left">Les Clients</TextBlock>
-                <ListView x:Name="lvListe" Margin="0 50 0 50" IsItemClickEnabled="False" CanDragItems="True" AllowDrop="True" CanReorderItems="True" SelectionMode="Single">
+                <ListView x:Name="lvListe" Margin="0 50 0 50" IsItemClickEnabled="False" CanDragItems="True" AllowDrop="True" CanReorderItems="True" SelectionMode="Single" SelectedIndex="-1" SelectionChanged="lvListe_SelectionChanged">
+
+                    <!--*****************CONTENU DE LA LISTE*****************-->
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="local:Client">
                             <StackPanel CornerRadius="10" Padding="10" Orientation="Vertical" Height="100" Margin="10 10 10 20">
-                                <TextBlock Text="{x:Bind Id_Client}" FontWeight="Light" FontSize="15pt" Foreground="WhiteSmoke"/>
-                                <TextBlock Text="{x:Bind Nom}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
-                                <TextBlock FontSize="25pt" Foreground="White" Text="{x:Bind Num_Tel}"/>
+                                <TextBlock Text="{x:Bind Id_Client, Mode=TwoWay}" FontWeight="Light" FontSize="15pt" Foreground="WhiteSmoke"/>
+                                <TextBlock Text="{x:Bind Nom, Mode=TwoWay}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
+                                <TextBlock FontSize="25pt" Foreground="White" Text="{x:Bind Num_Tel, Mode=TwoWay}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
         </ScrollViewer>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="25">
+            <Button x:Name="btModifier" Click="btModifier_Click" IsEnabled="False">Modifier</Button>
+            <Button x:Name="btDelete" Click="btDelete_Click" IsEnabled="False">Supprimer</Button>
+            <TextBlock x:Name="validation"/>
+        </StackPanel>
     </Grid>
 </Page>

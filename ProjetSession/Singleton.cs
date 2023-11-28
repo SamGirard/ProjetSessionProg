@@ -357,6 +357,7 @@ namespace ProjetSession
                     con.Close();
                 }
             }
+
             return estConnecter;
         }
 
@@ -408,6 +409,58 @@ namespace ProjetSession
             catch (Exception ex)
             {
                 con.Close();
+            }
+        }
+
+        public void supprimer(Object objet, int position)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+
+            if (objet.GetType() == typeof(Client))
+            {
+                Client client = (Client)objet;
+                string id = client.Id_Client;
+                try
+                {
+                    commande.CommandText = $"DELETE FROM client WHERE id_client='{id}'";
+                    con.Open();
+                    commande.ExecuteNonQuery();
+
+                    con.Close();
+                    listeClient.RemoveAt(position);
+                }
+                catch (Exception ex) { con.Close(); }
+            }
+            else if(objet.GetType() == typeof(Employe))
+            {
+                Employe employe = (Employe)objet;
+                string matricule = employe.Matricule;
+                try
+                {
+                    commande.CommandText = $"DELETE FROM employe WHERE matricule='{matricule}'";
+                    con.Open();
+                    commande.ExecuteNonQuery();
+
+                    con.Close();
+                    listeEmploye.RemoveAt(position);
+                }
+                catch (Exception ex) { con.Close(); }
+            }
+            else if (objet.GetType() == typeof(Projet))
+            {
+                Projet projet = (Projet)objet;
+                string id = projet.IdProjet;
+                try
+                {
+                    commande.CommandText = $"DELETE FROM projet WHERE id_projet='{id}'";
+                    con.Open();
+                    commande.ExecuteNonQuery();
+
+                    con.Close();
+                    listeProjet.RemoveAt(position);
+                }
+                catch (Exception ex) { con.Close(); }
             }
         }
 
