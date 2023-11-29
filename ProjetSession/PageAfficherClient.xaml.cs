@@ -22,12 +22,13 @@ namespace ProjetSession
         public PageAfficherClient()
         {
             this.InitializeComponent();
+
             lvListe.ItemsSource = Singleton.GetInstance().GetListeClient();
             if (Singleton.GetInstance().valideConnection())
             {
                 btModifier.Visibility = Visibility.Visible;
                 btDelete.Visibility = Visibility.Visible;
-                Frame rootFrame = Window.Current.Content as Frame; 
+                
             }
             else
             {
