@@ -301,6 +301,37 @@ namespace ProjetSession
             return titres;
         }
 
+        public List<string> GetNomsEmployes()
+        {
+            List<string> noms = new List<string>();
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT * FROM employe";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string nom = reader.GetString("nom");
+                    string prenom = reader.GetString("prenom");
+                    noms.Add($"{prenom} {nom}");
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return noms;
+        }
+
         public List<string> GetNomsClients()
         {
             List<string> noms = new List<string>();
@@ -486,6 +517,21 @@ namespace ProjetSession
                 }
                 catch (Exception ex) { con.Close(); }
             }
+        }
+
+        public int GetPositionEmpl(string idProjet)
+        {
+            ObservableCollection<Projet> listeProjet2 = GetInstance().GetListeProjet();
+            for (int i = 0; i < listeProjet2.Count; i++)
+            {
+                Projet projet = listeProjet2[i];
+                string id = projet.IdProjet;
+                if(id == idProjet)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
     }

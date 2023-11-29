@@ -52,9 +52,27 @@ namespace ProjetSession
             }
         }
 
-        private void btModifier_Click(object sender, RoutedEventArgs e)
+        private async void btModifier_Click(object sender, RoutedEventArgs e)
         {
+            Employe employe = gvListe.SelectedItem as Employe;
+            AjouterEmploye dialog = new AjouterEmploye();
+            dialog.XamlRoot = validation.XamlRoot;
+            dialog.Title = "Modifier un employé existant";
+            dialog.PrimaryButtonText = "Modifier";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Nom = employe.Nom;
+            dialog.Prenom = employe.Prenom;
+            dialog.Date_Naissance = employe.DateNaiss;
+            dialog.Email = employe.Email;
+            dialog.Adresse = employe.Adresse;
+            dialog.Date_Embauche = employe.DateEmb;
+            dialog.Taux = Convert.ToString(employe.TauxHor);
+            dialog.Photo = employe.Photo;
 
+            dialog.IdProjet = Singleton.GetInstance().GetPositionEmpl(employe.IdProjet);
+
+            await dialog.ShowAsync();
         }
 
         private void btDelete_Click(object sender, RoutedEventArgs e)

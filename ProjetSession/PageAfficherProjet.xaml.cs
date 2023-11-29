@@ -58,9 +58,15 @@ namespace ProjetSession
             
         }
 
-        private void btModifier_Click(object sender, RoutedEventArgs e)
+        private async void btModifier_Click(object sender, RoutedEventArgs e)
         {
-
+            AjoutProjetContent dialog = new AjoutProjetContent();
+            dialog.XamlRoot = validation.XamlRoot;
+            dialog.Title = "Modifier un projet existant";
+            dialog.PrimaryButtonText = "Modifier";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            await dialog.ShowAsync();
         }
 
         private void btDelete_Click(object sender, RoutedEventArgs e)

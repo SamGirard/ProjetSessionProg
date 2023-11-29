@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -99,7 +100,7 @@ namespace ProjetSession
             }
             else errTaux.Text = "";
 
-            if (dtDateNaiss.Date == DateTimeOffset.MinValue)
+            if (cdpNaiss.Date == DateTimeOffset.MinValue)
             {
                 erreur = true;
                 errDate.Text = "La date est vide";
@@ -107,11 +108,11 @@ namespace ProjetSession
             }
             else
             {
-                dateNaissance = dtDateNaiss.Date.Value.Date;
+                dateNaissance = cdpNaiss.Date.Value.Date;
                 errDate.Text = "";
             }
 
-            if (calDateEmb.Date == DateTimeOffset.MinValue)
+            if (cdpEmb.Date == DateTimeOffset.MinValue)
             {
                 erreur = true;
                 errEmbauche.Text = "La date est vide";
@@ -119,7 +120,7 @@ namespace ProjetSession
             }
             else
             {
-                dateEmbauche = calDateEmb.Date.Value.Date;
+                dateEmbauche = cdpEmb.Date.Value.Date;
                 errEmbauche.Text = "";
             }
 
@@ -157,5 +158,77 @@ namespace ProjetSession
                 Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, dTaux, photo, projet, statut);
             }
         }
+
+        public string Nom
+        {
+            get { return tbxNom.Text; }
+            set { tbxNom.Text = value; }
+        }
+
+        public string Prenom
+        {
+            get { return tbxPrenom.Text; }
+            set { tbxPrenom.Text = value; }
+        }
+
+        /*
+         DateTime selectedDate = calendarDatePicker1.Date.DateTime;
+         string formattedDate = selectedDate.ToString("yyyy-MM-dd");
+         */
+        public string Date_Naissance
+        {
+            get { return cdpNaiss.Date.ToString(); }
+            set 
+            {
+                DateTimeOffset date = new DateTimeOffset(DateTime.Parse(value));
+                cdpNaiss.Date = date; 
+            }
+        }
+
+        public string Email 
+        { 
+            get { return tbxEmail.Text; } 
+            set { tbxEmail.Text = value;}
+        }
+
+        public string Adresse
+        {
+            get { return tbxAdresse.Text;}
+            set { tbxAdresse.Text = value;}
+        }
+
+        public string Date_Embauche
+        {
+            get { return cdpEmb.Date.ToString(); }
+            set
+            {
+                DateTimeOffset date = new DateTimeOffset(DateTime.Parse(value));
+                cdpEmb.Date = date;
+            }
+        }
+
+        public string Taux
+        {
+            get { return tbxTaux.Text; }
+            set { tbxTaux.Text = value;}
+        }
+        public string Photo
+        {
+            get { return tbxPhoto.Text; }
+            set { tbxPhoto.Text = value; }
+        }
+
+        public int IdProjet
+        {
+            get { return cbxProjet.SelectedIndex; }
+            set {  cbxProjet.SelectedIndex = value;}
+        }
+
+        public int Statut
+        {
+            get { return cbxStatut.SelectedIndex; }
+            set { cbxStatut.SelectedIndex = value;}
+        }
+
     }
 }
