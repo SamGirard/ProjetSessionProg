@@ -68,18 +68,18 @@ namespace ProjetSession
 
         }
 
-        private void statut_Loaded(object sender, RoutedEventArgs e)
+        private void statut_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             TextBlock textBlock = sender as TextBlock;
 
             if (textBlock != null)
             {
-                // Accéder à l'Ellipse par son nom
+                // Accédez à l'Ellipse par son nom
                 Ellipse ellipse = FindName("couleur") as Ellipse;
 
                 if (ellipse != null)
                 {
-                    // Changer la couleur de l'Ellipse en fonction du Statut
+                    // Changez la couleur de l'Ellipse en fonction du Statut
                     string statut = textBlock.Text;
 
                     switch (statut)
@@ -98,5 +98,6 @@ namespace ProjetSession
                 }
             }
         }
+
     }
 }

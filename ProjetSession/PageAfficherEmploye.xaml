@@ -49,6 +49,8 @@
                                         <Run Text="Statut : "/>
                                         <Run Text="{x:Bind Statut}"></Run>
                                     </TextBlock>
+
+                                    
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

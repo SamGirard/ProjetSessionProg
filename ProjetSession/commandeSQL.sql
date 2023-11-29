@@ -77,7 +77,28 @@ BEGIN
 end;
 DELIMITER ;
 
+/*(fait par sam)*/
+DELIMITER //
 
+CREATE TRIGGER update_salaireTotal
+    AFTER INSERT ON employe
+    FOR EACH ROW
+BEGIN
+    DECLARE total_taux DOUBLE;
+
+    -- Calculer la somme des taux pour le projet associé au nouvel employé
+    SELECT SUM(taux) INTO total_taux
+    FROM employe
+    WHERE id_projet = NEW.id_projet;
+
+    -- Mettre à jour le salaireTotal dans la table projet
+    UPDATE projet
+    SET salaireTotal = total_taux
+    WHERE id_projet = NEW.id_projet;
+END;
+//
+
+DELIMITER ;
 -----------------------------PROCEDURES (a retravailler)---------------------------------
 /*Procédure pour ajouter employé (fait par isaac)*/
 DELIMITER //

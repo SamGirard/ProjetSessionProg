@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -486,6 +487,36 @@ namespace ProjetSession
                 }
                 catch (Exception ex) { con.Close(); }
             }
+        }
+
+        public string GetProjetEnCours(string idProjet)
+        {
+            string nomProjet = "";
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT titre FROM projet WHERE id_projet LIKE @idProjet";
+                commande.Parameters.AddWithValue("@idProjet", idProjet);
+
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nomProjet = reader.GetString("titre");
+                }
+                reader.Close();
+                con.Close();
+            }
+            
+
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            return nomProjet;
         }
 
     }

@@ -20,6 +20,7 @@ namespace ProjetSession
         double tauxHor;
         string photo;
         string statut;
+        string id_projet;
 
         public string Matricule
         {
@@ -74,6 +75,12 @@ namespace ProjetSession
         {
             get { return statut; }
             set { statut = value; this.OnPropertyChanged(); }
+        }
+
+        public string IdProjet
+        {
+            get { return id_projet; }
+            set { id_projet = value; this.OnPropertyChanged(); }
         }
 
         public string NomComplet

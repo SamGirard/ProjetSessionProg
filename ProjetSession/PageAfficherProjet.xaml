@@ -20,6 +20,7 @@
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
 
+                    
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local:Projet">
                             <Border Margin="20">
@@ -42,11 +43,15 @@
                                     </TextBlock>
 
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <TextBlock x:Name="statut" Loaded="statut_Loaded" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt" Foreground="WhiteSmoke"/>
+                                        <TextBlock x:Name="statut" SizeChanged="statut_SizeChanged" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt" Foreground="WhiteSmoke"/>
                                         <Ellipse x:Name="couleur" Width="8" Height="8" Margin="0 2 0 0" Fill="Green" VerticalAlignment="Center"/>
                                     </StackPanel>
 
-
+                                    <ScrollViewer>
+                                        <ListView CornerRadius="3">
+                                            <TextBlock x:Name="lvEmploye">1</TextBlock>
+                                        </ListView>
+                                    </ScrollViewer>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
