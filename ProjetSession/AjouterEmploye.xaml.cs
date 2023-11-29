@@ -35,7 +35,9 @@ namespace ProjetSession
         public AjouterEmploye()
         {
             this.InitializeComponent();
-            cbxProjet.ItemsSource = Singleton.GetInstance().GetNomsProjets();
+            //cbxProjet.ItemsSource = Singleton.GetInstance().GetNomsProjets();
+            cbxProjet.ItemsSource = Singleton.GetInstance().GetListeProjet();
+
             cdpEmb.MaxDate = DateTime.Now;
             cdpEmb.MinDate = new DateTime(1980, 01, 01);
 
@@ -47,22 +49,33 @@ namespace ProjetSession
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             var erreur = false;
+            Projet projet;
+
+            /////////////////////PROJET\\\\\\\\\\\\\\\\\\\\
+            if (cbxProjet.SelectedIndex < 0)
+            {
+                projet = null;
+            }
+            else
+            {
+                projet = cbxProjet.SelectedItem as Projet;
+            }
 
             /////////////////////NOM\\\\\\\\\\\\\\\\\\\\
-            if (tbxNom.Text == "")
-                {
+            if (string.IsNullOrEmpty(tbxNom.Text))
+            {
                     errNom.Text = "Le nom ne peut pas être vide";
                     erreur = true;
                     args.Cancel = true;
-                }
+            }
             else 
-                {
+            {
                     errNom.Text = "";
                     nom = tbxNom.Text;
-                }
+            }
 
             ////////////////////PRÉNOM\\\\\\\\\\\\\\\\\\\\
-            if (tbxPrenom.Text == "")
+            if (string.IsNullOrEmpty(tbxPrenom.Text))
             {
                 errPrenom.Text = "Le prénom ne peut pas être vide";
                 erreur = true;
@@ -75,7 +88,7 @@ namespace ProjetSession
             }
 
             ////////////////////EMAIL\\\\\\\\\\\\\\\\\\\\
-            if (tbxEmail.Text == "")
+            if (string.IsNullOrEmpty(tbxEmail.Text))
             {
                 errEmail.Text = "L'email ne peut pas être vide";
                 erreur = true;
@@ -88,7 +101,7 @@ namespace ProjetSession
             }
 
             ////////////////////ADRESSE\\\\\\\\\\\\\\\\\\\\
-            if (tbxAdresse.Text == "")
+            if (string.IsNullOrEmpty(tbxAdresse.Text))
             {
                 errAdresse.Text = "L'adresse ne peut pas être vide";
                 erreur = true;
@@ -142,11 +155,6 @@ namespace ProjetSession
             }
             else
             {
-                /*if(cdpNaiss.Date.Value.Year < 1950)
-                {
-                    erreur = true;
-                    errDate.Text = "La date de naissance ";
-                }*/
                 dateNaissance = cdpNaiss.Date.Value.Date;
                 errDate.Text = "";
             }
@@ -187,7 +195,7 @@ namespace ProjetSession
             }
 
             ////////////////////STATUT\\\\\\\\\\\\\\\\\\\\
-            if (cbxStatut.SelectedIndex == -1)
+            if (cbxStatut.SelectedIndex < 0)
             {
                 errStatut.Text = "Le statut ne peut pas être vide";
                 erreur = true;
@@ -202,18 +210,22 @@ namespace ProjetSession
 
             if (erreur == false)
             {
-                double dTaux = Convert.ToDouble(tbxTaux.Text);
-                string projet;
-                if (cbxProjet.SelectedIndex == -1)
+                Employe employe = new Employe 
                 {
-                    projet = null;
-                }
-                else
-                {
-                    projet = cbxProjet.SelectedItem.ToString();
-                }
+                    Nom = tbxNom.Text,
+                    Prenom = tbxPrenom.Text,
+                    DateNaiss = cdpNaiss.Date.Value.ToString("yyyy-MM-dd"),
+                    Email = tbxEmail.Text,
+                    Adresse = tbxAdresse.Text,
+                    DateEmb = cdpEmb.Date.Value.ToString("yyyy-MM-dd"),
+                    Photo = tbxPhoto.Text,
+                    Statut = cbxStatut.SelectedItem.ToString(),
+                    TauxHor = Convert.ToDouble(tbxTaux.Text),
+                    Projet = projet,
+                    IdProjet = projet.IdProjet
+                };
 
-                Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, dTaux, photo, projet, statut);
+                //Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, dTaux, photo, projet, statut);
             }
         }
 
@@ -239,10 +251,6 @@ namespace ProjetSession
             set { tbxPrenom.Text = value; }
         }
 
-        /*
-         DateTime selectedDate = calendarDatePicker1.Date.DateTime;
-         string formattedDate = selectedDate.ToString("yyyy-MM-dd");
-         */
         public string Date_Naissance
         {
             get { return cdpNaiss.Date.ToString(); }
@@ -298,6 +306,5 @@ namespace ProjetSession
             get { return cbxStatut.SelectedIndex; }
             set { cbxStatut.SelectedIndex = value;}
         }
-
     }
 }

@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     PrimaryButtonText="Ajouter"
-    PrimaryButtonClick="ContentDialog_PrimaryButtonClick">
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    >
 
     <Grid>
         <ScrollViewer>
@@ -44,8 +45,7 @@
                 </ComboBox>
                 <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"></TextBlock>
 
-                <ComboBox Header="Projet" x:Name="cbxProjet" Width="400" Margin="0 30 0 10" >
-                    <x:String></x:String>
+                <ComboBox Header="Projet" x:Name="cbxProjet" Width="400" Margin="0 30 0 10" DisplayMemberPath="Titre" x:DefaultBindMode="OneWay">
                 </ComboBox>
 
             </StackPanel>

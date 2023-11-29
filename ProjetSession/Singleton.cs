@@ -17,6 +17,7 @@ namespace ProjetSession
         private ObservableCollection<Client> listeClient;
         private ObservableCollection<Employe> listeEmploye;
         MySqlConnection con;
+        MySqlConnection con2;
 
         private static Singleton instance;
 
@@ -26,6 +27,7 @@ namespace ProjetSession
             listeClient = new ObservableCollection<Client>();
             listeEmploye = new ObservableCollection<Employe>();
             con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq19;Uid=2172853;Pwd=2172853");
+            con2 = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq19;Uid=2172853;Pwd=2172853");
         }
 
         public static Singleton GetInstance()
@@ -127,6 +129,7 @@ namespace ProjetSession
 
                 while (reader.Read())
                 {
+                    Projet projet = getProjet((string)reader["id_projet"]);
                     Employe unEmploye = new Employe()
                     {
                         Matricule = reader.GetString("matricule"),
@@ -140,8 +143,8 @@ namespace ProjetSession
                         Photo = reader.GetString("photo"),
                         Statut = reader.GetString("statut"),
                         IdProjet = reader.GetString("id_projet"),
+                        Projet = projet
                     };
-
                     listeEmploye.Add(unEmploye);
                 }
                 reader.Close();
@@ -468,12 +471,97 @@ namespace ProjetSession
             }
         }
 
+        public Projet getProjet(string idProjet)
+        {
+            MySqlCommand commande = new MySqlCommand($"p_get_projet");
+            commande.Connection = con2;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            commande.Parameters.AddWithValue("id", idProjet);
+
+            con2.Open();
+
+            MySqlDataReader read2 = commande.ExecuteReader();
+            read2.Read();
+            Projet projet = new Projet 
+            { 
+                IdProjet = (string)read2["id_projet"],
+                Titre = (string)read2["titre"],
+                DateDebut = (string)read2["date_debut"],
+                Description = (string)read2["description"],
+                Budget = (double)read2["budget"],
+                NbEmploye = (int)read2["nb_employe"],
+                TotalSal = (double)read2["salaireTotal"],
+                IdCLient = (string)read2["id_client"],
+                Statut = (string)read2["statut"]
+            };
+            read2.Close();
+            con2.Close();
+            return projet;
+        }
+
+        public void ajouter(Object objet)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            if (objet is Client)
+            {
+                Client client = (Client)objet;
+                string nom = client.Nom;
+                string adresse = client.Adresse;
+                string numero = client.Num_Tel;
+                string email = client.Email;
+
+                try
+                {
+                    commande.CommandText = "INSERT INTO client VALUES (null, @nom, @adresse, @numero_tel, @email)";
+
+                    commande.Parameters.AddWithValue("@nom", nom);
+                    commande.Parameters.AddWithValue("@adresse", adresse);
+                    commande.Parameters.AddWithValue("@numero_tel", numero);
+                    commande.Parameters.AddWithValue("@email", email);
+
+                    con.Open();
+                    commande.ExecuteNonQuery();
+
+                    con.Close();
+                }
+                catch (Exception ex) { con.Close(); }
+                listeClient.Add(client);
+
+            }
+            else if (objet is Employe)
+            {
+                Employe employe = (Employe)objet;
+                string nom = employe.Nom;
+                string prenom = employe.Prenom;
+                /*AVAIT ARRETER ICI, tu voulais centraliser les ajouts en une methode, va voir exercice procedure pour avoir exemple*/
+
+                try
+                {
+
+                }
+                catch (Exception ex) { con.Close(); }
+            }
+            else if (objet is Projet)
+            {
+                Projet projet = (Projet)objet;
+                string id = projet.IdProjet;
+
+                try
+                {
+
+                }
+                catch (Exception ex) { con.Close(); }
+            }
+        }
+
         public void supprimer(Object objet, int position)
         {
             MySqlCommand commande = new MySqlCommand();
             commande.Connection = con;
 
-            if (objet.GetType() == typeof(Client))
+            if (objet is Client)
             {
                 Client client = (Client)objet;
                 string id = client.Id_Client;
@@ -488,7 +576,7 @@ namespace ProjetSession
                 }
                 catch (Exception ex) { con.Close(); }
             }
-            else if(objet.GetType() == typeof(Employe))
+            else if(objet is Employe)
             {
                 Employe employe = (Employe)objet;
                 string matricule = employe.Matricule;
@@ -503,7 +591,7 @@ namespace ProjetSession
                 }
                 catch (Exception ex) { con.Close(); }
             }
-            else if (objet.GetType() == typeof(Projet))
+            else if (objet is Projet)
             {
                 Projet projet = (Projet)objet;
                 string id = projet.IdProjet;

@@ -21,6 +21,7 @@ namespace ProjetSession
         string photo;
         string statut;
         string idProjet;
+        Projet projet;
 
         public string Matricule
         {
@@ -77,6 +78,13 @@ namespace ProjetSession
             set { statut = value; this.OnPropertyChanged(); }
         }
 
+        public Projet Projet
+        {
+            get { return projet; }
+            set {  projet = value; this.OnPropertyChanged(); }
+        }
+
+        
         public string IdProjet
         {
             get { return idProjet; }

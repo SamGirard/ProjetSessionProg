@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +22,8 @@ namespace ProjetSession
         {
             this.InitializeComponent();
             gvListe.ItemsSource = Singleton.GetInstance().GetListeEmploye();
+
+            /*Affichage bouton admin*/
             if (Singleton.GetInstance().valideConnection())
             {
                 btModifier.Visibility = Visibility.Visible;
@@ -35,7 +38,7 @@ namespace ProjetSession
 
         private void gvListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*POUR ACTIVER/DÉSACTIVER LES BOUTONS*/
+            /*ACTIVER/DÉSACTIVER LES BOUTONS*/
             if (Singleton.GetInstance().valideConnection())
             {
                 if (gvListe.SelectedIndex > -1)
@@ -60,6 +63,7 @@ namespace ProjetSession
             dialog.PrimaryButtonText = "Modifier";
             dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
+
             dialog.Nom = employe.Nom;
             dialog.Prenom = employe.Prenom;
             dialog.Date_Naissance = employe.DateNaiss;
@@ -82,12 +86,34 @@ namespace ProjetSession
                 dialog.Statut = -1;
             }
 
-            await dialog.ShowAsync();
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+
+            }
         }
 
-        private void btDelete_Click(object sender, RoutedEventArgs e)
+        private async void btDelete_Click(object sender, RoutedEventArgs e)
         {
+            int position = gvListe.SelectedIndex;
+            Employe employe = gvListe.SelectedItem as Employe;
+            string id = employe.Matricule;
+            string nom = employe.NomComplet;
 
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = validation.XamlRoot;
+            dialog.Title = "Supprimer un(e) employé(e)?";
+            dialog.PrimaryButtonText = "Supprimer";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Content = $"Êtes-vous sûre de vouloir supprimer l'employé(e) : {nom}?";
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                Singleton.GetInstance().supprimer(employe, position);
+            }
         }
     }
 }

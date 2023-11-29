@@ -73,7 +73,7 @@ namespace ProjetSession
             dialog.PrimaryButtonText = "Supprimer";
             dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
-            dialog.Content = $"Êtes-vous sûre de vouloir supprimer le produit : {nom}?";
+            dialog.Content = $"Êtes-vous sûre de vouloir supprimer le client : {nom}?";
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)

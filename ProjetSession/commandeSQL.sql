@@ -111,6 +111,14 @@ BEGIN
 end //
 DELIMITER ;
 
+/*Procédure pour get projet spécifique (fait par isaac)*/
+DELIMITER //
+CREATE PROCEDURE p_get_projet (IN id varchar(11))
+BEGIN
+    SELECT * FROM projet WHERE id_projet = id;
+end//
+DELIMITER ;
+
 -----------------------------LES VIEWS-----------------------------
 /*Vue pour afficher contenu de la table client (fait par isaac)*/
 CREATE VIEW afficher_client AS
