@@ -154,7 +154,7 @@ namespace ProjetSession
         }
 
 
-        public void AjouterProjet(string titre, DateTime dateDebut, string client, string description, int budget, int nbEmployé, string statut)
+        public void AjouterProjet(string titre, DateTime dateDebut, string client, string description, int budget, int nbEmploye, string statut)
         {
             string idClient = "";
             try
@@ -174,19 +174,18 @@ namespace ProjetSession
                 }
                 reader.Close();
 
-
                 MySqlCommand commande = new MySqlCommand();
                 commande.Connection = con;
-                commande.CommandText = "INSERT INTO projet values(null, @titre, @date_debut, @description, @budget, @nbEmploye, null, @statut, @client)";
+                commande.CommandText = "INSERT INTO projet (id_projet, titre, date_debut, description, budget, nb_employe, salaireTotal, id_client, statut) " +
+                                      "VALUES (null, @titre, @date_debut, @description, @budget, @nbEmploye, null, @id_client, @statut)";
 
                 commande.Parameters.AddWithValue("@titre", titre);
                 commande.Parameters.AddWithValue("@date_debut", dateDebut.ToString("yyyy-MM-dd"));
-                commande.Parameters.AddWithValue("@id_client", client);
+                commande.Parameters.AddWithValue("@id_client", idClient);
                 commande.Parameters.AddWithValue("@description", description);
                 commande.Parameters.AddWithValue("@budget", budget);
-                commande.Parameters.AddWithValue("@nb_employe", nbEmployé);
+                commande.Parameters.AddWithValue("@nbEmploye", nbEmploye);
                 commande.Parameters.AddWithValue("@statut", statut);
-                commande.Parameters.AddWithValue("@client", idClient);
 
                 commande.ExecuteNonQuery();
 
@@ -198,30 +197,32 @@ namespace ProjetSession
             }
         }
 
+
         public void AjouterEmploye(string nom, string prenom, DateTime date_naissance, string email, string adresse, DateTime date_embauche, double taux, string photo, string projet, string statut)
         {
-                string idProjet = "";
+            string idProjet = "";
 
-                MySqlCommand commande2 = new MySqlCommand();
-                commande2.Connection = con;
-                commande2.CommandText = "SELECT id_projet from projet WHERE titre LIKE @projet";
-                commande2.Parameters.AddWithValue("@projet", projet);
+            MySqlCommand commande2 = new MySqlCommand();
+            commande2.Connection = con;
+            commande2.CommandText = "SELECT id_projet FROM projet WHERE titre LIKE @projet";
+            commande2.Parameters.AddWithValue("@projet", projet);
 
-                con.Open();
+            con.Open();
 
-                MySqlDataReader reader = commande2.ExecuteReader();
+            MySqlDataReader reader = commande2.ExecuteReader();
 
-                while (reader.Read())
-                {
-                    idProjet = reader.GetString("id_projet");
-                }
-                reader.Close();
-                con.Close();
+            while (reader.Read())
+            {
+                idProjet = reader.GetString("id_projet");
+            }
+            reader.Close();
+            con.Close();
 
             try
             {
                 MySqlCommand commande = new MySqlCommand();
-                commande.CommandText = "INSERT INTO employe values(null, @nom, @prenom, @date_naissance, @email, @adresse, @date_embauche, @taux, @photo, @id_projet, @statut)";
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO employe VALUES(null, @nom, @prenom, @date_naissance, @email, @adresse, @date_embauche, @taux, @photo, @id_projet, @statut)";
 
                 commande.Parameters.AddWithValue("@nom", nom);
                 commande.Parameters.AddWithValue("@prenom", prenom);
@@ -244,6 +245,7 @@ namespace ProjetSession
                 con.Close();
             }
         }
+
 
         public List<string> GetNomsProjets()
         {
