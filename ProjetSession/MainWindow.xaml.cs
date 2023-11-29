@@ -31,6 +31,7 @@ namespace ProjetSession
                 iAjoutEmpl.IsEnabled = true;
                 iDeco.Content = "Se déconnecter";
             }
+            mainFrame.Navigate(typeof(PageAfficherProjet));
         }
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -70,7 +71,8 @@ namespace ProjetSession
 
         private async void iDeco_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if(Singleton.GetInstance().valideConnection() == false) { 
+            
+            if (Singleton.GetInstance().valideConnection() == false) { 
                 connexion dialog = new connexion();
                 dialog.XamlRoot = dialogAjout.XamlRoot;
                 dialog.Title = "Se connecter";
@@ -92,6 +94,8 @@ namespace ProjetSession
                         iAjoutClient.IsEnabled = true;
                         iAjoutEmpl.IsEnabled = true;
                         iDeco.Content = "Se déconnecter";
+                        mainFrame.Navigate(typeof(PageAfficherProjet));
+                        iListeProjet.IsSelected = true;
                     }
                 }
             } 
@@ -114,6 +118,8 @@ namespace ProjetSession
                     iAjoutClient.IsEnabled = false;
                     iAjoutEmpl.IsEnabled = false;
                     iDeco.Content = "Se Connecter";
+                    mainFrame.Navigate(typeof(PageAfficherProjet));
+                    iListeProjet.IsSelected = true;
                 }
 
             }

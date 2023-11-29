@@ -56,9 +56,9 @@ namespace ProjetSession
                         Titre = reader.GetString("titre"),
                         DateDebut = reader.GetString("date_debut"),
                         Description = reader.GetString("description"),
-                        Budget = reader.GetInt32("budget"),
+                        Budget = reader.GetDouble("budget"),
                         NbEmploye = reader.GetInt32("nb_employe"),
-                        TotalSal = reader.GetInt32("salaireTotal"),
+                        TotalSal = reader.GetDouble("salaireTotal"),
                         IdCLient = reader.GetString("id_client"),
                         Statut = reader.GetString("statut"),
                     };
@@ -200,13 +200,12 @@ namespace ProjetSession
 
         public void AjouterEmploye(string nom, string prenom, DateTime date_naissance, string email, string adresse, DateTime date_embauche, double taux, string photo, string projet, string statut)
         {
-            string idProjet = "";
-            try
-            {
+                string idProjet = "";
+
                 MySqlCommand commande2 = new MySqlCommand();
                 commande2.Connection = con;
-                commande2.CommandText = "SELECT id_projet FROM projet WHERE titre LIKE @projet";
-                commande2.Parameters.AddWithValue("@id_projet", projet);
+                commande2.CommandText = "SELECT id_projet from projet WHERE titre LIKE @projet";
+                commande2.Parameters.AddWithValue("@projet", projet);
 
                 con.Open();
 
@@ -217,10 +216,11 @@ namespace ProjetSession
                     idProjet = reader.GetString("id_projet");
                 }
                 reader.Close();
+                con.Close();
 
-
+            try
+            {
                 MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
                 commande.CommandText = "INSERT INTO employe values(null, @nom, @prenom, @date_naissance, @email, @adresse, @date_embauche, @taux, @photo, @id_projet, @statut)";
 
                 commande.Parameters.AddWithValue("@nom", nom);
@@ -234,6 +234,7 @@ namespace ProjetSession
                 commande.Parameters.AddWithValue("@id_projet", idProjet);
                 commande.Parameters.AddWithValue("@statut", statut);
 
+                con.Open();
                 commande.ExecuteNonQuery();
 
                 con.Close();
@@ -272,6 +273,36 @@ namespace ProjetSession
             }
 
             return titres;
+        }
+
+        public List<string> GetNomsClients()
+        {
+            List<string> noms = new List<string>();
+
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT nom FROM client";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string nom = reader.GetString("nom");
+                    noms.Add(nom);
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            return noms;
         }
 
 
