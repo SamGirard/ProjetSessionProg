@@ -25,7 +25,6 @@ namespace ProjetSession
             {
                 btModifier.Visibility = Visibility.Visible;
                 btDelete.Visibility = Visibility.Visible;
-
             }
             else
             {
@@ -69,8 +68,19 @@ namespace ProjetSession
             dialog.Date_Embauche = employe.DateEmb;
             dialog.Taux = Convert.ToString(employe.TauxHor);
             dialog.Photo = employe.Photo;
-
             dialog.IdProjet = Singleton.GetInstance().GetPositionEmpl(employe.IdProjet);
+            if(employe.Statut == "Journalier")
+            {
+                dialog.Statut = 0;
+            }
+            else if(employe.Statut == "Permanent")
+            {
+                dialog.Statut = 1;
+            }
+            else
+            {
+                dialog.Statut = -1;
+            }
 
             await dialog.ShowAsync();
         }

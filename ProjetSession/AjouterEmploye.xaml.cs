@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -35,6 +36,11 @@ namespace ProjetSession
         {
             this.InitializeComponent();
             cbxProjet.ItemsSource = Singleton.GetInstance().GetNomsProjets();
+            cdpEmb.MaxDate = DateTime.Now;
+            cdpEmb.MinDate = new DateTime(1980, 01, 01);
+
+            cdpNaiss.MaxDate = new DateTime(2003, 01, 01);
+            cdpNaiss.MinDate = new DateTime(1950, 01, 01);
         }
 
 
@@ -42,20 +48,23 @@ namespace ProjetSession
         {
             var erreur = false;
 
+            /////////////////////NOM\\\\\\\\\\\\\\\\\\\\
             if (tbxNom.Text == "")
-            {
-                errNom.Text = "Le nom est vide";
-                erreur = true;
-                args.Cancel = true;
-            }
-            else {
-                errNom.Text = "";
-                nom = tbxNom.Text;
-            }
+                {
+                    errNom.Text = "Le nom ne peut pas être vide";
+                    erreur = true;
+                    args.Cancel = true;
+                }
+            else 
+                {
+                    errNom.Text = "";
+                    nom = tbxNom.Text;
+                }
 
+            ////////////////////PRÉNOM\\\\\\\\\\\\\\\\\\\\
             if (tbxPrenom.Text == "")
             {
-                errPrenom.Text = "Le prenom est vide";
+                errPrenom.Text = "Le prénom ne peut pas être vide";
                 erreur = true;
                 args.Cancel = true;
             }
@@ -65,10 +74,10 @@ namespace ProjetSession
                 prenom = tbxPrenom.Text;
             }
 
-
+            ////////////////////EMAIL\\\\\\\\\\\\\\\\\\\\
             if (tbxEmail.Text == "")
             {
-                errEmail.Text = "L'email est vide";
+                errEmail.Text = "L'email ne peut pas être vide";
                 erreur = true;
                 args.Cancel = true;
             }
@@ -78,10 +87,10 @@ namespace ProjetSession
                 email = tbxEmail.Text;
             }
 
-
+            ////////////////////ADRESSE\\\\\\\\\\\\\\\\\\\\
             if (tbxAdresse.Text == "")
             {
-                errAdresse.Text = "L'adresse est vide";
+                errAdresse.Text = "L'adresse ne peut pas être vide";
                 erreur = true;
                 args.Cancel = true;
             }
@@ -91,31 +100,62 @@ namespace ProjetSession
                 adresse = tbxAdresse.Text;
             }
 
-
-            if (tbxTaux.Text == "")
+            ////////////////////TAUX\\\\\\\\\\\\\\\\\\\\
+            if (string.IsNullOrEmpty(tbxTaux.Text))
             {
-                errTaux.Text = "Le taux est vide";
+                errTaux.Text = "Le taux ne peut pas être vide";
                 erreur = true;
-                args.Cancel = true;
-            }
-            else errTaux.Text = "";
-
-            if (cdpNaiss.Date == DateTimeOffset.MinValue)
-            {
-                erreur = true;
-                errDate.Text = "La date est vide";
                 args.Cancel = true;
             }
             else
             {
+                if (int.TryParse(tbxTaux.Text, out int result))
+                {
+                    if (Convert.ToInt32(tbxTaux.Text) < 0)
+                    {
+                        erreur = true;
+                        errTaux.Text = "Le taux ne peut pas être négatif";
+                    }
+                    else if(Convert.ToInt32(tbxTaux.Text) < 15)
+                    {
+                        erreur = true;
+                        errTaux.Text = "Le taux ne peut pas être inférieur au salair minimum";
+                    }
+                    else
+                    {
+                        errTaux.Text = "";
+                    }
+                }
+                else
+                {
+                    erreur = true;
+                    errTaux.Text = "Le taux doit être un nombre";
+                }
+            }
+
+            ////////////////////DATE NAISSANCE\\\\\\\\\\\\\\\\\\\\
+            if (string.IsNullOrEmpty(cdpNaiss.Date.ToString()))
+            {
+                erreur = true;
+                errDate.Text = "La date de naissance ne peut pas être vide";
+                args.Cancel = true;
+            }
+            else
+            {
+                /*if(cdpNaiss.Date.Value.Year < 1950)
+                {
+                    erreur = true;
+                    errDate.Text = "La date de naissance ";
+                }*/
                 dateNaissance = cdpNaiss.Date.Value.Date;
                 errDate.Text = "";
             }
 
-            if (cdpEmb.Date == DateTimeOffset.MinValue)
+            ////////////////////DATE EMBAUCHE\\\\\\\\\\\\\\\\\\\\
+            if (string.IsNullOrEmpty(cdpEmb.Date.ToString()))
             {
                 erreur = true;
-                errEmbauche.Text = "La date est vide";
+                errEmbauche.Text = "La date d'embauche ne peut pas être vide";
                 args.Cancel = true;
             }
             else
@@ -124,22 +164,32 @@ namespace ProjetSession
                 errEmbauche.Text = "";
             }
 
-            if (tbxPhoto.Text == "")
+            ////////////////////PHOTO\\\\\\\\\\\\\\\\\\\\
+            if (string.IsNullOrEmpty(tbxPhoto.Text))
             {
-                errPhoto.Text = "La photo est vide";
+                errPhoto.Text = "La photo ne peut pas être vide";
                 erreur = true;
                 args.Cancel = true;
             }
             else
             {
-                errPhoto.Text = "";
-                photo = tbxPhoto.Text;
+                if (UrlValide(tbxPhoto.Text) == false)
+                {
+                    errPhoto.Text = "Le lien URL est invalide";
+                    erreur = true;
+                    args.Cancel = true;
+                }
+                else
+                {
+                    errPhoto.Text = "";
+                    photo = tbxPhoto.Text;
+                }
             }
 
-
+            ////////////////////STATUT\\\\\\\\\\\\\\\\\\\\
             if (cbxStatut.SelectedIndex == -1)
             {
-                errStatut.Text = "Le statut est vide";
+                errStatut.Text = "Le statut ne peut pas être vide";
                 erreur = true;
                 args.Cancel = true;
             }
@@ -153,12 +203,30 @@ namespace ProjetSession
             if (erreur == false)
             {
                 double dTaux = Convert.ToDouble(tbxTaux.Text);
-                string projet = cbxProjet.SelectedItem.ToString();
+                string projet;
+                if (cbxProjet.SelectedIndex == -1)
+                {
+                    projet = null;
+                }
+                else
+                {
+                    projet = cbxProjet.SelectedItem.ToString();
+                }
 
                 Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, dTaux, photo, projet, statut);
             }
         }
 
+        /*********************VALIDATION URL*********************/
+        private bool UrlValide(string uriString)
+        {
+            System.Uri uri;
+            return System.Uri.TryCreate(uriString, UriKind.Absolute, out uri)
+            && (uri.Scheme == System.Uri.UriSchemeHttp || uri.Scheme == System.Uri.UriSchemeHttps);
+        }
+
+
+        /*********************PARTIE MODIFICATION*********************/
         public string Nom
         {
             get { return tbxNom.Text; }
@@ -212,12 +280,13 @@ namespace ProjetSession
             get { return tbxTaux.Text; }
             set { tbxTaux.Text = value;}
         }
+
         public string Photo
         {
             get { return tbxPhoto.Text; }
             set { tbxPhoto.Text = value; }
         }
-
+        
         public int IdProjet
         {
             get { return cbxProjet.SelectedIndex; }

@@ -139,6 +139,7 @@ namespace ProjetSession
                         TauxHor = reader.GetInt32("taux"),
                         Photo = reader.GetString("photo"),
                         Statut = reader.GetString("statut"),
+                        IdProjet = reader.GetString("id_projet"),
                     };
 
                     listeEmploye.Add(unEmploye);
@@ -240,7 +241,7 @@ namespace ProjetSession
 
                 con.Close();
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 con.Close();
             }
