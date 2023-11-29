@@ -19,7 +19,6 @@
     <None Remove="PageAfficherClient.xaml" />
     <None Remove="PageAfficherEmploye.xaml" />
     <None Remove="PageAfficherProjet.xaml" />
-    <None Remove="PageAjoutProjet.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,11 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="AjoutClientContent.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="PageAjoutProjet.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

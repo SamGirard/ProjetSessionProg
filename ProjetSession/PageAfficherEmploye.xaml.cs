@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,11 +23,12 @@ namespace ProjetSession
         {
             this.InitializeComponent();
             gvListe.ItemsSource = Singleton.GetInstance().GetListeEmploye();
+
+            /*Affichage bouton admin*/
             if (Singleton.GetInstance().valideConnection())
             {
                 btModifier.Visibility = Visibility.Visible;
                 btDelete.Visibility = Visibility.Visible;
-
             }
             else
             {
@@ -37,7 +39,7 @@ namespace ProjetSession
 
         private void gvListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            /*POUR ACTIVER/DÉSACTIVER LES BOUTONS*/
+            /*ACTIVER/DÉSACTIVER LES BOUTONS*/
             if (Singleton.GetInstance().valideConnection())
             {
                 if (gvListe.SelectedIndex > -1)
@@ -53,14 +55,66 @@ namespace ProjetSession
             }
         }
 
-        private void btModifier_Click(object sender, RoutedEventArgs e)
+        private async void btModifier_Click(object sender, RoutedEventArgs e)
         {
+            Employe employe = gvListe.SelectedItem as Employe;
+            AjouterEmploye dialog = new AjouterEmploye();
+            dialog.XamlRoot = validation.XamlRoot;
+            dialog.Title = "Modifier un employé existant";
+            dialog.PrimaryButtonText = "Modifier";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
 
+            dialog.Nom = employe.Nom;
+            dialog.Prenom = employe.Prenom;
+            dialog.Date_Naissance = employe.DateNaiss;
+            dialog.Email = employe.Email;
+            dialog.Adresse = employe.Adresse;
+            dialog.Date_Embauche = employe.DateEmb;
+            dialog.Taux = Convert.ToString(employe.TauxHor);
+            dialog.Photo = employe.Photo;
+            dialog.IdProjet = Singleton.GetInstance().GetPositionEmpl(employe.IdProjet);
+            if(employe.Statut == "Journalier")
+            {
+                dialog.Statut = 0;
+            }
+            else if(employe.Statut == "Permanent")
+            {
+                dialog.Statut = 1;
+            }
+            else
+            {
+                dialog.Statut = -1;
+            }
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+
+            }
         }
 
-        private void btDelete_Click(object sender, RoutedEventArgs e)
+        private async void btDelete_Click(object sender, RoutedEventArgs e)
         {
+            int position = gvListe.SelectedIndex;
+            Employe employe = gvListe.SelectedItem as Employe;
+            string id = employe.Matricule;
+            string nom = employe.NomComplet;
 
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = validation.XamlRoot;
+            dialog.Title = "Supprimer un(e) employé(e)?";
+            dialog.PrimaryButtonText = "Supprimer";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.Content = $"Êtes-vous sûre de vouloir supprimer l'employé(e) : {nom}?";
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                Singleton.GetInstance().supprimer(employe, position);
+            }
         }
     }
 }

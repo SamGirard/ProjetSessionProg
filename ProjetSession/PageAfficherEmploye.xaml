@@ -30,7 +30,7 @@
                                         <Image Source="{x:Bind Photo}" Stretch="UniformToFill"/>
                                     </Border>
 
-                                    
+
                                     <TextBlock Text="{x:Bind NomComplet}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
                                     
 
