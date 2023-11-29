@@ -25,46 +25,64 @@ namespace ProjetSession
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             Boolean erreur = false;
+            string nom = "";
+            string email = "";
+            string adresse = "";
+            string telephone = "";
+
             string champVide = "Ce champs ne peut pas être vide";
 
             if (string.IsNullOrEmpty(tbxNom.Text))
             {
                 erreur = true;
                 errNom.Text = "Le champ nom est obligatoire";
+                args.Cancel = true;
             }
             else
             {
                 errNom.Text = "";
+                nom = tbxNom.Text;
             }
 
             if (string.IsNullOrEmpty(tbxEmail.Text))
             {
                 erreur = true;
                 errEmail.Text = "Le champ email est obligatoire";
+                args.Cancel = true;
             }
             else
             {
                 errEmail.Text = "";
+                email = tbxEmail.Text;
             }
 
             if (string.IsNullOrEmpty(tbxAdresse.Text))
             {
                 erreur = true;
                 errAdresse.Text = "Le champ adresse est obligatoire";
+                args.Cancel = true;
             }
             else
             {
                 errAdresse.Text = "";
+                adresse = tbxAdresse.Text;
             }
 
             if (string.IsNullOrEmpty(tbxTel.Text))
             {
                 erreur = true;
                 errTel.Text = "Le champ numéro de téléphone est obligatoire";
+                args.Cancel = true;
             }
             else
             {
                 errTel.Text = "";
+                telephone = tbxTel.Text;
+            }
+
+            if(erreur == false)
+            {
+                Singleton.GetInstance().AjouterClient(nom, adresse, telephone, email);
             }
 
         }

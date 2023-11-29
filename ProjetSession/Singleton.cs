@@ -246,6 +246,30 @@ namespace ProjetSession
             }
         }
 
+        public void AjouterClient(string nom, string adresse, string numero, string email)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO client VALUES (null, @nom, @adresse, @numero_tel, @email)";
+
+                commande.Parameters.AddWithValue("@nom", nom);
+                commande.Parameters.AddWithValue("@adresse", adresse);
+                commande.Parameters.AddWithValue("@numero_tel", numero);
+                commande.Parameters.AddWithValue("@email", email);
+
+                con.Open();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception)
+            {
+                con.Close();
+            }
+        }
+
 
         public List<string> GetNomsProjets()
         {
