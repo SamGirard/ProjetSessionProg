@@ -116,7 +116,8 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE p_ajout_client(IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
 BEGIN
-    INSERT into client VALUES(null, nom, adresse, numero_tel, email);
+    INSERT into client (nom, adresse, numero_tel, email)
+    VALUES(nom, adresse, numero_tel, email);
 end //
 DELIMITER ;
 

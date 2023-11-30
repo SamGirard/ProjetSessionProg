@@ -26,6 +26,7 @@ namespace ProjetSession
         {
             Boolean erreur = false;
 
+            /////////////////////Nom\\\\\\\\\\\\\\\\\\\\
             if (string.IsNullOrEmpty(tbxNom.Text))
             {
                 erreur = true;
@@ -37,6 +38,7 @@ namespace ProjetSession
                 errNom.Text = "";
             }
 
+            /////////////////////EMAIL\\\\\\\\\\\\\\\\\\\\
             if (string.IsNullOrEmpty(tbxEmail.Text))
             {
                 erreur = true;
@@ -48,6 +50,7 @@ namespace ProjetSession
                 errEmail.Text = "";
             }
 
+            /////////////////////ADRESSE\\\\\\\\\\\\\\\\\\\\
             if (string.IsNullOrEmpty(tbxAdresse.Text))
             {
                 erreur = true;
@@ -59,6 +62,7 @@ namespace ProjetSession
                 errAdresse.Text = "";
             }
 
+            /////////////////////NUMÉRO DE TÉLÉPHONE\\\\\\\\\\\\\\\\\\\\
             if (string.IsNullOrEmpty(tbxTel.Text))
             {
                 erreur = true;
@@ -70,7 +74,9 @@ namespace ProjetSession
                 errTel.Text = "";
             }
 
-            if(erreur == false)
+
+            /////////////////////**AJOUT**\\\\\\\\\\\\\\\\\\\\
+            if (erreur == false)
             {
                 Client client = new Client 
                 { 

@@ -157,7 +157,7 @@ namespace ProjetSession
 
 
 
-            ////////////////////AJOUT LORSQUE VALIDATION EST FAITE\\\\\\\\\\\\\\\\\\\\
+            /////////////////////**AJOUT**\\\\\\\\\\\\\\\\\\\\
             if (erreur == false)
             {
                 Projet projet = new Projet
