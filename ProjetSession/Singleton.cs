@@ -180,7 +180,7 @@ namespace ProjetSession
                 }
                 reader.Close();
 
-                MySqlCommand commande = new MySqlCommand("p_ajouter_projet");
+                MySqlCommand commande = new MySqlCommand("p_ajout_projet");
                 commande.Connection = con;
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -188,7 +188,7 @@ namespace ProjetSession
                 commande.Parameters.AddWithValue("@date_debut", dateDebut.ToString("yyyy-MM-dd"));
                 commande.Parameters.AddWithValue("@description", description);
                 commande.Parameters.AddWithValue("@budget", budget);
-                commande.Parameters.AddWithValue("@nbEmploye", nbEmploye);
+                commande.Parameters.AddWithValue("@nbEmplo", nbEmploye);
                 commande.Parameters.AddWithValue("@id_client", idClient);
                 commande.Parameters.AddWithValue("@statut", statut);
 
