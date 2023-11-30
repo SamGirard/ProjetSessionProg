@@ -185,10 +185,10 @@ namespace ProjetSession
 
                 commande.Parameters.AddWithValue("@titre", titre);
                 commande.Parameters.AddWithValue("@date_debut", dateDebut.ToString("yyyy-MM-dd"));
-                commande.Parameters.AddWithValue("@id_client", idClient);
                 commande.Parameters.AddWithValue("@description", description);
                 commande.Parameters.AddWithValue("@budget", budget);
                 commande.Parameters.AddWithValue("@nbEmploye", nbEmploye);
+                commande.Parameters.AddWithValue("@id_client", idClient);
                 commande.Parameters.AddWithValue("@statut", statut);
 
                 commande.ExecuteNonQuery();
