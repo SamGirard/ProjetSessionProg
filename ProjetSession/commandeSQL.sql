@@ -118,12 +118,13 @@ end //
 DELIMITER ;
 
 /*Procédure pour ajouter projet (fait par isaac)*/
-DELIMITER //
-CREATE PROCEDURE p_ajout_projet(IN titre VARCHAR(50), IN date_debut DATE, IN description VARCHAR(255), IN budget DOUBLE, IN nbEmpl INT, IN salairTot DOUBLE, IN id_client VARCHAR(3), IN statut VARCHAR(20))
+CREATE PROCEDURE p_ajout_projet(IN titre varchar(50), IN date_debut date,
+                                 IN description varchar(255), IN budget double, IN nbEmplo INT,
+                                 IN id_client varchar(3), IN statut varchar(20))
 BEGIN
-    INSERT into projet VALUES(null, titre, date_debut, description, budget, nbEmpl, salairTot, id_client, statut);
-end //
-DELIMITER ;
+    INSERT INTO projet (titre, date_debut, description, budget, nb_employe, salaireTotal, id_client, statut)
+    VALUES (titre, date_debut, description, budget, nbEmplo, 0, id_client, statut);
+END;
 
 /*Procédure pour ajouter projet (fait par sam)*/
 DELIMITER //
