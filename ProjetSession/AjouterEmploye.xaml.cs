@@ -221,7 +221,7 @@ namespace ProjetSession
                     Photo = tbxPhoto.Text,
                     Statut = cbxStatut.SelectedItem.ToString(),
                     TauxHor = Convert.ToDouble(tbxTaux.Text),
-                    Projet = projet,
+                    ProjetEnCours = projet,
                     IdProjet = projet.IdProjet
                 };
 

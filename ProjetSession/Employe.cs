@@ -78,7 +78,7 @@ namespace ProjetSession
             set { statut = value; this.OnPropertyChanged(); }
         }
 
-        public Projet Projet
+        public Projet ProjetEnCours
         {
             get { return projet; }
             set {  projet = value; this.OnPropertyChanged(); }

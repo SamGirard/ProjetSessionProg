@@ -130,7 +130,7 @@ namespace ProjetSession
 
                 while (reader.Read())
                 {
-                    //Projet projet = getProjet((string)reader["id_projet"]);
+                    Projet projet = getProjet((string)reader["id_projet"]);
                     Employe unEmploye = new Employe()
                     {
                         Matricule = reader.GetString("matricule"),
@@ -473,7 +473,7 @@ namespace ProjetSession
 
         public Projet getProjet(string idProjet)
         {
-            MySqlCommand commande = new MySqlCommand($"p_get_projet");
+            MySqlCommand commande = new MySqlCommand("p_get_projet");
             commande.Connection = con2;
             commande.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -483,18 +483,30 @@ namespace ProjetSession
 
             MySqlDataReader read2 = commande.ExecuteReader();
             read2.Read();
-            Projet projet = new Projet 
-            { 
-                IdProjet = (string)read2["id_projet"],
-                Titre = (string)read2["titre"],
-                DateDebut = (string)read2["date_debut"],
-                Description = (string)read2["description"],
-                Budget = (double)read2["budget"],
-                NbEmploye = (int)read2["nb_employe"],
-                TotalSal = (double)read2["salaireTotal"],
-                IdCLient = (string)read2["id_client"],
-                Statut = (string)read2["statut"]
+            string id = (string)read2["id_projet"];
+            string titre = (string)read2["titre"];
+            DateTime test = (DateTime)read2["date_debut"];
+            string date = test.Date.ToString();
+            string description = (string)read2["description"];
+            double budget = (double)read2["budget"];
+            int nbEmpl = (int)read2["nb_employe"];
+            double salTot = (double)read2["salaireTotal"];
+            string idClient = (string)read2["id_client"];
+            string statut = (string)read2["statut"];
+
+            Projet projet = new Projet
+            {
+                IdProjet = id,
+                Titre = titre,
+                DateDebut = date,
+                Description = description,
+                Budget = budget,
+                NbEmploye = nbEmpl,
+                TotalSal = salTot,
+                IdCLient = idClient,
+                Statut = statut
             };
+
             read2.Close();
             con2.Close();
             return projet;
