@@ -21,21 +21,10 @@ namespace ProjetSession
 {
     public sealed partial class AjouterEmploye : ContentDialog
     {
-        /*
-        string nom = "";
-        string prenom = "";
-        DateTime dateNaissance;
-        string email = "";
-        string adresse = "";
-        DateTime dateEmbauche;
-        string photo = "";
-        string statut = "";
-        */
 
         public AjouterEmploye()
         {
             this.InitializeComponent();
-            //cbxProjet.ItemsSource = Singleton.GetInstance().GetNomsProjets();
             cbxProjet.ItemsSource = Singleton.GetInstance().GetListeProjet();
 
             cdpEmb.MaxDate = DateTime.Now;
@@ -71,7 +60,6 @@ namespace ProjetSession
             else 
             {
                     errNom.Text = "";
-                    //nom = tbxNom.Text;
             }
 
             ////////////////////PRÉNOM\\\\\\\\\\\\\\\\\\\\
@@ -84,7 +72,6 @@ namespace ProjetSession
             else
             {
                 errPrenom.Text = "";
-                //prenom = tbxPrenom.Text;
             }
 
             ////////////////////EMAIL\\\\\\\\\\\\\\\\\\\\
@@ -97,7 +84,6 @@ namespace ProjetSession
             else
             {
                 errEmail.Text = "";
-                //email = tbxEmail.Text;
             }
 
             ////////////////////ADRESSE\\\\\\\\\\\\\\\\\\\\
@@ -110,7 +96,6 @@ namespace ProjetSession
             else
             {
                 errAdresse.Text = "";
-                //adresse = tbxAdresse.Text;
             }
 
             ////////////////////TAUX\\\\\\\\\\\\\\\\\\\\
@@ -155,7 +140,6 @@ namespace ProjetSession
             }
             else
             {
-                //dateNaissance = cdpNaiss.Date.Value.Date;
                 errDate.Text = "";
             }
 
@@ -204,7 +188,6 @@ namespace ProjetSession
             else
             {
                 errStatut.Text = "";
-                //statut = cbxStatut.SelectedItem.ToString();
             }
 
 
@@ -224,8 +207,6 @@ namespace ProjetSession
                     ProjetEnCours = projet,
                     IdProjet = projet.IdProjet
                 };
-
-                //Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, dTaux, photo, projet, statut);
                 Singleton.GetInstance().ajouter(employe);
             }
         }

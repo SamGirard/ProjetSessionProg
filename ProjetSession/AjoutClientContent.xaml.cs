@@ -25,12 +25,6 @@ namespace ProjetSession
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             Boolean erreur = false;
-            string nom = "";
-            string email = "";
-            string adresse = "";
-            string telephone = "";
-
-            string champVide = "Ce champs ne peut pas être vide";
 
             if (string.IsNullOrEmpty(tbxNom.Text))
             {
@@ -41,7 +35,6 @@ namespace ProjetSession
             else
             {
                 errNom.Text = "";
-                nom = tbxNom.Text;
             }
 
             if (string.IsNullOrEmpty(tbxEmail.Text))
@@ -53,7 +46,6 @@ namespace ProjetSession
             else
             {
                 errEmail.Text = "";
-                email = tbxEmail.Text;
             }
 
             if (string.IsNullOrEmpty(tbxAdresse.Text))
@@ -65,7 +57,6 @@ namespace ProjetSession
             else
             {
                 errAdresse.Text = "";
-                adresse = tbxAdresse.Text;
             }
 
             if (string.IsNullOrEmpty(tbxTel.Text))
@@ -77,12 +68,18 @@ namespace ProjetSession
             else
             {
                 errTel.Text = "";
-                telephone = tbxTel.Text;
             }
 
             if(erreur == false)
             {
-                Singleton.GetInstance().AjouterClient(nom, adresse, telephone, email);
+                Client client = new Client 
+                { 
+                    Nom = tbxNom.Text,
+                    Adresse = tbxAdresse.Text,
+                    Num_Tel = tbxTel.Text,
+                    Email = tbxEmail.Text
+                };
+                Singleton.GetInstance().ajouter(client);
             }
 
         }
