@@ -174,5 +174,54 @@ namespace ProjetSession
                 Singleton.GetInstance().ajouter(projet);
             }
         }
+
+
+
+        /*********************PARTIE MODIFICATION*********************/
+        public string Titre
+        {
+            get { return tbTitre.Text; }
+            set { tbTitre.Text = value;}
+        }
+
+        public string DateDebut
+        {
+            get { return cdpDate.Date.ToString(); }
+            set
+            {
+                DateTimeOffset date = new DateTimeOffset(DateTime.Parse(value));
+                cdpDate.Date = date;
+            }
+        }
+
+        public string Description
+        {
+            get { return tbDescription.Text; }
+            set { tbDescription.Text = value; }
+        }
+
+        public string Budget
+        {
+            get { return tbBudget.Text; }
+            set { tbBudget.Text = value; }
+        }
+
+        public string NbEmploye
+        {
+            get { return tbNbEmploye.Text; }
+            set { tbNbEmploye.Text = value;}
+        }
+
+        public int IdClient
+        {
+            get { return cbClient.SelectedIndex; }
+            set { cbClient.SelectedIndex = value; }
+        }
+
+        public int Statut
+        {
+            get { return cbStatut.SelectedIndex; }
+            set { cbStatut.SelectedIndex = value; }
+        }
     }
 }

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.AppBroadcasting;
 
 namespace ProjetSession
 {
@@ -88,6 +89,33 @@ namespace ProjetSession
                 Singleton.GetInstance().ajouter(client);
             }
 
+        }
+
+
+
+        /*********************PARTIE MODIFICATION*********************/
+        public string Nom
+        {
+            get { return tbxNom.Text; }
+            set { tbxNom.Text = value;}
+        }
+
+        public string Adresse
+        {
+            get { return tbxAdresse.Text; }
+            set { tbxAdresse.Text = value; }
+        }
+
+        public string Num_Tel
+        {
+            get { return tbxTel.Text; }
+            set { tbxTel.Text = value; }
+        }
+
+        public string Email
+        {
+            get { return tbxEmail.Text;}
+            set { tbxEmail.Text = value;}
         }
 
     }

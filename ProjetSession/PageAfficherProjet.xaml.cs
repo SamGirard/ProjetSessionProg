@@ -57,18 +57,41 @@ namespace ProjetSession
                 
             }
 
-            
         }
 
         private async void btModifier_Click(object sender, RoutedEventArgs e)
         {
+            Projet projet = gvListe.SelectedItem as Projet;
             AjoutProjetContent dialog = new AjoutProjetContent();
             dialog.XamlRoot = validation.XamlRoot;
-            dialog.Title = "Modifier un projet existant";
+            dialog.Title = "Modifier un projet";
             dialog.PrimaryButtonText = "Modifier";
             dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
-            await dialog.ShowAsync();
+            
+            dialog.Titre = projet.Titre;
+            dialog.Description = projet.Description;
+            dialog.Budget = Convert.ToString(projet.Budget);
+            dialog.NbEmploye = Convert.ToString(projet.NbEmploye);
+            dialog.IdClient = Singleton.GetInstance().GetPositionClient(projet.IdCLient);
+            if (projet.Statut == "En cours")
+            {
+                dialog.Statut = 0;
+            }
+            else if (projet.Statut == "Terminé")
+            {
+                dialog.Statut = 1;
+            }
+            else
+            {
+                dialog.Statut = -1;
+            }
+
+            var result = await dialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                /*Va rester a faire le singleton et l'appeler ici*/
+            }
         }
 
         

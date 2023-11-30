@@ -505,7 +505,7 @@ namespace ProjetSession
         /*****************************************************************************************************/
         /***********************************************AUTRES************************************************/
         /*****************************************************************************************************/
-        public int GetPositionEmpl(string idProjet)
+        public int GetPositionProjet(string idProjet)
         {
             ObservableCollection<Projet> listeProjet2 = GetInstance().GetListeProjet();
             for (int i = 0; i < listeProjet2.Count; i++)
@@ -514,9 +514,28 @@ namespace ProjetSession
                 string id = projet.IdProjet;
                 if (id == idProjet)
                 {
+                    listeProjet2.Clear();
                     return i;
                 }
             }
+            listeProjet2.Clear();
+            return -1;
+        }
+
+        public int GetPositionClient(string idClient)
+        {
+            ObservableCollection<Client> listeClient2 = GetInstance().GetListeClient();
+            for (int i = 0; i < listeClient2.Count; i++)
+            {
+                Client client = listeClient2[i];
+                string id = client.Id_Client;
+                if (id == idClient)
+                {
+                    listeClient2.Clear();
+                    return i;
+                }
+            }
+            listeClient2.Clear();
             return -1;
         }
 
