@@ -32,6 +32,7 @@ namespace ProjetSession
                 iDeco.Content = "Se déconnecter";
             }
             mainFrame.Navigate(typeof(PageAfficherProjet));
+
         }
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

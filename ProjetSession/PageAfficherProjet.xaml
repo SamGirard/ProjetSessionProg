@@ -12,9 +12,9 @@
     <Grid>
         <ScrollViewer>
             <StackPanel Orientation="Vertical" Margin="30 30 30 30">
-                <TextBlock FontSize="50pt" FontWeight="Bold" HorizontalAlignment="Left">Les Projets</TextBlock>
+                <TextBlock FontSize="50pt" FontWeight="Bold" HorizontalAlignment="Left" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}">Les Projets</TextBlock>
                 <GridView x:Name="gvListe" Margin="0 50 0 50" IsItemClickEnabled="False" CanDragItems="True" AllowDrop="True" CanReorderItems="True" SelectionMode="Single" SelectedIndex="-1" SelectionChanged="gvListe_SelectionChanged">
-                    <GridView.ItemsPanel>
+                    <GridView.ItemsPanel> 
                         <ItemsPanelTemplate>
                             <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4"/>
                         </ItemsPanelTemplate>
@@ -25,25 +25,25 @@
                         <DataTemplate x:DataType="local:Projet">
                             <Border Margin="20">
                                 <StackPanel Orientation="Vertical" Height="300" Width="300" Margin="20" HorizontalAlignment="Center">
-                                    <TextBlock Text="{x:Bind IdProjet}" FontWeight="Light" FontSize="12pt" Foreground="WhiteSmoke"/>
-                                    <TextBlock Text="{x:Bind Titre}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
-                                    <TextBlock Text="{x:Bind Description}" FontWeight="Light" FontSize="15pt" Foreground="White" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{x:Bind IdProjet}" FontWeight="Light" FontSize="12pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}"/>
+                                    <TextBlock Text="{x:Bind Titre}" FontSize="30pt" TextWrapping="Wrap"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{x:Bind Description}" FontWeight="Light" FontSize="15pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 
-                                    <TextBlock FontSize="20pt" Foreground="White" Margin="0 10 0 0" Text="{x:Bind DateDebut}"/>
-                                    <TextBlock FontWeight="Light" FontSize="20pt" Foreground="WhiteSmoke">
+                                    <TextBlock FontSize="20pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Margin="0 10 0 0" Text="{x:Bind DateDebut}"/>
+                                    <TextBlock FontWeight="Light" FontSize="20pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}">
                                     <Run Text="Budget : "/>
                                     <Run Text="{x:Bind Budget}"></Run>
                                     <Run Text="$$"/>
                                     </TextBlock>
 
-                                    <TextBlock FontWeight="Light" FontSize="20pt" Margin="0 0 0 10" Foreground="WhiteSmoke">
+                                    <TextBlock FontWeight="Light" FontSize="20pt" Margin="0 0 0 10"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}">
                                     <Run Text="Salaire total : "/>
                                     <Run Text="{x:Bind TotalSal}"></Run>
                                     <Run Text="$/h"/>
                                     </TextBlock>
 
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <TextBlock x:Name="statut" SizeChanged="statut_SizeChanged" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt" Foreground="WhiteSmoke"/>
+                                        <TextBlock x:Name="statut" SizeChanged="statut_SizeChanged" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}"/>
                                         <Ellipse x:Name="couleur" Width="8" Height="8" Margin="0 2 0 0" Fill="Green" VerticalAlignment="Center"/>
                                     </StackPanel>
 

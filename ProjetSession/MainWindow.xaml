@@ -36,4 +36,7 @@
         </NavigationView>
 
     </Grid>
+    <Window.SystemBackdrop>
+        <DesktopAcrylicBackdrop />
+    </Window.SystemBackdrop>
 </Window>

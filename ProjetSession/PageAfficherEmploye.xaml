@@ -24,28 +24,28 @@
                         <DataTemplate x:DataType="local:Employe">
                             <Border Margin="20 10 20 10">
                                 <StackPanel Orientation="Vertical" Height="300" Width="300" Margin="20" HorizontalAlignment="Center">
-                                    <TextBlock Text="{x:Bind Matricule}" FontSize="12pt" TextWrapping="Wrap" Foreground="White" Opacity="0.5" Margin="0 0 0 10" FontWeight="light"/>
+                                    <TextBlock Text="{x:Bind Matricule}" FontSize="12pt" TextWrapping="Wrap"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Opacity="0.5" Margin="0 0 0 10" FontWeight="light"/>
 
                                     <Border CornerRadius="10" Width="150" Height="150" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 10">
                                         <Image Source="{x:Bind Photo}" Stretch="UniformToFill"/>
                                     </Border>
 
 
-                                    <TextBlock Text="{x:Bind NomComplet}" FontSize="30pt" TextWrapping="Wrap" Foreground="White" FontWeight="SemiBold"/>
-                                    
+                                    <TextBlock Text="{x:Bind NomComplet}" FontSize="30pt" TextWrapping="Wrap" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" FontWeight="SemiBold"/>
 
-                                    <TextBlock FontWeight="Light" FontSize="15pt" Foreground="White" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap">
+
+                                    <TextBlock FontWeight="Light" FontSize="15pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap">
                                         <Run Text="Date de naissance : "/>
                                         <Run Text="{x:Bind DateNaiss}"></Run>
                                     </TextBlock>
 
-                                    <TextBlock FontWeight="Light" FontSize="20pt" Foreground="WhiteSmoke">
+                                    <TextBlock FontWeight="Light" FontSize="20pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}">
                                         <Run Text="Taux horaire : "/>
                                         <Run Text="{x:Bind TauxHor}"></Run>
                                         <Run Text="$/h"/>
                                     </TextBlock>
 
-                                    <TextBlock FontWeight="Light" FontSize="15pt" Foreground="White" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap" Margin="0 10 0 0">
+                                    <TextBlock FontWeight="Light" FontSize="15pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap" Margin="0 10 0 0">
                                         <Run Text="Statut : "/>
                                         <Run Text="{x:Bind Statut}"></Run>
                                     </TextBlock>
