@@ -19,6 +19,7 @@ namespace ProjetSession
         double totalSal;
         string idCLient;
         string statut;
+        Client client;
 
         public string IdProjet
         {
@@ -71,6 +72,12 @@ namespace ProjetSession
         {
             get { return statut; }
             set { statut = value; this.OnPropertyChanged(); }
+        }
+
+        public Client Client
+        {
+            get { return client; }
+            set { client = value; this.OnPropertyChanged(); }
         }
 
 

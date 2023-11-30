@@ -53,6 +53,7 @@ namespace ProjetSession
 
                 while (reader.Read())
                 {
+                    Client client = getClient((string)reader["id_client"]);
                     Projet unProjet = new Projet()
                     {
                         IdProjet = reader.GetString("id_projet"),
@@ -64,8 +65,8 @@ namespace ProjetSession
                         TotalSal = reader.GetDouble("salaireTotal"),
                         IdCLient = reader.GetString("id_client"),
                         Statut = reader.GetString("statut"),
+                        Client = client
                     };
-
                     listeProjet.Add(unProjet);
                 }
                 reader.Close();
@@ -202,53 +203,7 @@ namespace ProjetSession
         }
 
 
-        public void AjouterEmploye(string nom, string prenom, DateTime date_naissance, string email, string adresse, DateTime date_embauche, double taux, string photo, string projet, string statut)
-        {
-            string idProjet = "";
 
-            MySqlCommand commande2 = new MySqlCommand();
-            commande2.Connection = con;
-            commande2.CommandText = "SELECT id_projet FROM projet WHERE titre LIKE @projet";
-            commande2.Parameters.AddWithValue("@projet", projet);
-
-            con.Open();
-
-            MySqlDataReader reader = commande2.ExecuteReader();
-
-            while (reader.Read())
-            {
-                idProjet = reader.GetString("id_projet");
-            }
-            reader.Close();
-            con.Close();
-
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "INSERT INTO employe VALUES(null, @nom, @prenom, @date_naissance, @email, @adresse, @date_embauche, @taux, @photo, @id_projet, @statut)";
-
-                commande.Parameters.AddWithValue("@nom", nom);
-                commande.Parameters.AddWithValue("@prenom", prenom);
-                commande.Parameters.AddWithValue("@date_naissance", date_naissance.ToString("yyyy-MM-dd"));
-                commande.Parameters.AddWithValue("@email", email);
-                commande.Parameters.AddWithValue("@adresse", adresse);
-                commande.Parameters.AddWithValue("@date_embauche", date_embauche.ToString("yyyy-MM-dd"));
-                commande.Parameters.AddWithValue("@taux", taux);
-                commande.Parameters.AddWithValue("@photo", photo);
-                commande.Parameters.AddWithValue("@id_projet", idProjet);
-                commande.Parameters.AddWithValue("@statut", statut);
-
-                con.Open();
-                commande.ExecuteNonQuery();
-
-                con.Close();
-            }
-            catch (Exception e)
-            {
-                con.Close();
-            }
-        }
 
         public void AjouterClient(string nom, string adresse, string numero, string email)
         {
@@ -512,12 +467,48 @@ namespace ProjetSession
             return projet;
         }
 
+        public Client getClient(string idClient)
+        {
+            MySqlCommand commande = new MySqlCommand("p_get_client");
+            commande.Connection = con2;
+            commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+            commande.Parameters.AddWithValue("id", idClient);
+
+            con2.Open();
+
+            MySqlDataReader read2 = commande.ExecuteReader();
+            read2.Read();
+            string id = (string)read2["id_client"];
+            string nom = (string)read2["nom"];
+            string adresse = (string)read2["adresse"];
+            string numero = (string)read2["numero_tel"];
+            string email = (string)read2["email"];
+
+            Client client = new Client
+            {
+                Id_Client = id,
+                Nom = nom,
+                Adresse = adresse,
+                Num_Tel = numero,
+                Email = email
+            };
+
+            read2.Close();
+            con2.Close();
+            return client;
+        }
+
+
+
         public void ajouter(Object objet)
         {
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
+            ////////////////////AJOUT CLIENT\\\\\\\\\\\\\\\\\\\\
             if (objet is Client)
             {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+
                 Client client = (Client)objet;
                 string nom = client.Nom;
                 string adresse = client.Adresse;
@@ -535,34 +526,76 @@ namespace ProjetSession
 
                     con.Open();
                     commande.ExecuteNonQuery();
-
                     con.Close();
                 }
                 catch (Exception ex) { con.Close(); }
                 listeClient.Add(client);
 
             }
+            ////////////////////AJOUT EMPLOYÉ\\\\\\\\\\\\\\\\\\\\
             else if (objet is Employe)
             {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+
                 Employe employe = (Employe)objet;
                 string nom = employe.Nom;
                 string prenom = employe.Prenom;
-                /*AVAIT ARRETER ICI, tu voulais centraliser les ajouts en une methode, va voir exercice procedure pour avoir exemple*/
+                string date_naissance = employe.DateNaiss;
+                string email = employe.Email;
+                string adresse = employe.Adresse;
+                string date_embauche = employe.DateEmb;
+                double taux = employe.TauxHor;
+                string photo = employe.Photo;
+                string idProjet = employe.IdProjet;
+                string statut = employe.Statut;
 
                 try
                 {
+                    commande.CommandText = "INSERT INTO employe VALUES(null, @nom, @prenom, @date_naissance, @email, @adresse, @date_embauche, @taux, @photo, @id_projet, @statut)";
 
+                    commande.Parameters.AddWithValue("@nom", nom);
+                    commande.Parameters.AddWithValue("@prenom", prenom);
+                    commande.Parameters.AddWithValue("@date_naissance", date_naissance);
+                    commande.Parameters.AddWithValue("@email", email);
+                    commande.Parameters.AddWithValue("@adresse", adresse);
+                    commande.Parameters.AddWithValue("@date_embauche", date_embauche);
+                    commande.Parameters.AddWithValue("@taux", taux);
+                    commande.Parameters.AddWithValue("@photo", photo);
+                    commande.Parameters.AddWithValue("@id_projet", idProjet);
+                    commande.Parameters.AddWithValue("@statut", statut);
+
+                    con.Open();
+                    commande.ExecuteNonQuery();
+                    con.Close();
                 }
                 catch (Exception ex) { con.Close(); }
+                listeEmploye.Add(employe);
             }
+            ////////////////////AJOUT PROJET\\\\\\\\\\\\\\\\\\\\
             else if (objet is Projet)
             {
                 Projet projet = (Projet)objet;
-                string id = projet.IdProjet;
 
                 try
                 {
+                    MySqlCommand commande = new MySqlCommand("p_ajout_projet");
+                    commande.Connection = con;
+                    commande.CommandType = System.Data.CommandType.StoredProcedure;
 
+                    commande.Parameters.AddWithValue("titre", projet.Titre);
+                    commande.Parameters.AddWithValue("date_debut", projet.DateDebut);
+                    commande.Parameters.AddWithValue("description", projet.Description);
+                    commande.Parameters.AddWithValue("budget", projet.Budget);
+                    commande.Parameters.AddWithValue("nbEmplo", projet.NbEmploye);
+                    commande.Parameters.AddWithValue("id_client", projet.IdCLient);
+                    commande.Parameters.AddWithValue("statut", projet.Statut);
+
+                    con.Open();
+                    commande.Prepare();
+                    int i = commande.ExecuteNonQuery();
+
+                    con.Close();
                 }
                 catch (Exception ex) { con.Close(); }
             }

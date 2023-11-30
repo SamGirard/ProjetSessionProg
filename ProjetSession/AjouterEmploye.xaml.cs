@@ -21,7 +21,7 @@ namespace ProjetSession
 {
     public sealed partial class AjouterEmploye : ContentDialog
     {
-
+        /*
         string nom = "";
         string prenom = "";
         DateTime dateNaissance;
@@ -30,7 +30,7 @@ namespace ProjetSession
         DateTime dateEmbauche;
         string photo = "";
         string statut = "";
-
+        */
 
         public AjouterEmploye()
         {
@@ -71,7 +71,7 @@ namespace ProjetSession
             else 
             {
                     errNom.Text = "";
-                    nom = tbxNom.Text;
+                    //nom = tbxNom.Text;
             }
 
             ////////////////////PRÉNOM\\\\\\\\\\\\\\\\\\\\
@@ -84,7 +84,7 @@ namespace ProjetSession
             else
             {
                 errPrenom.Text = "";
-                prenom = tbxPrenom.Text;
+                //prenom = tbxPrenom.Text;
             }
 
             ////////////////////EMAIL\\\\\\\\\\\\\\\\\\\\
@@ -97,7 +97,7 @@ namespace ProjetSession
             else
             {
                 errEmail.Text = "";
-                email = tbxEmail.Text;
+                //email = tbxEmail.Text;
             }
 
             ////////////////////ADRESSE\\\\\\\\\\\\\\\\\\\\
@@ -110,7 +110,7 @@ namespace ProjetSession
             else
             {
                 errAdresse.Text = "";
-                adresse = tbxAdresse.Text;
+                //adresse = tbxAdresse.Text;
             }
 
             ////////////////////TAUX\\\\\\\\\\\\\\\\\\\\
@@ -122,17 +122,17 @@ namespace ProjetSession
             }
             else
             {
-                if (int.TryParse(tbxTaux.Text, out int result))
+                if (double.TryParse(tbxTaux.Text, out double result))
                 {
-                    if (Convert.ToInt32(tbxTaux.Text) < 0)
+                    if (Convert.ToDouble(tbxTaux.Text) < 0)
                     {
                         erreur = true;
                         errTaux.Text = "Le taux ne peut pas être négatif";
                     }
-                    else if(Convert.ToInt32(tbxTaux.Text) < 15)
+                    else if(Convert.ToDouble(tbxTaux.Text) < 15)
                     {
                         erreur = true;
-                        errTaux.Text = "Le taux ne peut pas être inférieur au salair minimum";
+                        errTaux.Text = "Le taux ne peut pas être inférieur au salair minimum (15$/h)";
                     }
                     else
                     {
@@ -155,7 +155,7 @@ namespace ProjetSession
             }
             else
             {
-                dateNaissance = cdpNaiss.Date.Value.Date;
+                //dateNaissance = cdpNaiss.Date.Value.Date;
                 errDate.Text = "";
             }
 
@@ -168,7 +168,7 @@ namespace ProjetSession
             }
             else
             {
-                dateEmbauche = cdpEmb.Date.Value.Date;
+                //dateEmbauche = cdpEmb.Date.Value.Date;
                 errEmbauche.Text = "";
             }
 
@@ -180,7 +180,7 @@ namespace ProjetSession
                 args.Cancel = true;
             }
             else
-            {
+            {/*
                 if (UrlValide(tbxPhoto.Text) == false)
                 {
                     errPhoto.Text = "Le lien URL est invalide";
@@ -188,10 +188,10 @@ namespace ProjetSession
                     args.Cancel = true;
                 }
                 else
-                {
+                {*/
                     errPhoto.Text = "";
-                    photo = tbxPhoto.Text;
-                }
+                    //photo = tbxPhoto.Text;
+                //}
             }
 
             ////////////////////STATUT\\\\\\\\\\\\\\\\\\\\
@@ -204,7 +204,7 @@ namespace ProjetSession
             else
             {
                 errStatut.Text = "";
-                statut = cbxStatut.SelectedItem.ToString();
+                //statut = cbxStatut.SelectedItem.ToString();
             }
 
 
@@ -226,6 +226,7 @@ namespace ProjetSession
                 };
 
                 //Singleton.GetInstance().AjouterEmploye(nom, prenom, dateNaissance, email, adresse, dateEmbauche, dTaux, photo, projet, statut);
+                Singleton.GetInstance().ajouter(employe);
             }
         }
 
