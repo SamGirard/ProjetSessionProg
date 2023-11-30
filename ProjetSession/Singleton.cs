@@ -84,9 +84,9 @@ namespace ProjetSession
             listeClient.Clear();
             try
             {
-                MySqlCommand commande = new MySqlCommand();
+                MySqlCommand commande = new MySqlCommand("afficher_clients");
                 commande.Connection = con;
-                commande.CommandText = "SELECT * FROM client";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
 
                 con.Open();
                 MySqlDataReader reader = commande.ExecuteReader();
@@ -121,9 +121,9 @@ namespace ProjetSession
             listeEmploye.Clear();
             try
             {
-                MySqlCommand commande = new MySqlCommand();
+                MySqlCommand commande = new MySqlCommand("afficher_employes");
                 commande.Connection = con;
-                commande.CommandText = "SELECT * FROM employe";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
 
                 con.Open();
                 MySqlDataReader reader = commande.ExecuteReader();
@@ -164,10 +164,10 @@ namespace ProjetSession
             string idClient = "";
             try
             {
-                MySqlCommand commande2 = new MySqlCommand();
+                MySqlCommand commande2 = new MySqlCommand("idClientPourAjouterProjet");
                 commande2.Connection = con;
-                commande2.CommandText = "SELECT id_client FROM client WHERE nom LIKE @client";
-                commande2.Parameters.AddWithValue("@client", client);
+                commande2.CommandType = System.Data.CommandType.StoredProcedure;
+                commande2.Parameters.AddWithValue("@idClient", client);
 
                 con.Open();
 
@@ -179,10 +179,9 @@ namespace ProjetSession
                 }
                 reader.Close();
 
-                MySqlCommand commande = new MySqlCommand();
+                MySqlCommand commande = new MySqlCommand("p_ajouter_projet");
                 commande.Connection = con;
-                commande.CommandText = "INSERT INTO projet (id_projet, titre, date_debut, description, budget, nb_employe, salaireTotal, id_client, statut) " +
-                                      "VALUES (null, @titre, @date_debut, @description, @budget, @nbEmploye, null, @id_client, @statut)";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
 
                 commande.Parameters.AddWithValue("@titre", titre);
                 commande.Parameters.AddWithValue("@date_debut", dateDebut.ToString("yyyy-MM-dd"));

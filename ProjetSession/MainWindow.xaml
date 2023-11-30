@@ -10,7 +10,7 @@
 
     <Grid>
         <NavigationView x:Name="navView" PaneTitle="Gestion entreprise" PaneDisplayMode="Left" SelectionChanged="navView_SelectionChanged"
-    IsBackButtonVisible="Collapsed" IsSettingsVisible="False">
+            IsBackButtonVisible="Collapsed" IsSettingsVisible="False">
             <NavigationView.MenuItems>
                 <NavigationViewItemHeader Content="Listes"/>
                 <NavigationViewItem Content="Liste projets" x:Name="iListeProjet" Icon="Library"/>

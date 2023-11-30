@@ -97,8 +97,9 @@ BEGIN
     WHERE id_projet = NEW.id_projet;
 END;
 //
-
 DELIMITER ;
+
+
 -----------------------------PROCEDURES (a retravailler)---------------------------------
 /*Procédure pour ajouter employé (fait par isaac)*/
 DELIMITER //
@@ -120,7 +121,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE p_ajout_projet(IN titre VARCHAR(50), IN date_debut DATE, IN description VARCHAR(255), IN budget DOUBLE, IN nbEmpl INT, IN salairTot DOUBLE, IN id_client VARCHAR(3), IN statut VARCHAR(20))
 BEGIN
-    INSERT into client VALUES(null, titre, date_debut, description, budget, nbEmpl, salairTot, id_client, statut);
+    INSERT into projet VALUES(null, titre, date_debut, description, budget, nbEmpl, salairTot, id_client, statut);
 end //
 DELIMITER ;
 
@@ -138,6 +139,28 @@ CREATE PROCEDURE p_get_projet (IN id varchar(11))
 BEGIN
     SELECT * FROM projet WHERE id_projet = id;
 end//
+DELIMITER ;
+
+/*fait par sam*/
+DELIMITER //
+CREATE PROCEDURE afficher_clients()
+BEGIN
+    SELECT * FROM client;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE afficher_employes()
+BEGIN
+    SELECT * FROM employe;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE idClientPourAjouterProjet(IN idClient VARCHAR(100))
+BEGIN
+    SELECT id_client FROM client WHERE nom LIKE idClient;
+end //
 DELIMITER ;
 
 -----------------------------LES VIEWS-----------------------------

@@ -39,7 +39,7 @@
                                     <TextBlock FontWeight="Light" FontSize="20pt" Margin="0 0 0 10" Foreground="WhiteSmoke">
                                     <Run Text="Salaire total : "/>
                                     <Run Text="{x:Bind TotalSal}"></Run>
-                                    <Run Text="$$"/>
+                                    <Run Text="$/h"/>
                                     </TextBlock>
 
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
