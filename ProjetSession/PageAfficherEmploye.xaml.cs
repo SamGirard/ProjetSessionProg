@@ -104,7 +104,7 @@ namespace ProjetSession
 
             ContentDialog dialog = new ContentDialog();
             dialog.XamlRoot = validation.XamlRoot;
-            dialog.Title = "Supprimer un(e) employé(e)?";
+            dialog.Title = "Supprimer un(e) employé(e)";
             dialog.PrimaryButtonText = "Supprimer";
             dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
