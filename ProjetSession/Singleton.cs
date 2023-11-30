@@ -130,7 +130,7 @@ namespace ProjetSession
 
                 while (reader.Read())
                 {
-                    Projet projet = getProjet((string)reader["id_projet"]);
+                    //Projet projet = getProjet((string)reader["id_projet"]);
                     Employe unEmploye = new Employe()
                     {
                         Matricule = reader.GetString("matricule"),
@@ -144,7 +144,7 @@ namespace ProjetSession
                         Photo = reader.GetString("photo"),
                         Statut = reader.GetString("statut"),
                         IdProjet = reader.GetString("id_projet"),
-                        Projet = projet
+                        
                     };
                     listeEmploye.Add(unEmploye);
                 }
@@ -652,6 +652,32 @@ namespace ProjetSession
                 con.Close();
             }
             return nomProjet;
+        }
+
+        public string GetNomEmploye(string idProjet)
+        {
+            List<String> listeNom = new List<String>();
+            string nom = "";
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "SELECT CONCAT(prenom, ' ', nom) as nomEmp FROM employe WHERE id_projet LIKE @idProjet";
+            commande.Parameters.AddWithValue("@idProjet", idProjet);
+
+
+            con.Open();
+            MySqlDataReader reader = commande.ExecuteReader();
+
+            while (reader.Read())
+            {
+                nom = reader.GetString("nomEmp");
+
+                listeNom.Add(nom);
+            }
+            reader.Close();
+            con.Close();
+
+            return listeNom.ToString();
         }
 
     }

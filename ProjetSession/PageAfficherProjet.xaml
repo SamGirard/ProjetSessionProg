@@ -48,8 +48,8 @@
                                     </StackPanel>
 
                                     <ScrollViewer>
-                                        <ListView CornerRadius="3">
-                                            <TextBlock x:Name="lvEmploye">1</TextBlock>
+                                        <ListView CornerRadius="3" ItemsSource="">
+                                            <TextBlock></TextBlock>
                                         </ListView>
                                     </ScrollViewer>
                                 </StackPanel>
