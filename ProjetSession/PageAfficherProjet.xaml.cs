@@ -97,7 +97,7 @@ namespace ProjetSession
         
         private async void btDelete_Click(object sender, RoutedEventArgs e)
         {
-            /*********VA DEVOIR ALLER CHANGER LES EMPLOYÉS LIÉ AU PROJET (changer leur valeur pour null)***********
+            
             int position = gvListe.SelectedIndex;
             Projet projet = gvListe.SelectedItem as Projet;
             string id = projet.IdProjet;
@@ -108,16 +108,17 @@ namespace ProjetSession
             dialog.Title = "Supprimer un projet";
             dialog.PrimaryButtonText = "Supprimer";
             dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.DefaultButton = ContentDialogButton.Close;
             dialog.Content = $"Êtes-vous sûre de vouloir supprimer le projet : {projet}?";
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
             {
                 Singleton.GetInstance().supprimer(projet, position);
-                
+                /*********VA DEVOIR ALLER CHANGER LES EMPLOYÉS LIÉ AU PROJET (changer leur valeur pour null)************/
+
             }
-            */
+
         }
 
         private void statut_SizeChanged(object sender, SizeChangedEventArgs e)

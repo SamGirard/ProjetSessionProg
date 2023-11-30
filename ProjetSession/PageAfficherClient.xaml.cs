@@ -87,10 +87,10 @@ namespace ProjetSession
 
             ContentDialog dialog = new ContentDialog();
             dialog.XamlRoot = validation.XamlRoot;
-            dialog.Title = "Supprimer un client(e)";
+            dialog.Title = "Supprimer un client";
             dialog.PrimaryButtonText = "Supprimer";
             dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.DefaultButton = ContentDialogButton.Close;
             dialog.Content = $"Êtes-vous sûre de vouloir supprimer le client : {nom}?";
             var result = await dialog.ShowAsync();
 

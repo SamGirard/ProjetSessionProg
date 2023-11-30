@@ -13,7 +13,7 @@
     <Grid>
         <ScrollViewer>
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                <TextBlock FontSize="12pt" Margin="0 0 0 20">Entrer les informations suivantes</TextBlock>
+                <TextBlock FontSize="12pt" Margin="0 0 0 20">Entrez les informations suivantes (obligatoire)</TextBlock>
 
                 <TextBox x:Name="tbxNom" Header="Nom" PlaceholderText="Entrez nom complet"/>
                 <TextBlock x:Name="errNom" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"/>
