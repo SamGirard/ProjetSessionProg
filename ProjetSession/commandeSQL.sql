@@ -57,7 +57,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*Trigger pour le numéro de proje (fait par sam)t*/
+/*Trigger pour le numéro de projet (fait par sam)t*/
 DELIMITER  //
 CREATE TRIGGER numeroProjet BEFORE INSERT
     on projet
@@ -103,9 +103,12 @@ DELIMITER ;
 -----------------------------PROCEDURES (a retravailler)---------------------------------
 /*Procédure pour ajouter employé (fait par isaac)*/
 DELIMITER //
-CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
+CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(50), IN prenom VARCHAR(50), IN date_naiss DATE,
+                                 IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_emb DATE,
+                                 IN taux DOUBLE, IN photo VARCHAR(1000), IN idProjet VARCHAR(15), IN statut VARCHAR(20))
 BEGIN
-    INSERT into employe VALUES(null, nom, prenom, dateNaiss, email, adresse, date_embauche, taux, photo, statut);
+    INSERT into employe (nom, prenom, date_naissance, email, adresse, date_embauche, taux, photo, id_projet, statut)
+    VALUES (nom, prenom, date_naiss, email, adresse, date_emb, taux, photo, idProjet, statut);
 end //
 DELIMITER ;
 
@@ -117,7 +120,8 @@ BEGIN
 end //
 DELIMITER ;
 
-/*Procédure pour ajouter projet (fait par isaac)*/
+
+/*Procédure pour ajouter projet (fait par sam)*/
 CREATE PROCEDURE p_ajout_projet(IN titre varchar(50), IN date_debut date,
                                  IN description varchar(255), IN budget double, IN nbEmplo INT,
                                  IN id_client varchar(3), IN statut varchar(20))
@@ -139,6 +143,14 @@ DELIMITER //
 CREATE PROCEDURE p_get_projet (IN id varchar(11))
 BEGIN
     SELECT * FROM projet WHERE id_projet = id;
+end//
+DELIMITER ;
+
+/*fait par isaac*/
+DELIMITER //
+CREATE PROCEDURE p_get_client (IN id varchar(15))
+BEGIN
+    SELECT * FROM client WHERE id_client = id;
 end//
 DELIMITER ;
 

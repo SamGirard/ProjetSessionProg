@@ -84,27 +84,5 @@ namespace ProjetSession
 
         }
 
-        /*private void tbxTel_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string input = tbxTel.Text;
-
-            string digitsOnly = new string(input.Where(char.IsDigit).ToArray());
-
-
-            if (digitsOnly.Length == 3)
-            {
-                digitsOnly = $"({input})-";
-            }
-
-            if (digitsOnly.Length == 9)
-            {
-                digitsOnly = $"{input.Substring(0, 6)}{input.Substring(7, 9)}-";
-            }
-
-
-            // Mettre à jour le texte dans le TextBox
-            tbxTel.Text = digitsOnly;
-            tbxTel.SelectionStart = digitsOnly.Length;
-        }*/
     }
 }
