@@ -92,6 +92,21 @@ END //
 DELIMITER ;
 
 
+/*Trigger pour update le salaire total d'un projet lorsqu'un employé se fait delete (fait par isaac)*/
+DELIMITER //
+CREATE TRIGGER update_salaireTotalDelete
+    AFTER DELETE ON employe
+    FOR EACH ROW
+BEGIN
+    DECLARE total_taux DOUBLE;
+    SELECT f_salTot(OLD.id_projet) INTO total_taux;
+    UPDATE projet
+    SET salaireTotal = total_taux
+    WHERE id_projet = OLD.id_projet;
+END //
+DELIMITER ;
+
+
 -----------------------------PROCEDURES (a retravailler)---------------------------------
 /*Procédure pour ajouter employé (fait par isaac)*/
 DELIMITER //
@@ -209,17 +224,18 @@ CREATE VIEW afficher_Connexion AS
     SELECT estConnecter FROM admin;
 
 -----------------------------FONCTIONS-----------------------------
-/*Function pour calculer automatiquement le salaire total par heure des employés du projet (fait par isaac)*/
-/*Va devoir relier la function au trigger ou procedure qui va venir le insert automatiquement dans table projet*/
+/*Function pour calculer automatiquement le salaire total par heure des employés du projet: utilisé par 2 triggers updateSalaire (fait par isaac)*/
 DELIMITER //
 CREATE FUNCTION f_salTot(id VARCHAR(15)) RETURNS DOUBLE
 BEGIN
     DECLARE salTot DOUBLE;
     SELECT SUM(taux) INTO salTot FROM employe WHERE id_projet = id GROUP BY id_projet;
+    IF (salTot IS NULL) THEN
+        SET salTot = 0;
+    end if;
     RETURN salTot;
 end//
 DELIMITER ;
-
 
 -----------------------------INSERTION DE DONNÉE (fait par sam)-----------------------------
 INSERT INTO client VALUES (null, 'Jean Lamontage', '47 rue bouol', '819-555-4443', 'email@email.xom');
