@@ -106,40 +106,6 @@ BEGIN
 END //
 DELIMITER ;
 
-DELIMITER //
-CREATE PROCEDURE p_maj_salairesTot()
-BEGIN
-    DECLARE id VARCHAR(15);
-    DECLARE taux DOUBLE;
-    DECLARE termine INT DEFAULT 0;
-
-    DECLARE boucle CURSOR FOR
-    SELECT id_projet FROM projet;
-
-    /*Pour ignorer toute erreur ou il n'y a pas de resultat*/
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET termine = 1;
-
-    OPEN boucle;
-
-    boucle_principale: LOOP
-        FETCH boucle INTO id;
-
-        /*Pour sortir de la boucle*/
-        IF (termine = 1) THEN
-            LEAVE boucle_principale;
-        end if;
-
-        /*Vient faire la mise à jour du salaire total de chaque projet*/
-        SELECT f_salTot(id) INTO taux;
-        UPDATE projet
-            SET salaireTotal = taux
-            WHERE id_projet = id;
-    end loop boucle_principale;
-
-    CLOSE boucle;
-end //
-DELIMITER ;
-
 
 -----------------------------PROCEDURES (a retravailler)---------------------------------
 /*Procédure pour ajouter employé (fait par isaac)*/
@@ -233,6 +199,40 @@ DELIMITER //
 CREATE procedure p_deconnexion()
 BEGIN
     UPDATE admin SET estConnecter = false WHERE 1 = 1;
+end //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE p_maj_salairesTot()
+BEGIN
+    DECLARE id VARCHAR(15);
+    DECLARE taux DOUBLE;
+    DECLARE termine INT DEFAULT 0;
+
+    DECLARE boucle CURSOR FOR
+    SELECT id_projet FROM projet;
+
+    /*Pour ignorer toute erreur ou il n'y a pas de resultat*/
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET termine = 1;
+
+    OPEN boucle;
+
+    boucle_principale: LOOP
+        FETCH boucle INTO id;
+
+        /*Pour sortir de la boucle*/
+        IF (termine = 1) THEN
+            LEAVE boucle_principale;
+        end if;
+
+        /*Vient faire la mise à jour du salaire total de chaque projet*/
+        SELECT f_salTot(id) INTO taux;
+        UPDATE projet
+            SET salaireTotal = taux
+            WHERE id_projet = id;
+    end loop boucle_principale;
+
+    CLOSE boucle;
 end //
 DELIMITER ;
 
