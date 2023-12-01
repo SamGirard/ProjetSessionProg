@@ -426,10 +426,10 @@ namespace ProjetSession
             {
                 try
                 {
-                    MySqlCommand commande2 = new MySqlCommand();
+                    MySqlCommand commande2 = new MySqlCommand("p_estConnecter");
                     commande2.Connection = con;
-                    commande2.CommandText = "UPDATE admin SET estConnecter = true WHERE utilisateur = @utilisateur";
-                    commande2.Parameters.AddWithValue("@utilisateur", utilisateur);
+                    commande2.CommandType = System.Data.CommandType.StoredProcedure;
+                    commande2.Parameters.AddWithValue("@compte", utilisateur);
 
                     con.Open();
                     int i = commande2.ExecuteNonQuery();
@@ -485,12 +485,12 @@ namespace ProjetSession
         {
             try
             {
-                MySqlCommand commande2 = new MySqlCommand();
-                commande2.Connection = con;
-                commande2.CommandText = "UPDATE admin SET estConnecter = false WHERE 1 = 1";
+                MySqlCommand commande = new MySqlCommand("p_deconnexion");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
 
                 con.Open();
-                int i = commande2.ExecuteNonQuery();
+                int i = commande.ExecuteNonQuery();
 
                 con.Close();
             }

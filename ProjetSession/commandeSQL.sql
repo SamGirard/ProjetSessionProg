@@ -67,7 +67,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*(fait par sam)*/
+/*Trigger pour faire le matricule de l'employé (fait par sam)*/
 DELIMITER  //
 CREATE TRIGGER matriculeEmp before insert
     on employe
@@ -77,7 +77,7 @@ BEGIN
 end;
 DELIMITER ;
 
-/*(fait par sam)*/
+/*Trigger pour update le salaire des employé (fait par sam)*/
 DELIMITER //
 
 CREATE TRIGGER update_salaireTotal
@@ -86,12 +86,10 @@ CREATE TRIGGER update_salaireTotal
 BEGIN
     DECLARE total_taux DOUBLE;
 
-    -- Calculer la somme des taux pour le projet associé au nouvel employé
     SELECT SUM(taux) INTO total_taux
     FROM employe
     WHERE id_projet = NEW.id_projet;
 
-    -- Mettre à jour le salaireTotal dans la table projet
     UPDATE projet
     SET salaireTotal = total_taux
     WHERE id_projet = NEW.id_projet;
@@ -147,7 +145,7 @@ BEGIN
 end//
 DELIMITER ;
 
-/*fait par isaac*/
+/*Procédure pour avoir le client avec son id fait par isaac*/
 DELIMITER //
 CREATE PROCEDURE p_get_client (IN id varchar(15))
 BEGIN
@@ -155,7 +153,7 @@ BEGIN
 end//
 DELIMITER ;
 
-/*fait par sam*/
+/*Procédure pour afficher les clients (fait par sam)*/
 DELIMITER //
 CREATE PROCEDURE afficher_clients()
 BEGIN
@@ -163,6 +161,7 @@ BEGIN
 end //
 DELIMITER ;
 
+/*Procédure pour afficher les employés (fait par sam)*/
 DELIMITER //
 CREATE PROCEDURE afficher_employes()
 BEGIN
@@ -170,10 +169,27 @@ BEGIN
 end //
 DELIMITER ;
 
+/*Procédure pour avoir l'id du client pour le projet (fait par sam)*/
 DELIMITER //
 CREATE PROCEDURE idClientPourAjouterProjet(IN idClient VARCHAR(100))
 BEGIN
     SELECT id_client FROM client WHERE nom LIKE idClient;
+end //
+DELIMITER ;
+
+/*Procédure pour mettre l'état de connexion en connecter (fait par sam)*/
+Delimiter //
+CREATE PROCEDURE p_estConnecter(IN compte VARCHAR(10))
+BEGIN
+    UPDATE admin SET estConnecter = true WHERE utilisateur = compte;
+end //
+DELIMITER ;
+
+/*Procédure pour déconnecter (fait par sam)*/
+DELIMITER //
+CREATE procedure p_deconnexion()
+BEGIN
+    UPDATE admin SET estConnecter = false WHERE 1 = 1;
 end //
 DELIMITER ;
 
@@ -190,6 +206,13 @@ SELECT * FROM employe;
 CREATE VIEW afficher_projet AS
 SELECT * FROM projet;
 
+/*Vue pour afficher contenu de la table admin (fait par sam)*/
+CREATE VIEW afficher_admin AS
+    SELECT * FROM admin;
+
+/*Vue pour afficher contenu de la table admin la colonne estConnecter (fait par sam)*/
+CREATE VIEW afficher_Connexion AS
+    SELECT estConnecter FROM admin;
 
 -----------------------------FONCTIONS-----------------------------
 /*Function pour calculer automatiquement le salaire total par heure des employés du projet (fait par isaac)*/
