@@ -77,24 +77,18 @@ BEGIN
 end;
 DELIMITER ;
 
-/*Trigger pour update le salaire des employé (fait par sam)*/
+/*Trigger pour update le salaire des employé (fait par sam et isaac)*/
 DELIMITER //
-
-CREATE TRIGGER update_salaireTotal
+CREATE TRIGGER update_salaireTotalAjout
     AFTER INSERT ON employe
     FOR EACH ROW
 BEGIN
     DECLARE total_taux DOUBLE;
-
-    SELECT SUM(taux) INTO total_taux
-    FROM employe
-    WHERE id_projet = NEW.id_projet;
-
+    SELECT f_salTot(NEW.id_projet) INTO total_taux;
     UPDATE projet
     SET salaireTotal = total_taux
-    WHERE id_projet = NEW.id_projet;
-END;
-//
+    WHERE id_projet = NEW.id_projet;;
+END //
 DELIMITER ;
 
 
@@ -218,11 +212,11 @@ CREATE VIEW afficher_Connexion AS
 /*Function pour calculer automatiquement le salaire total par heure des employés du projet (fait par isaac)*/
 /*Va devoir relier la function au trigger ou procedure qui va venir le insert automatiquement dans table projet*/
 DELIMITER //
-CREATE FUNCTION f_salTot(id VARCHAR(11)) RETURNS DOUBLE
+CREATE FUNCTION f_salTot(id VARCHAR(15)) RETURNS DOUBLE
 BEGIN
-    DECLARE salaire DOUBLE;
-    SELECT SUM(taux) INTO salaire FROM employe WHERE id_projet = id GROUP BY id_projet;
-    RETURNS salaire;
+    DECLARE salTot DOUBLE;
+    SELECT SUM(taux) INTO salTot FROM employe WHERE id_projet = id GROUP BY id_projet;
+    RETURN salTot;
 end//
 DELIMITER ;
 

@@ -514,11 +514,9 @@ namespace ProjetSession
                 string id = projet.IdProjet;
                 if (id == idProjet)
                 {
-                    listeProjet2.Clear();
                     return i;
                 }
             }
-            listeProjet2.Clear();
             return -1;
         }
 
@@ -531,11 +529,9 @@ namespace ProjetSession
                 string id = client.Id_Client;
                 if (id == idClient)
                 {
-                    listeClient2.Clear();
                     return i;
                 }
             }
-            listeClient2.Clear();
             return -1;
         }
 
