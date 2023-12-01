@@ -202,6 +202,7 @@ BEGIN
 end //
 DELIMITER ;
 
+/*Procédure qui permet de mettre à jour le salaire total de chaque projet (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_maj_salairesTot()
 BEGIN
