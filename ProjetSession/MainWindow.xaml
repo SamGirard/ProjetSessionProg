@@ -6,7 +6,8 @@
     xmlns:local="using:ProjetSession"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Title="Projet Final">
 
     <Grid>
         <NavigationView x:Name="navView" PaneTitle="Gestion entreprise" PaneDisplayMode="Left" SelectionChanged="navView_SelectionChanged"
@@ -32,7 +33,13 @@
 
             </NavigationView.FooterMenuItems>
 
-            <Frame x:Name="mainFrame"/>
+            <Frame x:Name="mainFrame">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition  />
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
         </NavigationView>
 
     </Grid>

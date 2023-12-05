@@ -24,7 +24,7 @@ namespace ProjetSession
             this.InitializeComponent();
             bool connecter = Singleton.GetInstance().valideConnection();
 
-            if(connecter == true)
+            if (connecter == true)
             {
                 iAjoutProjet.IsEnabled = true;
                 iAjoutClient.IsEnabled = true;
