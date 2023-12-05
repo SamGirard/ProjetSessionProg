@@ -12,16 +12,16 @@
 
     <Grid>
         <ScrollViewer>
-            <StackPanel HorizontalAlignment="Center" Orientation="Vertical">  
-
+            <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
+                <TextBlock FontSize="12pt" Margin="0 0 0 20">Entrez les informations suivantes (obligatoire):</TextBlock>
+                
                 <TextBox x:Name="tbTitre" Header="Titre"/>
                 <TextBlock x:Name="errTitre" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
             
                 <CalendarDatePicker x:Name="cdpDate" Header="Choisissez une date" HorizontalAlignment="Stretch"/>
                 <TextBlock x:Name="errDate" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
-                <ComboBox x:Name="cbClient" Width="400" Header="Client">
-                    <x:String></x:String>
+                <ComboBox x:Name="cbClient" Width="400" Header="Client" DisplayMemberPath="Nom" x:DefaultBindMode="OneWay">
                 </ComboBox>
                 <TextBlock x:Name="errClient" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
@@ -37,8 +37,8 @@
                 <ComboBox x:Name="cbStatut" Header="Status" Width="400">
                     <x:String>En cours</x:String>
                     <x:String>Terminé</x:String>
-
                 </ComboBox>
+                
                 <TextBlock x:Name="errStatut" Foreground="Red" FontSize="12pt" Margin="0 10 0 10" Width="400"></TextBlock>
 
 

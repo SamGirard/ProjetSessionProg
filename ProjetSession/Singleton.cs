@@ -27,8 +27,14 @@ namespace ProjetSession
             listeProjet = new ObservableCollection<Projet>();
             listeClient = new ObservableCollection<Client>();
             listeEmploye = new ObservableCollection<Employe>();
-            con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq19;Uid=2172853;Pwd=2172853");
-            con2 = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq19;Uid=2172853;Pwd=2172853");
+
+            string server = Environment.GetEnvironmentVariable("server");
+            string database = Environment.GetEnvironmentVariable("database");
+            string user = Environment.GetEnvironmentVariable("user");
+            string password = Environment.GetEnvironmentVariable("password");
+
+            con = new MySqlConnection($"Server={server};Database={database};Uid={user};Pwd={password}");
+            con2 = new MySqlConnection($"Server={server};Database={database};Uid={user};Pwd={password}");
         }
 
         public static Singleton GetInstance()
@@ -159,274 +165,7 @@ namespace ProjetSession
             return listeEmploye;
         }
 
-
-        public void AjouterProjet(string titre, DateTime dateDebut, string client, string description, int budget, int nbEmploye, string statut)
-        {
-            string idClient = "";
-            try
-            {
-                MySqlCommand commande2 = new MySqlCommand("idClientPourAjouterProjet");
-                commande2.Connection = con;
-                commande2.CommandType = System.Data.CommandType.StoredProcedure;
-                commande2.Parameters.AddWithValue("@idClient", client);
-
-                con.Open();
-
-                MySqlDataReader reader = commande2.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    idClient = reader.GetString("id_client");
-                }
-                reader.Close();
-
-                MySqlCommand commande = new MySqlCommand("p_ajout_projet");
-                commande.Connection = con;
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-                commande.Parameters.AddWithValue("@titre", titre);
-                commande.Parameters.AddWithValue("@date_debut", dateDebut.ToString("yyyy-MM-dd"));
-                commande.Parameters.AddWithValue("@description", description);
-                commande.Parameters.AddWithValue("@budget", budget);
-                commande.Parameters.AddWithValue("@nbEmplo", nbEmploye);
-                commande.Parameters.AddWithValue("@id_client", idClient);
-                commande.Parameters.AddWithValue("@statut", statut);
-
-                commande.ExecuteNonQuery();
-
-                con.Close();
-            }
-            catch (Exception)
-            {
-                con.Close();
-            }
-        }
-
-
-
-
-        public void AjouterClient(string nom, string adresse, string numero, string email)
-        {
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "INSERT INTO client VALUES (null, @nom, @adresse, @numero_tel, @email)";
-
-                commande.Parameters.AddWithValue("@nom", nom);
-                commande.Parameters.AddWithValue("@adresse", adresse);
-                commande.Parameters.AddWithValue("@numero_tel", numero);
-                commande.Parameters.AddWithValue("@email", email);
-
-                con.Open();
-                commande.ExecuteNonQuery();
-
-                con.Close();
-            }
-            catch (Exception)
-            {
-                con.Close();
-            }
-        }
-
-
-        public List<string> GetNomsProjets()
-        {
-            List<string> titres = new List<string>();
-
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "SELECT titre FROM projet";
-
-                con.Open();
-                MySqlDataReader reader = commande.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string titre = reader.GetString("titre");
-                    titres.Add(titre);
-                }
-
-                reader.Close();
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-
-            return titres;
-        }
-
-        public List<string> GetNomsEmployes()
-        {
-            List<string> noms = new List<string>();
-
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "SELECT * FROM employe";
-
-                con.Open();
-                MySqlDataReader reader = commande.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string nom = reader.GetString("nom");
-                    string prenom = reader.GetString("prenom");
-                    noms.Add($"{prenom} {nom}");
-                }
-
-                reader.Close();
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-
-            return noms;
-        }
-
-        public List<string> GetNomsClients()
-        {
-            List<string> noms = new List<string>();
-
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "SELECT nom FROM client";
-
-                con.Open();
-                MySqlDataReader reader = commande.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string nom = reader.GetString("nom");
-                    noms.Add(nom);
-                }
-
-                reader.Close();
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-
-            return noms;
-        }
-
-
-        public bool verif_Admin(string utilisateur, string motDePasse)
-        {
-            bool estConnecter = false;
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "SELECT * FROM admin";
-
-                con.Open();
-                MySqlDataReader reader = commande.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    if (utilisateur == reader.GetString("utilisateur") && motDePasse == reader.GetString("motDePasse"))
-                    {
-                        estConnecter = true;
-                        break;
-                    }
-
-                }
-                reader.Close();
-                con.Close();
-            }
-
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-
-            if (estConnecter == true)
-            {
-                try
-                {
-                    MySqlCommand commande2 = new MySqlCommand();
-                    commande2.Connection = con;
-                    commande2.CommandText = "UPDATE admin SET estConnecter = true WHERE utilisateur = @utilisateur";
-                    commande2.Parameters.AddWithValue("@utilisateur", utilisateur);
-
-                    con.Open();
-                    int i = commande2.ExecuteNonQuery();
-
-                    con.Close();
-                }
-                catch (Exception ex)
-                {
-                    con.Close();
-                }
-            }
-
-            return estConnecter;
-        }
-
-        public bool valideConnection()
-        {
-            bool estConnecter = false;
-            try
-            {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-                commande.CommandText = "SELECT estConnecter FROM admin";
-
-                con.Open();
-                MySqlDataReader reader = commande.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    if (reader.GetInt32("estConnecter") == 1)
-                    {
-                        estConnecter = true;
-                        break;
-                    }
-
-                }
-                reader.Close();
-                con.Close();
-            }
-
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-            return estConnecter;
-        }
-
-        public void deconnexion()
-        {
-            try
-            {
-                MySqlCommand commande2 = new MySqlCommand();
-                commande2.Connection = con;
-                commande2.CommandText = "UPDATE admin SET estConnecter = false WHERE 1 = 1";
-
-                con.Open();
-                int i = commande2.ExecuteNonQuery();
-
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                con.Close();
-            }
-        }
-
-        public Projet getProjet(string idProjet)
+        private Projet getProjet(string idProjet)
         {
             MySqlCommand commande = new MySqlCommand("p_get_projet");
             commande.Connection = con2;
@@ -467,7 +206,7 @@ namespace ProjetSession
             return projet;
         }
 
-        public Client getClient(string idClient)
+        private Client getClient(string idClient)
         {
             MySqlCommand commande = new MySqlCommand("p_get_client");
             commande.Connection = con2;
@@ -500,73 +239,58 @@ namespace ProjetSession
         }
 
 
-
+        /*****************************************************************************************************/
+        /***************************************AJOUT/MODIFIER/SUPPRIMER**************************************/
+        /*****************************************************************************************************/
         public void ajouter(Object objet)
         {
             ////////////////////AJOUT CLIENT\\\\\\\\\\\\\\\\\\\\
             if (objet is Client)
             {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-
                 Client client = (Client)objet;
-                string nom = client.Nom;
-                string adresse = client.Adresse;
-                string numero = client.Num_Tel;
-                string email = client.Email;
-
                 try
                 {
-                    commande.CommandText = "INSERT INTO client VALUES (null, @nom, @adresse, @numero_tel, @email)";
+                    MySqlCommand commande = new MySqlCommand("p_ajout_client");
+                    commande.Connection = con;
+                    commande.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    commande.Parameters.AddWithValue("@nom", nom);
-                    commande.Parameters.AddWithValue("@adresse", adresse);
-                    commande.Parameters.AddWithValue("@numero_tel", numero);
-                    commande.Parameters.AddWithValue("@email", email);
+                    commande.Parameters.AddWithValue("nom", client.Nom);
+                    commande.Parameters.AddWithValue("adresse", client.Adresse);
+                    commande.Parameters.AddWithValue("numero_tel", client.Num_Tel);
+                    commande.Parameters.AddWithValue("email", client.Email);
 
                     con.Open();
-                    commande.ExecuteNonQuery();
+                    commande.Prepare();
+                    int i = commande.ExecuteNonQuery();
                     con.Close();
                 }
                 catch (Exception ex) { con.Close(); }
                 listeClient.Add(client);
-
             }
             ////////////////////AJOUT EMPLOYÉ\\\\\\\\\\\\\\\\\\\\
             else if (objet is Employe)
             {
-                MySqlCommand commande = new MySqlCommand();
-                commande.Connection = con;
-
                 Employe employe = (Employe)objet;
-                string nom = employe.Nom;
-                string prenom = employe.Prenom;
-                string date_naissance = employe.DateNaiss;
-                string email = employe.Email;
-                string adresse = employe.Adresse;
-                string date_embauche = employe.DateEmb;
-                double taux = employe.TauxHor;
-                string photo = employe.Photo;
-                string idProjet = employe.IdProjet;
-                string statut = employe.Statut;
-
                 try
                 {
-                    commande.CommandText = "INSERT INTO employe VALUES(null, @nom, @prenom, @date_naissance, @email, @adresse, @date_embauche, @taux, @photo, @id_projet, @statut)";
+                    MySqlCommand commande = new MySqlCommand("p_ajout_employe");
+                    commande.Connection = con;
+                    commande.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    commande.Parameters.AddWithValue("@nom", nom);
-                    commande.Parameters.AddWithValue("@prenom", prenom);
-                    commande.Parameters.AddWithValue("@date_naissance", date_naissance);
-                    commande.Parameters.AddWithValue("@email", email);
-                    commande.Parameters.AddWithValue("@adresse", adresse);
-                    commande.Parameters.AddWithValue("@date_embauche", date_embauche);
-                    commande.Parameters.AddWithValue("@taux", taux);
-                    commande.Parameters.AddWithValue("@photo", photo);
-                    commande.Parameters.AddWithValue("@id_projet", idProjet);
-                    commande.Parameters.AddWithValue("@statut", statut);
+                    commande.Parameters.AddWithValue("nom", employe.Nom);
+                    commande.Parameters.AddWithValue("prenom", employe.Prenom);
+                    commande.Parameters.AddWithValue("date_naiss", employe.DateNaiss);
+                    commande.Parameters.AddWithValue("email", employe.Email);
+                    commande.Parameters.AddWithValue("adresse", employe.Adresse);
+                    commande.Parameters.AddWithValue("date_emb", employe.DateEmb);
+                    commande.Parameters.AddWithValue("taux", employe.TauxHor);
+                    commande.Parameters.AddWithValue("photo", employe.Photo);
+                    commande.Parameters.AddWithValue("idProjet", employe.IdProjet);
+                    commande.Parameters.AddWithValue("statut", employe.Statut);
 
                     con.Open();
-                    commande.ExecuteNonQuery();
+                    commande.Prepare();
+                    int i = commande.ExecuteNonQuery();
                     con.Close();
                 }
                 catch (Exception ex) { con.Close(); }
@@ -576,7 +300,6 @@ namespace ProjetSession
             else if (objet is Projet)
             {
                 Projet projet = (Projet)objet;
-
                 try
                 {
                     MySqlCommand commande = new MySqlCommand("p_ajout_projet");
@@ -594,12 +317,13 @@ namespace ProjetSession
                     con.Open();
                     commande.Prepare();
                     int i = commande.ExecuteNonQuery();
-
                     con.Close();
                 }
                 catch (Exception ex) { con.Close(); }
             }
         }
+
+
 
         public void supprimer(Object objet, int position)
         {
@@ -653,20 +377,171 @@ namespace ProjetSession
             }
         }
 
-        public int GetPositionEmpl(string idProjet)
+
+
+        public void modifier(Object objet, int position)
+        {
+            if (objet is Client)
+            {
+                Client client = objet as Client;
+            }
+            else if(objet is Employe)
+            {
+                Employe employe = objet as Employe;
+            }
+            else if(objet is Projet)
+            {
+                Projet projet = (Projet)objet;
+            }
+        }
+
+        /*****************************************************************************************************/
+        /**********************************************CONNEXION**********************************************/
+        /*****************************************************************************************************/
+        public bool verif_Admin(string utilisateur, string motDePasse)
+        {
+            bool estConnecter = false;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT * FROM admin";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (utilisateur == reader.GetString("utilisateur") && motDePasse == reader.GetString("motDePasse"))
+                    {
+                        estConnecter = true;
+                        break;
+                    }
+
+                }
+                reader.Close();
+                con.Close();
+            }
+
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+
+            if (estConnecter == true)
+            {
+                try
+                {
+                    MySqlCommand commande2 = new MySqlCommand("p_estConnecter");
+                    commande2.Connection = con;
+                    commande2.CommandType = System.Data.CommandType.StoredProcedure;
+                    commande2.Parameters.AddWithValue("@compte", utilisateur);
+
+                    con.Open();
+                    int i = commande2.ExecuteNonQuery();
+
+                    con.Close();
+                }
+                catch (Exception ex)
+                {
+                    con.Close();
+                }
+            }
+
+            return estConnecter;
+        }
+
+
+
+        public bool valideConnection()
+        {
+            bool estConnecter = false;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT estConnecter FROM admin";
+
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.GetInt32("estConnecter") == 1)
+                    {
+                        estConnecter = true;
+                        break;
+                    }
+
+                }
+                reader.Close();
+                con.Close();
+            }
+
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            return estConnecter;
+        }
+
+
+
+        public void deconnexion()
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("p_deconnexion");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                con.Open();
+                int i = commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+        }
+
+
+
+        /*****************************************************************************************************/
+        /***********************************************AUTRES************************************************/
+        /*****************************************************************************************************/
+        public int GetPositionProjet(string idProjet)
         {
             ObservableCollection<Projet> listeProjet2 = GetInstance().GetListeProjet();
             for (int i = 0; i < listeProjet2.Count; i++)
             {
                 Projet projet = listeProjet2[i];
                 string id = projet.IdProjet;
-                if(id == idProjet)
+                if (id == idProjet)
                 {
                     return i;
                 }
             }
             return -1;
         }
+
+        public int GetPositionClient(string idClient)
+        {
+            ObservableCollection<Client> listeClient2 = GetInstance().GetListeClient();
+            for (int i = 0; i < listeClient2.Count; i++)
+            {
+                Client client = listeClient2[i];
+                string id = client.Id_Client;
+                if (id == idClient)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+
 
         public string GetProjetEnCours(string idProjet)
         {
@@ -689,7 +564,7 @@ namespace ProjetSession
                 reader.Close();
                 con.Close();
             }
-            
+
 
             catch (Exception ex)
             {
@@ -697,6 +572,8 @@ namespace ProjetSession
             }
             return nomProjet;
         }
+
+
 
         public string GetNomEmploye(string idProjet)
         {

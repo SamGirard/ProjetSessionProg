@@ -60,7 +60,7 @@ namespace ProjetSession
             Employe employe = gvListe.SelectedItem as Employe;
             AjouterEmploye dialog = new AjouterEmploye();
             dialog.XamlRoot = validation.XamlRoot;
-            dialog.Title = "Modifier un employé existant";
+            dialog.Title = "Modifier un employé";
             dialog.PrimaryButtonText = "Modifier";
             dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
@@ -73,7 +73,8 @@ namespace ProjetSession
             dialog.Date_Embauche = employe.DateEmb;
             dialog.Taux = Convert.ToString(employe.TauxHor);
             dialog.Photo = employe.Photo;
-            dialog.IdProjet = Singleton.GetInstance().GetPositionEmpl(employe.IdProjet);
+            dialog.IdProjet = Singleton.GetInstance().GetPositionProjet(employe.IdProjet);
+
             if(employe.Statut == "Journalier")
             {
                 dialog.Statut = 0;
@@ -91,7 +92,7 @@ namespace ProjetSession
 
             if (result == ContentDialogResult.Primary)
             {
-
+                /*Va rester a faire le singleton et l'appeler ici*/
             }
         }
 
@@ -104,11 +105,11 @@ namespace ProjetSession
 
             ContentDialog dialog = new ContentDialog();
             dialog.XamlRoot = validation.XamlRoot;
-            dialog.Title = "Supprimer un(e) employé(e)";
+            dialog.Title = "Supprimer un(e) employé";
             dialog.PrimaryButtonText = "Supprimer";
             dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Primary;
-            dialog.Content = $"Êtes-vous sûre de vouloir supprimer l'employé(e) : {nom}?";
+            dialog.DefaultButton = ContentDialogButton.Close;
+            dialog.Content = $"Êtes-vous sûre de vouloir supprimer l'employé : {nom}?";
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)

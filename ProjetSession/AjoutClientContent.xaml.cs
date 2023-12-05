@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.AppBroadcasting;
 
 namespace ProjetSession
 {
@@ -25,13 +26,8 @@ namespace ProjetSession
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             Boolean erreur = false;
-            string nom = "";
-            string email = "";
-            string adresse = "";
-            string telephone = "";
 
-            string champVide = "Ce champs ne peut pas être vide";
-
+            /////////////////////Nom\\\\\\\\\\\\\\\\\\\\
             if (string.IsNullOrEmpty(tbxNom.Text))
             {
                 erreur = true;
@@ -41,9 +37,9 @@ namespace ProjetSession
             else
             {
                 errNom.Text = "";
-                nom = tbxNom.Text;
             }
 
+            /////////////////////EMAIL\\\\\\\\\\\\\\\\\\\\
             if (string.IsNullOrEmpty(tbxEmail.Text))
             {
                 erreur = true;
@@ -53,9 +49,9 @@ namespace ProjetSession
             else
             {
                 errEmail.Text = "";
-                email = tbxEmail.Text;
             }
 
+            /////////////////////ADRESSE\\\\\\\\\\\\\\\\\\\\
             if (string.IsNullOrEmpty(tbxAdresse.Text))
             {
                 erreur = true;
@@ -65,9 +61,9 @@ namespace ProjetSession
             else
             {
                 errAdresse.Text = "";
-                adresse = tbxAdresse.Text;
             }
 
+            /////////////////////NUMÉRO DE TÉLÉPHONE\\\\\\\\\\\\\\\\\\\\
             if (string.IsNullOrEmpty(tbxTel.Text))
             {
                 erreur = true;
@@ -77,37 +73,50 @@ namespace ProjetSession
             else
             {
                 errTel.Text = "";
-                telephone = tbxTel.Text;
             }
 
-            if(erreur == false)
+
+            /////////////////////**AJOUT**\\\\\\\\\\\\\\\\\\\\
+            if (erreur == false)
             {
-                Singleton.GetInstance().AjouterClient(nom, adresse, telephone, email);
+                Client client = new Client 
+                { 
+                    Nom = tbxNom.Text,
+                    Adresse = tbxAdresse.Text,
+                    Num_Tel = tbxTel.Text,
+                    Email = tbxEmail.Text
+                };
+                Singleton.GetInstance().ajouter(client);
             }
 
         }
 
-        /*private void tbxTel_TextChanged(object sender, TextChangedEventArgs e)
+
+
+        /*********************PARTIE MODIFICATION*********************/
+        public string Nom
         {
-            string input = tbxTel.Text;
+            get { return tbxNom.Text; }
+            set { tbxNom.Text = value;}
+        }
 
-            string digitsOnly = new string(input.Where(char.IsDigit).ToArray());
+        public string Adresse
+        {
+            get { return tbxAdresse.Text; }
+            set { tbxAdresse.Text = value; }
+        }
 
+        public string Num_Tel
+        {
+            get { return tbxTel.Text; }
+            set { tbxTel.Text = value; }
+        }
 
-            if (digitsOnly.Length == 3)
-            {
-                digitsOnly = $"({input})-";
-            }
+        public string Email
+        {
+            get { return tbxEmail.Text;}
+            set { tbxEmail.Text = value;}
+        }
 
-            if (digitsOnly.Length == 9)
-            {
-                digitsOnly = $"{input.Substring(0, 6)}{input.Substring(7, 9)}-";
-            }
-
-
-            // Mettre à jour le texte dans le TextBox
-            tbxTel.Text = digitsOnly;
-            tbxTel.SelectionStart = digitsOnly.Length;
-        }*/
     }
 }

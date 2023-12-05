@@ -20,119 +20,208 @@ namespace ProjetSession
         public AjoutProjetContent()
         {
             this.InitializeComponent();
-            cbClient.ItemsSource = Singleton.GetInstance().GetNomsClients();
-        }
+            cbClient.ItemsSource = Singleton.GetInstance().GetListeClient();
 
-        string titre = "";
-        DateTime dateDebut;
-        string client = "";
-        string description = "";
-        int budget;
-        int nbEmploye;
-        string status = "";
+            cdpDate.MaxDate = DateTime.Now;
+            cdpDate.MinDate = new DateTime(1980, 01, 01);
+        }
         
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             var erreur = false;
+            Client client = cbClient.SelectedItem as Client;
 
-            if (tbTitre.Text == "")
+            ////////////////////TITRE\\\\\\\\\\\\\\\\\\\\
+            if (string.IsNullOrEmpty(tbTitre.Text))
             {
                 erreur = true;
-                errTitre.Text = "Le titre est vide";
+                errTitre.Text = "Le titre ne peut pas être vide";
                 args.Cancel = true;
             }
             else
             {
-                titre = tbTitre.Text;
                 errTitre.Text = "";
             }
-            
 
-
-            if (cdpDate.Date == DateTimeOffset.MinValue)
+            ////////////////////DATE DÉBUT\\\\\\\\\\\\\\\\\\\\
+            if (string.IsNullOrEmpty(cdpDate.Date.ToString()))
             {
                 erreur = true;
-                errDate.Text = "La date est vide";
+                errDate.Text = "La date ne peut pas être vide";
                 args.Cancel = true;
             }
             else
             {
-                dateDebut = cdpDate.Date.Value.Date;
                 errDate.Text = "";
             }
 
-
+            ////////////////////CLIENT\\\\\\\\\\\\\\\\\\\\
             if (cbClient.SelectedIndex == -1)
             {
                 erreur = true;
-                errClient.Text = "Le client est vide";
+                errClient.Text = "Le client ne peut pas être vide";
                 args.Cancel = true;
             }
             else
             {
-                client = cbClient.SelectedItem.ToString();
                 errClient.Text = "";
             }
 
-
-            if (tbDescription.Text == "")
+            ////////////////////DESCRIPTION\\\\\\\\\\\\\\\\\\\\
+            if (string.IsNullOrEmpty(tbDescription.Text))
             {
                 erreur = true;
-                errDesc.Text = "La description est vide";
+                errDesc.Text = "La description ne peut pas être vide";
                 args.Cancel = true;
             }
             else
             {
-                description = tbDescription.Text;
                 errDesc.Text = "";
             }
 
-
-            if (tbBudget.Text == "")
+            ////////////////////BUDGET\\\\\\\\\\\\\\\\\\\\
+            if (string.IsNullOrEmpty(tbBudget.Text))
             {
                 erreur = true;
-                errBudget.Text = "Le budget est vide";
+                errBudget.Text = "Le budget ne peut pas être vide";
                 args.Cancel = true;
             }
             else
             {
-                budget = Convert.ToInt32(tbBudget.Text);
-                errBudget.Text = "";
+                if (double.TryParse(tbBudget.Text, out double result))
+                {
+                    if (Convert.ToDouble(tbBudget.Text) < 0)
+                    {
+                        erreur = true;
+                        errBudget.Text = "Le budget ne peut pas être négatif";
+                    }
+                    else
+                    {
+                        errBudget.Text = "";
+                    }
+                }
+                else
+                {
+                    erreur = true;
+                    errBudget.Text = "Le budget doit être un nombre";
+                }
             }
 
-
-            if (tbNbEmploye.Text == "")
+            ////////////////////NB EMPLOYÉ\\\\\\\\\\\\\\\\\\\\
+            if (string.IsNullOrEmpty(tbNbEmploye.Text))
             {
                 erreur = true;
-                errNbEmploye.Text = "Le nombre d'employé est vide";
+                errNbEmploye.Text = "Le nombre d'employé ne peut pas être vide";
                 args.Cancel = true;
             }
             else
             {
-                nbEmploye = Convert.ToInt32(tbNbEmploye.Text);
-                errNbEmploye.Text = "";
+                if (int.TryParse(tbNbEmploye.Text, out int result))
+                {
+                    if (Convert.ToInt32(tbNbEmploye.Text) <= 0)
+                    {
+                        erreur = true;
+                        errNbEmploye.Text = "Le nombre d'employé doit être supérieur à 0";
+                    }
+                    else if(Convert.ToInt32(tbNbEmploye.Text) > 5)
+                    {
+                        erreur = true;
+                        errNbEmploye.Text = "Le nombre d'employé ne peut pas dépasser 5";
+                    }
+                    else
+                    {
+                        errNbEmploye.Text = "";
+                    }
+                }
+                else
+                {
+                    erreur = true;
+                    errNbEmploye.Text = "Le nombre d'employé doit être un nombre";
+                }
             }
 
-
+            ////////////////////STATUT\\\\\\\\\\\\\\\\\\\\
             if (cbStatut.SelectedIndex == -1)
             {
                 erreur = true;
-                errStatut.Text = "Le status est vide";
+                errStatut.Text = "Le statut ne peut pas être vide";
                 args.Cancel = true;
             }
             else
             {
-                status = cbStatut.SelectedItem.ToString();
                 errStatut.Text = "";
             }
 
 
 
+
+
+            /////////////////////**AJOUT**\\\\\\\\\\\\\\\\\\\\
             if (erreur == false)
             {
-                Singleton.GetInstance().AjouterProjet(titre, dateDebut, client, description, budget, nbEmploye, status);
+                Projet projet = new Projet
+                {
+                    Titre = tbTitre.Text,
+                    DateDebut = cdpDate.Date.Value.ToString("yyyy-MM-dd"),
+                    IdCLient = client.Id_Client,
+                    Description = tbDescription.Text,
+                    Budget = Convert.ToDouble(tbBudget.Text),
+                    NbEmploye = Convert.ToInt32(tbNbEmploye.Text),
+                    Statut = cbStatut.SelectedItem.ToString(),
+                    Client = client
+                };
+                Singleton.GetInstance().ajouter(projet);
             }
+        }
+
+
+
+        /*********************PARTIE MODIFICATION*********************/
+        public string Titre
+        {
+            get { return tbTitre.Text; }
+            set { tbTitre.Text = value;}
+        }
+
+        public string DateDebut
+        {
+            get { return cdpDate.Date.ToString(); }
+            set
+            {
+                DateTimeOffset date = new DateTimeOffset(DateTime.Parse(value));
+                cdpDate.Date = date;
+            }
+        }
+
+        public string Description
+        {
+            get { return tbDescription.Text; }
+            set { tbDescription.Text = value; }
+        }
+
+        public string Budget
+        {
+            get { return tbBudget.Text; }
+            set { tbBudget.Text = value; }
+        }
+
+        public string NbEmploye
+        {
+            get { return tbNbEmploye.Text; }
+            set { tbNbEmploye.Text = value;}
+        }
+
+        public int IdClient
+        {
+            get { return cbClient.SelectedIndex; }
+            set { cbClient.SelectedIndex = value; }
+        }
+
+        public int Statut
+        {
+            get { return cbStatut.SelectedIndex; }
+            set { cbStatut.SelectedIndex = value; }
         }
     }
 }

@@ -79,6 +79,7 @@ namespace ProjetSession
                 dialog.Title = "Se connecter";
                 dialog.PrimaryButtonText = "Connexion";
                 dialog.CloseButtonText = "Annuler";
+                dialog.DefaultButton = ContentDialogButton.Primary;
                 ContentDialogResult result = await dialog.ShowAsync();
 
 
@@ -133,6 +134,7 @@ namespace ProjetSession
             dialog.Title = "Créer un nouveau projet";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
             await dialog.ShowAsync();
         }
 

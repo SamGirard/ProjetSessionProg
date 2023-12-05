@@ -55,9 +55,27 @@ namespace ProjetSession
             }
         }
 
-        private void btModifier_Click(object sender, RoutedEventArgs e)
+        private async void btModifier_Click(object sender, RoutedEventArgs e)
         {
+            Client client = lvListe.SelectedItem as Client;
+            AjoutClientContent dialog = new AjoutClientContent();
+            dialog.XamlRoot = validation.XamlRoot;
+            dialog.Title = "Modifier un client";
+            dialog.PrimaryButtonText = "Modifier";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
 
+            dialog.Nom = client.Nom;
+            dialog.Adresse = client.Adresse;
+            dialog.Num_Tel = client.Num_Tel;
+            dialog.Email = client.Email;
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                /*Va rester a faire le singleton et l'appeler ici*/
+            }
         }
 
         private async void btDelete_Click(object sender, RoutedEventArgs e)
@@ -69,16 +87,17 @@ namespace ProjetSession
 
             ContentDialog dialog = new ContentDialog();
             dialog.XamlRoot = validation.XamlRoot;
-            dialog.Title = "Supprimer un client(e)";
+            dialog.Title = "Supprimer un client";
             dialog.PrimaryButtonText = "Supprimer";
             dialog.CloseButtonText = "Annuler";
-            dialog.DefaultButton = ContentDialogButton.Primary;
+            dialog.DefaultButton = ContentDialogButton.Close;
             dialog.Content = $"Êtes-vous sûre de vouloir supprimer le client : {nom}?";
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
             {
                 Singleton.GetInstance().supprimer(client, position);
+                /*NE PAS OUBLIER DALLER CHANGER VALEUR IDCLIENT DANS PROJET POUR NULL*/
             }
         }
     }

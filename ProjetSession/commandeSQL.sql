@@ -57,7 +57,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*Trigger pour le numéro de proje (fait par sam)t*/
+/*Trigger pour le numéro de projet (fait par sam)t*/
 DELIMITER  //
 CREATE TRIGGER numeroProjet BEFORE INSERT
     on projet
@@ -67,7 +67,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*(fait par sam)*/
+/*Trigger pour faire le matricule de l'employé (fait par sam)*/
 DELIMITER  //
 CREATE TRIGGER matriculeEmp before insert
     on employe
@@ -77,35 +77,45 @@ BEGIN
 end;
 DELIMITER ;
 
-/*(fait par sam)*/
+/*Trigger pour update le salaire des employé (fait par sam et isaac)*/
 DELIMITER //
-
-CREATE TRIGGER update_salaireTotal
+CREATE TRIGGER update_salaireTotalAjout
     AFTER INSERT ON employe
     FOR EACH ROW
 BEGIN
     DECLARE total_taux DOUBLE;
-
-    -- Calculer la somme des taux pour le projet associé au nouvel employé
-    SELECT SUM(taux) INTO total_taux
-    FROM employe
-    WHERE id_projet = NEW.id_projet;
-
-    -- Mettre à jour le salaireTotal dans la table projet
+    SELECT f_salTot(NEW.id_projet) INTO total_taux;
     UPDATE projet
     SET salaireTotal = total_taux
-    WHERE id_projet = NEW.id_projet;
-END;
-//
+    WHERE id_projet = NEW.id_projet;;
+END //
+DELIMITER ;
+
+
+/*Trigger pour update le salaire total d'un projet lorsqu'un employé se fait delete (fait par isaac)*/
+DELIMITER //
+CREATE TRIGGER update_salaireTotalDelete
+    AFTER DELETE ON employe
+    FOR EACH ROW
+BEGIN
+    DECLARE total_taux DOUBLE;
+    SELECT f_salTot(OLD.id_projet) INTO total_taux;
+    UPDATE projet
+    SET salaireTotal = total_taux
+    WHERE id_projet = OLD.id_projet;
+END //
 DELIMITER ;
 
 
 -----------------------------PROCEDURES (a retravailler)---------------------------------
 /*Procédure pour ajouter employé (fait par isaac)*/
 DELIMITER //
-CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(20), IN prenom VARCHAR(20), IN dateNaiss DATE, IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_embauche DATE, IN taux DOUBLE, IN photo VARCHAR(1000), IN statut VARCHAR(20))
+CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(50), IN prenom VARCHAR(50), IN date_naiss DATE,
+                                 IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_emb DATE,
+                                 IN taux DOUBLE, IN photo VARCHAR(1000), IN idProjet VARCHAR(15), IN statut VARCHAR(20))
 BEGIN
-    INSERT into employe VALUES(null, nom, prenom, dateNaiss, email, adresse, date_embauche, taux, photo, statut);
+    INSERT into employe (nom, prenom, date_naissance, email, adresse, date_embauche, taux, photo, id_projet, statut)
+    VALUES (nom, prenom, date_naiss, email, adresse, date_emb, taux, photo, idProjet, statut);
 end //
 DELIMITER ;
 
@@ -113,11 +123,13 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE p_ajout_client(IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
 BEGIN
-    INSERT into client VALUES(null, nom, adresse, numero_tel, email);
+    INSERT into client (nom, adresse, numero_tel, email)
+    VALUES(nom, adresse, numero_tel, email);
 end //
 DELIMITER ;
 
-/*Procédure pour ajouter projet (fait par isaac)*/
+
+/*Procédure pour ajouter projet (fait par sam)*/
 CREATE PROCEDURE p_ajout_projet(IN titre varchar(50), IN date_debut date,
                                  IN description varchar(255), IN budget double, IN nbEmplo INT,
                                  IN id_client varchar(3), IN statut varchar(20))
@@ -142,7 +154,15 @@ BEGIN
 end//
 DELIMITER ;
 
-/*fait par sam*/
+/*Procédure pour avoir le client avec son id fait par isaac*/
+DELIMITER //
+CREATE PROCEDURE p_get_client (IN id varchar(15))
+BEGIN
+    SELECT * FROM client WHERE id_client = id;
+end//
+DELIMITER ;
+
+/*Procédure pour afficher les clients (fait par sam)*/
 DELIMITER //
 CREATE PROCEDURE afficher_clients()
 BEGIN
@@ -150,6 +170,7 @@ BEGIN
 end //
 DELIMITER ;
 
+/*Procédure pour afficher les employés (fait par sam)*/
 DELIMITER //
 CREATE PROCEDURE afficher_employes()
 BEGIN
@@ -157,10 +178,62 @@ BEGIN
 end //
 DELIMITER ;
 
+/*Procédure pour avoir l'id du client pour le projet (fait par sam)*/
 DELIMITER //
 CREATE PROCEDURE idClientPourAjouterProjet(IN idClient VARCHAR(100))
 BEGIN
     SELECT id_client FROM client WHERE nom LIKE idClient;
+end //
+DELIMITER ;
+
+/*Procédure pour mettre l'état de connexion en connecter (fait par sam)*/
+Delimiter //
+CREATE PROCEDURE p_estConnecter(IN compte VARCHAR(10))
+BEGIN
+    UPDATE admin SET estConnecter = true WHERE utilisateur = compte;
+end //
+DELIMITER ;
+
+/*Procédure pour déconnecter (fait par sam)*/
+DELIMITER //
+CREATE procedure p_deconnexion()
+BEGIN
+    UPDATE admin SET estConnecter = false WHERE 1 = 1;
+end //
+DELIMITER ;
+
+/*Procédure qui permet de mettre à jour le salaire total de chaque projet (fait par isaac)*/
+DELIMITER //
+CREATE PROCEDURE p_maj_salairesTot()
+BEGIN
+    DECLARE id VARCHAR(15);
+    DECLARE taux DOUBLE;
+    DECLARE termine INT DEFAULT 0;
+
+    DECLARE boucle CURSOR FOR
+    SELECT id_projet FROM projet;
+
+    /*Pour ignorer toute erreur ou il n'y a pas de resultat*/
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET termine = 1;
+
+    OPEN boucle;
+
+    boucle_principale: LOOP
+        FETCH boucle INTO id;
+
+        /*Pour sortir de la boucle*/
+        IF (termine = 1) THEN
+            LEAVE boucle_principale;
+        end if;
+
+        /*Vient faire la mise à jour du salaire total de chaque projet*/
+        SELECT f_salTot(id) INTO taux;
+        UPDATE projet
+            SET salaireTotal = taux
+            WHERE id_projet = id;
+    end loop boucle_principale;
+
+    CLOSE boucle;
 end //
 DELIMITER ;
 
@@ -177,19 +250,27 @@ SELECT * FROM employe;
 CREATE VIEW afficher_projet AS
 SELECT * FROM projet;
 
+/*Vue pour afficher contenu de la table admin (fait par sam)*/
+CREATE VIEW afficher_admin AS
+    SELECT * FROM admin;
+
+/*Vue pour afficher contenu de la table admin la colonne estConnecter (fait par sam)*/
+CREATE VIEW afficher_Connexion AS
+    SELECT estConnecter FROM admin;
 
 -----------------------------FONCTIONS-----------------------------
-/*Function pour calculer automatiquement le salaire total par heure des employés du projet (fait par isaac)*/
-/*Va devoir relier la function au trigger ou procedure qui va venir le insert automatiquement dans table projet*/
+/*Function pour calculer automatiquement le salaire total par heure des employés du projet: utilisé par 2 triggers updateSalaire (fait par isaac)*/
 DELIMITER //
-CREATE FUNCTION f_salTot(id VARCHAR(11)) RETURNS DOUBLE
+CREATE FUNCTION f_salTot(id VARCHAR(15)) RETURNS DOUBLE
 BEGIN
-    DECLARE salaire DOUBLE;
-    SELECT SUM(taux) INTO salaire FROM employe WHERE id_projet = id GROUP BY id_projet;
-    RETURNS salaire;
+    DECLARE salTot DOUBLE;
+    SELECT SUM(taux) INTO salTot FROM employe WHERE id_projet = id GROUP BY id_projet;
+    IF (salTot IS NULL) THEN
+        SET salTot = 0;
+    end if;
+    RETURN salTot;
 end//
 DELIMITER ;
-
 
 -----------------------------INSERTION DE DONNÉE (fait par sam)-----------------------------
 INSERT INTO client VALUES (null, 'Jean Lamontage', '47 rue bouol', '819-555-4443', 'email@email.xom');
