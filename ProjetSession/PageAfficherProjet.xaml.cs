@@ -74,6 +74,7 @@ namespace ProjetSession
             dialog.Budget = Convert.ToString(projet.Budget);
             dialog.NbEmploye = Convert.ToString(projet.NbEmploye);
             dialog.IdClient = Singleton.GetInstance().GetPositionClient(projet.IdCLient);
+            dialog.DateDebut = projet.DateDebutTest.ToString();
             if (projet.Statut == "En cours")
             {
                 dialog.Statut = 0;

@@ -22,7 +22,7 @@
                 <NavigationViewItem Content="Créer un nouveau projet" x:Name="iAjoutProjet" IsEnabled="False" Tapped="iAjoutProjet_Tapped" SelectsOnInvoked="False" Icon="Add"/>
                 <NavigationViewItem Content="Ajouter un nouvel employé" x:Name="iAjoutEmpl" IsEnabled="False" Tapped="iAjoutEmpl_Tapped" SelectsOnInvoked="False" Icon="AddFriend"/>
                 <NavigationViewItem Content="Ajouter un nouveau client" x:Name="iAjoutClient" IsEnabled="False" Tapped="iAjoutClient_Tapped" SelectsOnInvoked="False" Icon="AddFriend"/>
-                <TextBlock x:Name="dialogAjout"/>
+                
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
@@ -40,8 +40,9 @@
                     </TransitionCollection>
                 </Frame.ContentTransitions>
             </Frame>
+            
         </NavigationView>
-
+        
     </Grid>
     <Window.SystemBackdrop>
         <DesktopAcrylicBackdrop />

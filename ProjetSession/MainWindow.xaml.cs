@@ -75,7 +75,7 @@ namespace ProjetSession
             
             if (Singleton.GetInstance().valideConnection() == false) { 
                 connexion dialog = new connexion();
-                dialog.XamlRoot = dialogAjout.XamlRoot;
+                dialog.XamlRoot = mainFrame.XamlRoot;
                 dialog.Title = "Se connecter";
                 dialog.PrimaryButtonText = "Connexion";
                 dialog.CloseButtonText = "Annuler";
@@ -130,7 +130,7 @@ namespace ProjetSession
         private async void iAjoutProjet_Tapped(object sender, TappedRoutedEventArgs e)
         {
             AjoutProjetContent dialog = new AjoutProjetContent();
-            dialog.XamlRoot = dialogAjout.XamlRoot;
+            dialog.XamlRoot = mainFrame.XamlRoot;
             dialog.Title = "Créer un nouveau projet";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
@@ -142,7 +142,7 @@ namespace ProjetSession
         private async void iAjoutEmpl_Tapped(object sender, TappedRoutedEventArgs e)
         {
             AjouterEmploye dialog = new AjouterEmploye();
-            dialog.XamlRoot = dialogAjout.XamlRoot;
+            dialog.XamlRoot = mainFrame.XamlRoot;
             dialog.Title = "Ajouter un employé";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";
@@ -153,7 +153,7 @@ namespace ProjetSession
         private async void iAjoutClient_Tapped(object sender, TappedRoutedEventArgs e)
         {
             AjoutClientContent dialog = new AjoutClientContent();
-            dialog.XamlRoot = dialogAjout.XamlRoot;
+            dialog.XamlRoot = mainFrame.XamlRoot;
             dialog.Title = "Ajouter un employé";
             dialog.PrimaryButtonText = "Ajouter";
             dialog.CloseButtonText = "Annuler";

@@ -29,17 +29,15 @@
                                     <TextBlock Text="{x:Bind Titre}" FontSize="30pt" TextWrapping="Wrap"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" FontWeight="SemiBold"/>
                                     <TextBlock Text="{x:Bind Description}" FontWeight="Light" FontSize="15pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap"/>
 
-                                    <TextBlock FontSize="20pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Margin="0 10 0 0" Text="{x:Bind DateDebut}"/>
+                                    <TextBlock FontSize="20pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Margin="0 10 0 0" Text="{x:Bind DateDebutTest}"/>
                                     <TextBlock FontWeight="Light" FontSize="20pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}">
                                     <Run Text="Budget : "/>
-                                    <Run Text="{x:Bind Budget}"></Run>
-                                    <Run Text="$$"/>
+                                    <Run Text="{x:Bind BudgetString}"></Run>
                                     </TextBlock>
 
                                     <TextBlock FontWeight="Light" FontSize="20pt" Margin="0 0 0 10"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}">
                                     <Run Text="Salaire total : "/>
-                                    <Run Text="{x:Bind TotalSal}"></Run>
-                                    <Run Text="$/h"/>
+                                    <Run Text="{x:Bind TotalSalString}"></Run>
                                     </TextBlock>
 
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

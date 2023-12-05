@@ -13,6 +13,7 @@ namespace ProjetSession
         string idProjet;
         string titre;
         string dateDebut;
+        DateTime dateDebutTest;
         string description;
         double budget;
         int nbEmploye;
@@ -31,10 +32,17 @@ namespace ProjetSession
             get { return titre; }
             set { titre = value; this.OnPropertyChanged(); }
         }
+
         public string DateDebut
         {
             get { return dateDebut; }
             set { dateDebut = value; this.OnPropertyChanged(); }
+        }
+
+        public string DateDebutTest
+        {
+            get {  return dateDebutTest.Date.ToString("yyyy-MM-dd"); }
+            set { dateDebutTest = DateTime.Parse(value); this.OnPropertyChanged(); }
         }
         public string Description
         {
@@ -78,6 +86,16 @@ namespace ProjetSession
         {
             get { return client; }
             set { client = value; this.OnPropertyChanged(); }
+        }
+
+        public string TotalSalString
+        {
+            get { return totalSal.ToString() + "$/heure"; }
+        }
+
+        public string BudgetString
+        {
+            get { return totalSal.ToString("C"); }
         }
 
 
