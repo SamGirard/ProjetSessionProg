@@ -106,6 +106,18 @@ BEGIN
 END //
 DELIMITER ;
 
+/*Trigger pour le statut de l'employé*/
+DELIMITER //
+CREATE TRIGGER statutEmploye before insert on employe
+    for each row
+    begin
+        if(YEAR(current_date) - YEAR(date_embauche) < 3) THEN
+            SET NEW.statut = 'Journalier';
+        ELSE
+            SET NEW.statut = 'Permanent';
+        END IF;
+    end ;
+DELIMITER //
 
 -----------------------------PROCEDURES (a retravailler)---------------------------------
 /*Procédure pour ajouter employé (fait par isaac)*/

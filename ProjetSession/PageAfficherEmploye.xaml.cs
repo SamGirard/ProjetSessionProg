@@ -35,6 +35,7 @@ namespace ProjetSession
                 btModifier.Visibility = Visibility.Collapsed;
                 btDelete.Visibility = Visibility.Collapsed;
             }
+
         }
 
         private void gvListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -74,19 +75,6 @@ namespace ProjetSession
             dialog.Taux = Convert.ToString(employe.TauxHor);
             dialog.Photo = employe.Photo;
             dialog.IdProjet = Singleton.GetInstance().GetPositionProjet(employe.IdProjet);
-
-            if(employe.Statut == "Journalier")
-            {
-                dialog.Statut = 0;
-            }
-            else if(employe.Statut == "Permanent")
-            {
-                dialog.Statut = 1;
-            }
-            else
-            {
-                dialog.Statut = -1;
-            }
 
             var result = await dialog.ShowAsync();
 

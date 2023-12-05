@@ -178,18 +178,6 @@ namespace ProjetSession
                 //}
             }
 
-            ////////////////////STATUT\\\\\\\\\\\\\\\\\\\\
-            if (cbxStatut.SelectedIndex < 0)
-            {
-                errStatut.Text = "Le statut ne peut pas être vide";
-                erreur = true;
-                args.Cancel = true;
-            }
-            else
-            {
-                errStatut.Text = "";
-            }
-
 
             /////////////////////**AJOUT**\\\\\\\\\\\\\\\\\\\\
             if (erreur == false)
@@ -203,7 +191,7 @@ namespace ProjetSession
                     Adresse = tbxAdresse.Text,
                     DateEmb = cdpEmb.Date.Value.ToString("yyyy-MM-dd"),
                     Photo = tbxPhoto.Text,
-                    Statut = cbxStatut.SelectedItem.ToString(),
+                    Statut = null,
                     TauxHor = Convert.ToDouble(tbxTaux.Text),
                     ProjetEnCours = projet,
                     IdProjet = projet.IdProjet
@@ -282,12 +270,6 @@ namespace ProjetSession
         {
             get { return cbxProjet.SelectedIndex; }
             set {  cbxProjet.SelectedIndex = value;}
-        }
-
-        public int Statut
-        {
-            get { return cbxStatut.SelectedIndex; }
-            set { cbxStatut.SelectedIndex = value;}
         }
     }
 }

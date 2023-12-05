@@ -17,6 +17,7 @@ using System.Xml.Linq;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
+
 namespace ProjetSession
 {
     public sealed partial class MainWindow : Window
@@ -37,6 +38,8 @@ namespace ProjetSession
             mainFrame.Navigate(typeof(PageAfficherProjet));
 
         }
+
+
 
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
