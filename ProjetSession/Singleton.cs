@@ -64,7 +64,7 @@ namespace ProjetSession
                     {
                         IdProjet = reader.GetString("id_projet"),
                         Titre = reader.GetString("titre"),
-                        DateDebut = reader.GetString("date_debut"),
+                        DateDebutTest = reader.GetString("date_debut"),
                         Description = reader.GetString("description"),
                         Budget = reader.GetDouble("budget"),
                         NbEmploye = reader.GetInt32("nb_employe"),
