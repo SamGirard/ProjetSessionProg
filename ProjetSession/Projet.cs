@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml.Media;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -23,6 +24,7 @@ namespace ProjetSession
         string idCLient;
         string statut;
         Client client;
+        List<Employe> listeEmploye;
 
         private string _statut;
 
@@ -108,6 +110,12 @@ namespace ProjetSession
         public string BudgetString
         {
             get { return totalSal.ToString("C"); }
+        }
+
+        public List<Employe> ListeEmploye
+        {
+            get { return listeEmploye; }
+            set { listeEmploye = value; this.OnPropertyChanged(); }
         }
 
         private SolidColorBrush _ellipseColor;
