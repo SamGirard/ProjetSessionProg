@@ -77,6 +77,18 @@ BEGIN
 end;
 DELIMITER ;
 
+/*Trigger pour modifier le matricule de l'employé lorsque modification de son nom (fait par isaac)*/
+DELIMITER  //
+CREATE TRIGGER matriculeEmpModif before update
+    on employe
+    for each row
+BEGIN
+IF (OLD.nom != NEW.nom) THEN
+    SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 1, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
+END IF;
+end;
+DELIMITER ;
+
 /*Trigger pour update le salaire des employé (fait par sam et isaac)*/
 DELIMITER //
 CREATE TRIGGER update_salaireTotalAjout
@@ -124,10 +136,10 @@ DELIMITER //
 DELIMITER //
 CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(50), IN prenom VARCHAR(50), IN date_naiss DATE,
                                  IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_emb DATE,
-                                 IN taux DOUBLE, IN photo VARCHAR(1000), IN idProjet VARCHAR(15), IN statut VARCHAR(20))
+                                 IN taux DOUBLE, IN photo VARCHAR(1000), IN idProjet VARCHAR(15))
 BEGIN
-    INSERT into employe (nom, prenom, date_naissance, email, adresse, date_embauche, taux, photo, id_projet, statut)
-    VALUES (nom, prenom, date_naiss, email, adresse, date_emb, taux, photo, idProjet, statut);
+    INSERT into employe (nom, prenom, date_naissance, email, adresse, date_embauche, taux, photo, id_projet)
+    VALUES (nom, prenom, date_naiss, email, adresse, date_emb, taux, photo, idProjet);
 end //
 DELIMITER ;
 
@@ -254,6 +266,18 @@ DELIMITER //
 CREATE PROCEDURE p_liste_empl_projet(IN idProjet VARCHAR(15))
 BEGIN
     SELECT * FROM employe WHERE id_projet = idProjet;
+end //
+DELIMITER ;
+
+/*Procédure pour modifier un employé (fait par isaac)*/
+DELIMITER //
+CREATE PROCEDURE p_modif_empl(IN matriculeEmp VARCHAR(12), IN nom VARCHAR(50), IN prenom VARCHAR(50),
+                                 IN email VARCHAR(150), IN adresse VARCHAR(100),IN taux DOUBLE,
+                                 IN photo VARCHAR(1000), IN idProjet VARCHAR(15))
+BEGIN
+    UPDATE employe
+    SET matricule = matriculeEmp, nom = nom, prenom = prenom, email = email, adresse = adresse, taux = taux, photo = photo, id_projet = idProjet
+    WHERE matricule = matriculeEmp;
 end //
 DELIMITER ;
 
