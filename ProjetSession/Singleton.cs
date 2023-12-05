@@ -398,6 +398,49 @@ namespace ProjetSession
         /*****************************************************************************************************/
         /**********************************************CONNEXION**********************************************/
         /*****************************************************************************************************/
+
+        public bool compteExiste()
+        {
+            bool existe = false;
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "SELECT COUNT(*) FROM afficher_admin";
+
+                con.Open();
+                int nombreDeLignes = Convert.ToInt32(commande.ExecuteScalar());
+
+                if (nombreDeLignes <= 0)
+                {
+                    existe = false;
+                }
+                else existe = true;
+
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
+            return existe;
+        }
+
+        public void creerCompte(string utilisateur, string mdp)
+        {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "INSERT INTO admin VALUES(@utilisateur, @mdp, 0)";
+
+            commande.Parameters.AddWithValue("utilisateur", utilisateur);
+            commande.Parameters.AddWithValue("motDePasse", mdp);
+
+            con.Open();
+            commande.ExecuteNonQuery();
+
+            con.Close();
+        }
+
         public bool verif_Admin(string utilisateur, string motDePasse)
         {
             bool estConnecter = false;

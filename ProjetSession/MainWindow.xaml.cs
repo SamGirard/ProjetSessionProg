@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
+using Windows.ApplicationModel.VoiceCommands;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -25,8 +26,33 @@ namespace ProjetSession
         public MainWindow()
         {
             this.InitializeComponent();
-            bool connecter = Singleton.GetInstance().valideConnection();
+            InitializeAsync();
+        }
 
+        private async void InitializeAsync()
+        {
+            bool connecter = Singleton.GetInstance().valideConnection();
+            bool compteExiste = Singleton.GetInstance().compteExiste();
+            /*
+            if (compteExiste == false)
+            {
+                creerCompte dialog = new creerCompte();
+                dialog.XamlRoot = mainFrame.XamlRoot;
+                dialog.Title = "Créer un compte administateur";
+                dialog.PrimaryButtonText = "Créer";
+                dialog.CloseButtonText = "Annuler";
+                dialog.DefaultButton = ContentDialogButton.Primary;
+                ContentDialogResult result = await dialog.ShowAsync();
+
+                if (result == ContentDialogResult.Primary)
+                {
+                    string utilisateur = dialog.User;
+                    string motDePasse = dialog.Mdp;
+
+                    Singleton.GetInstance().creerCompte(utilisateur, motDePasse);
+                }
+            }
+            */
             if (connecter == true)
             {
                 iAjoutProjet.IsEnabled = true;
@@ -36,11 +62,8 @@ namespace ProjetSession
                 iDeco.Content = "Se déconnecter";
             }
             mainFrame.Navigate(typeof(PageAfficherProjet));
-
         }
-
-
-
+            
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             var items = (NavigationViewItem)args.SelectedItem;
@@ -67,9 +90,6 @@ namespace ProjetSession
 
         private async void iExport_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            
-
-            
             var picker = new Windows.Storage.Pickers.FileSavePicker();
 
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
