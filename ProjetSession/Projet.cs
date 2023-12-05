@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.UI;
+using Microsoft.UI.Xaml.Media;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,6 +23,8 @@ namespace ProjetSession
         string idCLient;
         string statut;
         Client client;
+
+        private string _statut;
 
         public string IdProjet
         {
@@ -78,8 +82,16 @@ namespace ProjetSession
         }
         public string Statut
         {
-            get { return statut; }
-            set { statut = value; this.OnPropertyChanged(); }
+            get { return _statut; }
+            set
+            {
+                if (_statut != value)
+                {
+                    _statut = value;
+                    OnPropertyChanged(nameof(Statut));
+                    UpdateEllipseColor();
+                }
+            }
         }
 
         public Client Client
@@ -98,6 +110,35 @@ namespace ProjetSession
             get { return totalSal.ToString("C"); }
         }
 
+        private SolidColorBrush _ellipseColor;
+        public SolidColorBrush EllipseColor
+        {
+            get { return _ellipseColor; }
+            set
+            {
+                if (_ellipseColor != value)
+                {
+                    _ellipseColor = value;
+                    OnPropertyChanged(nameof(EllipseColor));
+                }
+            }
+        }
+
+        private void UpdateEllipseColor()
+        {
+            switch (Statut)
+            {
+                case "En cours":
+                    EllipseColor = new SolidColorBrush(Colors.DodgerBlue);
+                    break;
+                case "Terminé":
+                    EllipseColor = new SolidColorBrush(Colors.LimeGreen);
+                    break;
+                default:
+                    EllipseColor = new SolidColorBrush(Colors.Gray);
+                    break;
+            }
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

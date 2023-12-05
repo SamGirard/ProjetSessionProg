@@ -9,6 +9,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -37,7 +38,11 @@ namespace ProjetSession
                 btDelete.Visibility = Visibility.Collapsed;
             }
 
-            
+            ObservableCollection<Projet> projets = Singleton.GetInstance().GetListeProjet(); // Assurez-vous de remplacer cela par votre logique de chargement
+            List<Projet> viewModels = projets.Select(p => new Projet { Statut = p.Statut }).ToList();
+            gvListe.ItemsSource = projets;
+
+
         }
         private void gvListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -121,37 +126,5 @@ namespace ProjetSession
             }
 
         }
-
-        private void statut_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            TextBlock textBlock = sender as TextBlock;
-
-            if (textBlock != null)
-            {
-                // Accédez à l'Ellipse par son nom
-                Ellipse ellipse = FindName("couleur") as Ellipse;
-
-                if (ellipse != null)
-                {
-                    // Changez la couleur de l'Ellipse en fonction du Statut
-                    string statut = textBlock.Text;
-
-                    switch (statut)
-                    {
-                        case "En cours":
-                            ellipse.Fill = new SolidColorBrush(Colors.Red);
-                            break;
-                        case "Terminé":
-                            ellipse.Fill = new SolidColorBrush(Colors.Green);
-                            break;
-                        // Ajoutez d'autres cas selon vos besoins
-                        default:
-                            ellipse.Fill = new SolidColorBrush(Colors.Gray);
-                            break;
-                    }
-                }
-            }
-        }
-
     }
 }

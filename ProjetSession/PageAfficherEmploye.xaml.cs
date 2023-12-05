@@ -36,7 +36,6 @@ namespace ProjetSession
                 btDelete.Visibility = Visibility.Collapsed;
             }
 
-            
         }
 
         private void gvListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
