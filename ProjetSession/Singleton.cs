@@ -28,13 +28,13 @@ namespace ProjetSession
             listeClient = new ObservableCollection<Client>();
             listeEmploye = new ObservableCollection<Employe>();
 
-            string server = Environment.GetEnvironmentVariable("server");
+            /*string server = Environment.GetEnvironmentVariable("server");
             string database = Environment.GetEnvironmentVariable("database");
             string user = Environment.GetEnvironmentVariable("user");
             string password = Environment.GetEnvironmentVariable("password");
-
-            con = new MySqlConnection($"Server={server};Database={database};Uid={user};Pwd={password}");
-            con2 = new MySqlConnection($"Server={server};Database={database};Uid={user};Pwd={password}");
+            */
+            con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq19;Uid=2172853;Pwd=2172853");
+            con2 = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq19;Uid=2172853;Pwd=2172853");
         }
 
         public static Singleton GetInstance()
