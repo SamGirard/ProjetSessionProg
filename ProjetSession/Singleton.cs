@@ -465,17 +465,24 @@ namespace ProjetSession
 
         public void creerCompte(string utilisateur, string mdp)
         {
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-            commande.CommandText = "INSERT INTO admin VALUES(@utilisateur, @mdp, 0)";
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+                commande.CommandText = "INSERT INTO admin VALUES(@utilisateur, @motDePasse, 0)";
 
-            commande.Parameters.AddWithValue("utilisateur", utilisateur);
-            commande.Parameters.AddWithValue("motDePasse", mdp);
+                commande.Parameters.AddWithValue("utilisateur", utilisateur);
+                commande.Parameters.AddWithValue("motDePasse", mdp);
 
-            con.Open();
-            commande.ExecuteNonQuery();
+                con.Open();
+                commande.ExecuteNonQuery();
 
-            con.Close();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                con.Close();
+            }
         }
 
         public bool verif_Admin(string utilisateur, string motDePasse)
