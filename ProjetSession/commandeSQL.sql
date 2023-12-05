@@ -67,6 +67,18 @@ BEGIN
 end //
 DELIMITER ;
 
+/*fait par isaac*/
+DELIMITER  //
+CREATE TRIGGER numeroProjetModif BEFORE update
+    on projet
+    FOR EACH ROW
+BEGIN
+    IF(OLD.id_client != NEW.id_client) THEN
+    SET NEW.id_projet = CONCAT(UPPER(NEW.id_client), '-', FLOOR(rand()*89) + 10, '-', YEAR(NEW.date_debut));
+    END IF;
+end //
+DELIMITER 
+
 /*Trigger pour faire le matricule de l'employé (fait par sam)*/
 DELIMITER  //
 CREATE TRIGGER matriculeEmp before insert
@@ -85,6 +97,7 @@ CREATE TRIGGER matriculeEmpModif before update
 BEGIN
 IF (OLD.nom != NEW.nom) THEN
     SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 1, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
+    /*************DEVRA AUSSI MODIFIER LE ID DES CLIENTS QUI ETAIT LIE************/
 END IF;
 end;
 DELIMITER ;
@@ -154,13 +167,15 @@ DELIMITER ;
 
 
 /*Procédure pour ajouter projet (fait par sam)*/
+DELIMITER //
 CREATE PROCEDURE p_ajout_projet(IN titre varchar(50), IN date_debut date,
                                  IN description varchar(255), IN budget double, IN nbEmplo INT,
                                  IN id_client varchar(3), IN statut varchar(20))
 BEGIN
     INSERT INTO projet (titre, date_debut, description, budget, nb_employe, salaireTotal, id_client, statut)
     VALUES (titre, date_debut, description, budget, nbEmplo, 0, id_client, statut);
-END;
+END //
+DELIMITER ;
 
 /*Procédure pour ajouter projet (fait par sam)*/
 DELIMITER //
