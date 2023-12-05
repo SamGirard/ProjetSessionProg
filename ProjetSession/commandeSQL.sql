@@ -249,6 +249,14 @@ BEGIN
 end //
 DELIMITER ;
 
+/*Procédure qui va chercher tout les employés d'un projet (fait par isaac)*/
+DELIMITER //
+CREATE PROCEDURE p_liste_empl_projet(IN idProjet VARCHAR(15))
+BEGIN
+    SELECT * FROM employe WHERE id_projet = idProjet;
+end //
+DELIMITER ;
+
 -----------------------------LES VIEWS-----------------------------
 /*Vue pour afficher contenu de la table client (fait par isaac)*/
 CREATE VIEW afficher_client AS

@@ -41,8 +41,6 @@ namespace ProjetSession
             ObservableCollection<Projet> projets = Singleton.GetInstance().GetListeProjet(); // Assurez-vous de remplacer cela par votre logique de chargement
             List<Projet> viewModels = projets.Select(p => new Projet { Statut = p.Statut }).ToList();
             gvListe.ItemsSource = projets;
-
-
         }
         private void gvListe_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

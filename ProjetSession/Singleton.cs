@@ -71,7 +71,8 @@ namespace ProjetSession
                         TotalSal = reader.GetDouble("salaireTotal"),
                         IdCLient = reader.GetString("id_client"),
                         Statut = reader.GetString("statut"),
-                        Client = client
+                        Client = client,
+                        ListeEmploye = ListeEmployesProjet(reader.GetString("id_projet"))
                     };
                     listeProjet.Add(unProjet);
                 }
@@ -165,6 +166,42 @@ namespace ProjetSession
             return listeEmploye;
         }
 
+        public List<Employe> ListeEmployesProjet(string idProjet)
+        {
+            List<Employe> liste = new List<Employe>();
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("p_liste_empl_projet");
+                commande.Connection = con2;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                commande.Parameters.AddWithValue("idProjet", idProjet);
+
+                con2.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Employe unEmploye = new Employe()
+                    {
+                        Matricule = reader.GetString("matricule"),
+                        Nom = reader.GetString("nom"),
+                        Prenom = reader.GetString("prenom"),
+                        DateNaiss = reader.GetString("date_naissance"),
+                        Email = reader.GetString("email"),
+                        Adresse = reader.GetString("adresse"),
+                        DateEmb = reader.GetString("date_embauche"),
+                        TauxHor = reader.GetInt32("taux"),
+                        Photo = reader.GetString("photo"),
+                        Statut = reader.GetString("statut"),
+                    };
+                    liste.Add(unEmploye);
+                }
+                reader.Close();
+                con2.Close();
+            }
+            catch (Exception ex) { con2.Close(); }
+            return liste;
+        }
         private Projet getProjet(string idProjet)
         {
             MySqlCommand commande = new MySqlCommand("p_get_projet");
