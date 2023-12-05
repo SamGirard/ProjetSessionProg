@@ -8,6 +8,8 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -29,6 +31,7 @@ namespace ProjetSession
                 iAjoutProjet.IsEnabled = true;
                 iAjoutClient.IsEnabled = true;
                 iAjoutEmpl.IsEnabled = true;
+                iExport.IsEnabled = true;
                 iDeco.Content = "Se déconnecter";
             }
             mainFrame.Navigate(typeof(PageAfficherProjet));
@@ -59,15 +62,39 @@ namespace ProjetSession
 
         }
 
-
-        private void iImport_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void iExport_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            
 
-        }
+            
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
 
-        private void iExport_Tapped(object sender, TappedRoutedEventArgs e)
-        {
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
 
+            picker.SuggestedFileName = "Liste des projets";
+            picker.FileTypeChoices.Add("Fichier CSV", new List<string>() { ".csv" });
+
+            //crée le fichier
+            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+
+            if (monFichier == null)
+            {
+                return; 
+            }
+
+            string texteAEcrire = "idProjet;titre;date_debut;description;budget;nb_employe;salaireTotal;idClient;statut";
+
+            ObservableCollection<Projet> listeDeDonnees = Singleton.GetInstance().GetListeProjet();
+
+            // Parcourez la liste et ajoutez chaque ligne au fichier CSV
+            foreach (var donnee in listeDeDonnees)
+            {
+                texteAEcrire += $"\n{donnee.IdProjet};{donnee.Titre};{donnee.DateDebut.ToString()};{donnee.Description};{donnee.Budget};{donnee.NbEmploye};{donnee.TotalSal};{donnee.IdCLient};{donnee.Statut}";
+            }
+       
+                // Écrit dans le fichier
+                await Windows.Storage.FileIO.WriteTextAsync(monFichier, texteAEcrire, Windows.Storage.Streams.UnicodeEncoding.Utf8);
         }
 
         private async void iDeco_Tapped(object sender, TappedRoutedEventArgs e)

@@ -26,7 +26,6 @@
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="Importer" x:Name="iImport" Tapped="iImport_Tapped" IsEnabled="False" SelectsOnInvoked="False" Icon="Import"/>
                 <NavigationViewItem Content="Exporter" x:Name="iExport" Tapped="iExport_Tapped" IsEnabled="False" SelectsOnInvoked="False" Icon="Save"/>
                 <NavigationViewItemSeparator/>
                 <NavigationViewItem Content="Se connnecter" x:Name="iDeco" Tapped="iDeco_Tapped" SelectsOnInvoked="False" Icon="OpenPane"/>
