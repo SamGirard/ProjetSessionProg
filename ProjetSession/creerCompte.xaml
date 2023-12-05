@@ -14,10 +14,10 @@
         <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
             <TextBox x:Name="tbUtilisateur" Header="Nom d'utilisateur" Margin="0 0 0 20"/>
 
-            <PasswordBox x:Name="tbMotDePasse" Header="Mot de passe"/>
+            <PasswordBox x:Name="tbMotDePasse" Header="Mot de passe" Margin="0 0 0 20"/>
 
             <PasswordBox x:Name="tbCMotDePasse" Header="Confirmer le Mot de passe"/>
-            <TextBlock x:Name="err" Foreground="Red" FontSize="12pt" Margin="0 20 0 10" Width="400"></TextBlock>
+            <TextBlock x:Name="err" Foreground="Red" FontSize="12pt" Margin="0 0 0 20" Width="400"></TextBlock>
         </StackPanel>
     </Grid>
 </ContentDialog>

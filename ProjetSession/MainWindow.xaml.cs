@@ -14,7 +14,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Linq;
-using Windows.ApplicationModel.VoiceCommands;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -26,33 +25,8 @@ namespace ProjetSession
         public MainWindow()
         {
             this.InitializeComponent();
-            InitializeAsync();
-        }
-
-        private async void InitializeAsync()
-        {
             bool connecter = Singleton.GetInstance().valideConnection();
-            bool compteExiste = Singleton.GetInstance().compteExiste();
-            /*
-            if (compteExiste == false)
-            {
-                creerCompte dialog = new creerCompte();
-                dialog.XamlRoot = mainFrame.XamlRoot;
-                dialog.Title = "Créer un compte administateur";
-                dialog.PrimaryButtonText = "Créer";
-                dialog.CloseButtonText = "Annuler";
-                dialog.DefaultButton = ContentDialogButton.Primary;
-                ContentDialogResult result = await dialog.ShowAsync();
 
-                if (result == ContentDialogResult.Primary)
-                {
-                    string utilisateur = dialog.User;
-                    string motDePasse = dialog.Mdp;
-
-                    Singleton.GetInstance().creerCompte(utilisateur, motDePasse);
-                }
-            }
-            */
             if (connecter == true)
             {
                 iAjoutProjet.IsEnabled = true;
@@ -62,8 +36,11 @@ namespace ProjetSession
                 iDeco.Content = "Se déconnecter";
             }
             mainFrame.Navigate(typeof(PageAfficherProjet));
+
         }
-            
+
+
+
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             var items = (NavigationViewItem)args.SelectedItem;
@@ -90,6 +67,9 @@ namespace ProjetSession
 
         private async void iExport_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            
+
+            
             var picker = new Windows.Storage.Pickers.FileSavePicker();
 
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
@@ -122,59 +102,95 @@ namespace ProjetSession
 
         private async void iDeco_Tapped(object sender, TappedRoutedEventArgs e)
         {
+
+            bool compteExiste = Singleton.GetInstance().compteExiste();
             
-            if (Singleton.GetInstance().valideConnection() == false) { 
-                connexion dialog = new connexion();
+            if (compteExiste == false)
+            {
+                iDeco.Content = "Se créer un compte";
+
+                creerCompte dialog = new creerCompte();
                 dialog.XamlRoot = mainFrame.XamlRoot;
-                dialog.Title = "Se connecter";
-                dialog.PrimaryButtonText = "Connexion";
+                dialog.Title = "Créer un compte administateur";
+                dialog.PrimaryButtonText = "Créer";
                 dialog.CloseButtonText = "Annuler";
                 dialog.DefaultButton = ContentDialogButton.Primary;
                 ContentDialogResult result = await dialog.ShowAsync();
-
 
                 if (result == ContentDialogResult.Primary)
                 {
                     string utilisateur = dialog.User;
                     string motDePasse = dialog.Mdp;
 
-                    bool estConnecter = Singleton.GetInstance().verif_Admin(utilisateur, motDePasse);
+                    Singleton.GetInstance().creerCompte(utilisateur, motDePasse);
+                    compteExiste = Singleton.GetInstance().compteExiste();
 
-                    if (estConnecter == true)
+                    if(compteExiste == true)
                     {
-                        iAjoutProjet.IsEnabled = true;
-                        iAjoutClient.IsEnabled = true;
-                        iAjoutEmpl.IsEnabled = true;
-                        iDeco.Content = "Se déconnecter";
+                        iDeco.Content = "Se connecter";
+                    }
+                }
+
+            } 
+            else if (compteExiste == true)
+            {
+                if (Singleton.GetInstance().valideConnection() == false)
+                {
+                    connexion dialog = new connexion();
+                    dialog.XamlRoot = mainFrame.XamlRoot;
+                    dialog.Title = "Se connecter";
+                    dialog.PrimaryButtonText = "Connexion";
+                    dialog.CloseButtonText = "Annuler";
+                    dialog.DefaultButton = ContentDialogButton.Primary;
+                    ContentDialogResult result = await dialog.ShowAsync();
+
+
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        string utilisateur = dialog.User;
+                        string motDePasse = dialog.Mdp;
+
+                        bool estConnecter = Singleton.GetInstance().verif_Admin(utilisateur, motDePasse);
+
+                        if (estConnecter == true)
+                        {
+                            iAjoutProjet.IsEnabled = true;
+                            iAjoutClient.IsEnabled = true;
+                            iAjoutEmpl.IsEnabled = true;
+                            iDeco.Content = "Se déconnecter";
+                            mainFrame.Navigate(typeof(PageAfficherProjet));
+                            iListeProjet.IsSelected = true;
+                        }
+                    }
+                }
+                else
+                {
+                    ContentDialog dialog2 = new ContentDialog();
+                    dialog2.XamlRoot = mainFrame.XamlRoot;
+                    dialog2.Title = "Déconnexion";
+                    dialog2.PrimaryButtonText = "Oui";
+                    dialog2.CloseButtonText = "Annuler";
+                    dialog2.DefaultButton = ContentDialogButton.Close;
+                    dialog2.Content = "Voulez-vous vraiment vous déconnecter?";
+
+                    var result2 = await dialog2.ShowAsync();
+
+                    if (result2 == ContentDialogResult.Primary)
+                    {
+                        Singleton.GetInstance().deconnexion();
+                        iAjoutProjet.IsEnabled = false;
+                        iAjoutClient.IsEnabled = false;
+                        iAjoutEmpl.IsEnabled = false;
+                        iDeco.Content = "Se Connecter";
                         mainFrame.Navigate(typeof(PageAfficherProjet));
                         iListeProjet.IsSelected = true;
                     }
+
                 }
-            } 
-            else
-            {
-                ContentDialog dialog2 = new ContentDialog();
-                dialog2.XamlRoot = mainFrame.XamlRoot;
-                dialog2.Title = "Déconnexion";
-                dialog2.PrimaryButtonText = "Oui";
-                dialog2.CloseButtonText = "Annuler";
-                dialog2.DefaultButton = ContentDialogButton.Close;
-                dialog2.Content = "Voulez-vous vraiment vous déconnecter?";
-
-                var result2 = await dialog2.ShowAsync();
-
-                if(result2 == ContentDialogResult.Primary)
-                {
-                    Singleton.GetInstance().deconnexion();
-                    iAjoutProjet.IsEnabled = false;
-                    iAjoutClient.IsEnabled = false;
-                    iAjoutEmpl.IsEnabled = false;
-                    iDeco.Content = "Se Connecter";
-                    mainFrame.Navigate(typeof(PageAfficherProjet));
-                    iListeProjet.IsSelected = true;
-                }
-
             }
+
+            
+            
         }
 
         private async void iAjoutProjet_Tapped(object sender, TappedRoutedEventArgs e)

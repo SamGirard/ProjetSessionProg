@@ -28,7 +28,7 @@
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Content="Exporter" x:Name="iExport" Tapped="iExport_Tapped" IsEnabled="False" SelectsOnInvoked="False" Icon="Save"/>
                 <NavigationViewItemSeparator/>
-                <NavigationViewItem Content="Se connnecter" x:Name="iDeco" Tapped="iDeco_Tapped" SelectsOnInvoked="False" Icon="OpenPane"/>
+                <NavigationViewItem Content="Se créer un compte" x:Name="iDeco" Tapped="iDeco_Tapped" SelectsOnInvoked="False" Icon="OpenPane"/>
 
             </NavigationView.FooterMenuItems>
 
