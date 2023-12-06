@@ -46,10 +46,7 @@
                                     </StackPanel>
 
                                     <ScrollViewer>
-                                        <ListView CornerRadius="3" ItemsSource="{Binding ListeEmploye}">
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding NomComplet}"/>
-                                            </DataTemplate>
+                                        <ListView CornerRadius="3" ItemsSource="{Binding ListeEmploye}" DisplayMemberPath="NomComplet">
                                         </ListView>
                                     </ScrollViewer>
                                 </StackPanel>
