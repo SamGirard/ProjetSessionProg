@@ -144,7 +144,7 @@ CREATE TRIGGER statutEmploye before insert on employe
     end ;
 DELIMITER //
 
------------------------------PROCEDURES (a retravailler)---------------------------------
+-----------------------------PROCEDURES---------------------------------
 /*Procédure pour ajouter employé (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(50), IN prenom VARCHAR(50), IN date_naiss DATE,
@@ -316,8 +316,7 @@ BEGIN
     SET id_client = idClient, nom = nom, adresse = adresse, numero_tel = numero_tel, email = email
     WHERE id_client = idClient;
 end //
-DELIMITER ;
-
+DELIMITER
 
 -----------------------------LES VIEWS-----------------------------
 /*Vue pour afficher contenu de la table client (fait par isaac)*/
