@@ -415,7 +415,7 @@ namespace ProjetSession
         }
 
 
-
+        //as
         public void modifier(Object objet, int position)
         {
             if (objet is Client)
