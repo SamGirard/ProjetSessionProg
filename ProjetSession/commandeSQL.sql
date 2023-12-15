@@ -67,6 +67,18 @@ BEGIN
 end //
 DELIMITER ;
 
+/*fait par isaac*/
+DELIMITER  //
+CREATE TRIGGER numeroProjetModif BEFORE update
+    on projet
+    FOR EACH ROW
+BEGIN
+    IF(OLD.id_client != NEW.id_client) THEN
+    SET NEW.id_projet = CONCAT(UPPER(NEW.id_client), '-', FLOOR(rand()*89) + 10, '-', YEAR(NEW.date_debut));
+    END IF;
+end //
+DELIMITER 
+
 /*Trigger pour faire le matricule de l'employé (fait par sam)*/
 DELIMITER  //
 CREATE TRIGGER matriculeEmp before insert
@@ -74,6 +86,19 @@ CREATE TRIGGER matriculeEmp before insert
     for each row
 BEGIN
     SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 1, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
+end;
+DELIMITER ;
+
+/*Trigger pour modifier le matricule de l'employé lorsque modification de son nom (fait par isaac)*/
+DELIMITER  //
+CREATE TRIGGER matriculeEmpModif before update
+    on employe
+    for each row
+BEGIN
+IF (OLD.nom != NEW.nom) THEN
+    SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 1, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
+    /*************DEVRA AUSSI MODIFIER LE ID DES CLIENTS QUI ETAIT LIE************/
+END IF;
 end;
 DELIMITER ;
 
@@ -124,10 +149,10 @@ DELIMITER //
 DELIMITER //
 CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(50), IN prenom VARCHAR(50), IN date_naiss DATE,
                                  IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_emb DATE,
-                                 IN taux DOUBLE, IN photo VARCHAR(1000), IN idProjet VARCHAR(15), IN statut VARCHAR(20))
+                                 IN taux DOUBLE, IN photo VARCHAR(1000), IN idProjet VARCHAR(15))
 BEGIN
-    INSERT into employe (nom, prenom, date_naissance, email, adresse, date_embauche, taux, photo, id_projet, statut)
-    VALUES (nom, prenom, date_naiss, email, adresse, date_emb, taux, photo, idProjet, statut);
+    INSERT into employe (nom, prenom, date_naissance, email, adresse, date_embauche, taux, photo, id_projet)
+    VALUES (nom, prenom, date_naiss, email, adresse, date_emb, taux, photo, idProjet);
 end //
 DELIMITER ;
 
@@ -142,13 +167,15 @@ DELIMITER ;
 
 
 /*Procédure pour ajouter projet (fait par sam)*/
+DELIMITER //
 CREATE PROCEDURE p_ajout_projet(IN titre varchar(50), IN date_debut date,
                                  IN description varchar(255), IN budget double, IN nbEmplo INT,
                                  IN id_client varchar(3), IN statut varchar(20))
 BEGIN
     INSERT INTO projet (titre, date_debut, description, budget, nb_employe, salaireTotal, id_client, statut)
     VALUES (titre, date_debut, description, budget, nbEmplo, 0, id_client, statut);
-END;
+END //
+DELIMITER ;
 
 /*Procédure pour ajouter projet (fait par sam)*/
 DELIMITER //
@@ -254,6 +281,18 @@ DELIMITER //
 CREATE PROCEDURE p_liste_empl_projet(IN idProjet VARCHAR(15))
 BEGIN
     SELECT * FROM employe WHERE id_projet = idProjet;
+end //
+DELIMITER ;
+
+/*Procédure pour modifier un employé (fait par isaac)*/
+DELIMITER //
+CREATE PROCEDURE p_modif_empl(IN matriculeEmp VARCHAR(12), IN nom VARCHAR(50), IN prenom VARCHAR(50),
+                                 IN email VARCHAR(150), IN adresse VARCHAR(100),IN taux DOUBLE,
+                                 IN photo VARCHAR(1000), IN idProjet VARCHAR(15))
+BEGIN
+    UPDATE employe
+    SET matricule = matriculeEmp, nom = nom, prenom = prenom, email = email, adresse = adresse, taux = taux, photo = photo, id_projet = idProjet
+    WHERE matricule = matriculeEmp;
 end //
 DELIMITER ;
 
