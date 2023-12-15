@@ -67,7 +67,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*fait par isaac*/
+/*fait par isaac, pour update le numero de projet seulement lorsque id du client change*/
 DELIMITER  //
 CREATE TRIGGER numeroProjetModif BEFORE update
     on projet
@@ -295,6 +295,29 @@ BEGIN
     WHERE matricule = matriculeEmp;
 end //
 DELIMITER ;
+
+/*Procédure pour modifier un projet (fait par isaac)*/
+DELIMITER //
+CREATE PROCEDURE p_modif_proj(IN idProjet varchar(15), IN titre varchar(50),
+                              IN description varchar(255), IN budget double, IN nbEmplo int,
+                              IN id_client varchar(3), IN statut varchar(20))
+BEGIN
+    UPDATE projet
+    SET id_projet = idProjet, titre = titre, description = description, budget = budget, nb_employe = nbEmplo, id_client = id_client, statut = statut
+    WHERE id_projet = idProjet;
+end //
+DELIMITER ;
+
+/*Procédure pour modifier un client (fait par isaac)*/
+DELIMITER //
+CREATE PROCEDURE p_modif_client(IN idClient varchar(3), IN nom varchar(100), IN adresse varchar(150), IN numero_tel varchar(25), IN email varchar(200))
+BEGIN
+    UPDATE client
+    SET id_client = idClient, nom = nom, adresse = adresse, numero_tel = numero_tel, email = email
+    WHERE id_client = idClient;
+end //
+DELIMITER ;
+
 
 -----------------------------LES VIEWS-----------------------------
 /*Vue pour afficher contenu de la table client (fait par isaac)*/

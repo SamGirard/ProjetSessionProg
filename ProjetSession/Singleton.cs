@@ -415,12 +415,22 @@ namespace ProjetSession
         }
 
 
-        //as
+        
         public void modifier(Object objet, int position)
         {
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+
             if (objet is Client)
             {
                 Client client = objet as Client;
+                try
+                {
+                    commande.CommandText = $"";
+                    con.Open();
+                    commande.ExecuteNonQuery();
+                }
+                catch (Exception ex) { con.Close(); }
             }
             else if(objet is Employe)
             {
