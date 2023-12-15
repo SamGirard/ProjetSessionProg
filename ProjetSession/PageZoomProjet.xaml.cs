@@ -26,6 +26,12 @@ namespace ProjetSession
         public PageZoomProjet()
         {
             this.InitializeComponent();
+
+            Style itemContainerStyle = new Style(typeof(ListViewItem));
+            itemContainerStyle.Setters.Add(new Setter(FontSizeProperty, 25.0));
+            itemContainerStyle.Setters.Add(new Setter(MarginProperty, new Thickness(0)));
+            itemContainerStyle.Setters.Add(new Setter(PaddingProperty, new Thickness(10)));
+            lvListe.ItemContainerStyle = itemContainerStyle;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -34,6 +40,16 @@ namespace ProjetSession
             {
                 Projet unProjet = e.Parameter as Projet;
                 tblTitre.Text = unProjet.Titre;
+                tblBudget.Text = unProjet.BudgetString;
+                tblDate.Text = unProjet.DateDebutTest.ToString();
+                tblDesc.Text = unProjet.Description;
+                tblIdClient.Text = unProjet.IdCLient;
+                tblIdProjet.Text = unProjet.IdProjet;
+                tblNbEmp.Text = unProjet.NbEmploye.ToString();
+                tblStatut.Text = unProjet.Statut;
+                tblSalaire.Text = unProjet.TotalSalString;
+                lvListe.ItemsSource = unProjet.ListeEmploye;
+                rond.Fill = unProjet.EllipseColor;
             }
         }
     }

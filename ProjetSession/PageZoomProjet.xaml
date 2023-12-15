@@ -11,7 +11,52 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock x:Name="tblTitre"></TextBlock>
+            <StackPanel Orientation="Vertical" Margin="30 20 0 0">
+                <TextBlock x:Name="tblTitre" FontSize="50pt" FontWeight="Bold"></TextBlock>
+                <TextBlock x:Name="tblIdProjet" FontWeight="Light" Opacity="0.5"></TextBlock>
+            </StackPanel>
+
+
+            <StackPanel Background="#828282" Margin="30 30 30 30" Padding="25" CornerRadius="15">
+                <TextBlock Opacity="0.5" Margin="0 0 0 10">Description</TextBlock>
+                <TextBlock x:Name="tblDesc"></TextBlock>
+                
+                <TextBlock Opacity="0.5" Margin="0 10 0 0">Date du commencement du projet</TextBlock>
+                <TextBlock x:Name="tblDate" VerticalAlignment="Center"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="30 0 30 30">
+                <StackPanel Background="#828282" Padding="25" CornerRadius="15">
+                    <TextBlock Opacity="0.5" Margin="0 0 0 0">Budget</TextBlock>
+                    <TextBlock x:Name="tblBudget" FontSize="25"></TextBlock>
+
+                    <TextBlock Opacity="0.5" Margin="0 20 0 0">Nombre d'employé requis</TextBlock>
+                    <TextBlock x:Name="tblNbEmp" FontSize="25"></TextBlock>
+
+                    <TextBlock Opacity="0.5" Margin="0 20 0 0">Salaire total</TextBlock>
+                    <TextBlock x:Name="tblSalaire" FontSize="25"></TextBlock>
+                </StackPanel>
+
+                <StackPanel Background="#828282" Margin="30 0 30 0" Padding="25" CornerRadius="15">
+                    <TextBlock Opacity="0.5" Margin="0 0 0 0">Numéro du client</TextBlock>
+                    <TextBlock x:Name="tblIdClient" FontSize="25"></TextBlock>
+
+                    <TextBlock Opacity="0.5" Margin="0 20 0 0">Statut</TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock x:Name="tblStatut" FontSize="25"></TextBlock>
+                        <Ellipse Width="8" Height="8" Margin="10 6 0 0" x:Name="rond" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Background="#828282" Margin="0 0 0 0" Padding="25" CornerRadius="15">
+                    <TextBlock Opacity="0.5" Margin="1 0 0 0">Numéro du client</TextBlock>
+                    <ScrollViewer>
+                        <ListView CornerRadius="3" x:Name="lvListe" DisplayMemberPath="NomComplet">
+                        </ListView>
+                    </ScrollViewer>
+                </StackPanel>
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </Page>
