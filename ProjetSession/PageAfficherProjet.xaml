@@ -14,13 +14,13 @@
             <StackPanel Orientation="Vertical" Margin="30 30 30 30">
                 <TextBlock FontSize="50pt" FontWeight="Bold" HorizontalAlignment="Left" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}">Les Projets</TextBlock>
                 <GridView x:Name="gvListe" Margin="0 50 0 50" IsItemClickEnabled="False" CanDragItems="True" AllowDrop="True" CanReorderItems="True" SelectionMode="Single" SelectedIndex="-1" SelectionChanged="gvListe_SelectionChanged">
-                    <GridView.ItemsPanel> 
+                    <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4"/>
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
 
-                    
+
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local:Projet">
                             <Border Margin="20">
@@ -39,15 +39,15 @@
                                     <Run Text="{x:Bind TotalSalString}"></Run>
                                     </TextBlock>
 
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <TextBlock x:Name="statut" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}"/>
-                                        <Ellipse Width="8" Height="8" Margin="0 2 0 0" Fill="{x:Bind EllipseColor}" VerticalAlignment="Center"/>
-                                    </StackPanel>
-
                                     <ScrollViewer>
                                         <ListView CornerRadius="3" ItemsSource="{Binding ListeEmploye}" DisplayMemberPath="NomComplet">
                                         </ListView>
                                     </ScrollViewer>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <TextBlock x:Name="statut" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}"/>
+                                        <Ellipse Width="8" Height="8" Margin="0 2 0 0" Fill="{x:Bind EllipseColor}" VerticalAlignment="Center"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -55,11 +55,6 @@
                 </GridView>
             </StackPanel>
         </ScrollViewer>
-        
-        <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="25">
-            <Button x:Name="btModifier" Click="btModifier_Click" IsEnabled="False" Margin="0 0 10 0">Modifier</Button>
-            <Button x:Name="btDelete" Click="btDelete_Click" IsEnabled="False">Supprimer</Button>
-            <TextBlock x:Name="validation"/>
-        </StackPanel>
+        <Frame x:Name="frameZoom"></Frame>
     </Grid>
 </Page>
