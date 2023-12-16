@@ -73,8 +73,8 @@ namespace ProjetSession
             if (result == ContentDialogResult.Primary)
             {
                 /*Va rester a faire le singleton et l'appeler ici*/
-            }
-        }
+         //   }
+     //   }
 
 /*
         private async void btDelete_Click(object sender, RoutedEventArgs e)
@@ -99,9 +99,9 @@ namespace ProjetSession
                 Singleton.GetInstance().supprimer(projet, position);
                 /*********VA DEVOIR ALLER CHANGER LES EMPLOYÉS LIÉ AU PROJET (changer leur valeur pour null)************/
 
-            }
+          //  }
+            
+       // }
 
-        }
-*/
     }
 }
