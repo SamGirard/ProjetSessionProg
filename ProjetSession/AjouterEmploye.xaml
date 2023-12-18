@@ -39,9 +39,11 @@
                 <TextBox x:Name="tbxPhoto" Header="Photo"></TextBox>
                 <TextBlock x:Name="errPhoto" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"/>
 
-                <TextBlock FontSize="12pt" Margin="0 0 0 20">Information optionnel:</TextBlock>
                 <ComboBox Header="Projet" x:Name="cbxProjet" Width="400" Margin="0 0 0 0" DisplayMemberPath="Titre" x:DefaultBindMode="OneWay">
+
                 </ComboBox>
+                <TextBlock x:Name="errProjet" Foreground="Red" FontSize="12pt" Margin="0 10 0 10"/>
+
 
             </StackPanel>
         </ScrollViewer>

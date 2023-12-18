@@ -162,7 +162,6 @@ namespace ProjetSession
             }
             else
             {
-                //dateEmbauche = cdpEmb.Date.Value.Date;
                 errEmbauche.Text = "";
             }
 
@@ -174,7 +173,7 @@ namespace ProjetSession
                 args.Cancel = true;
             }
             else
-            {/*
+            {
                 if (UrlValide(tbxPhoto.Text) == false)
                 {
                     errPhoto.Text = "Le lien URL est invalide";
@@ -182,10 +181,20 @@ namespace ProjetSession
                     args.Cancel = true;
                 }
                 else
-                {*/
+                {
                     errPhoto.Text = "";
-                    //photo = tbxPhoto.Text;
-                //}
+                }
+            }
+
+            if(cbxProjet.SelectedIndex == -1)
+            {
+                erreur = true;
+                errProjet.Text = "L'employé doit avoir un projet";
+                args.Cancel = true;
+            }
+            else
+            {
+                errProjet.Text = "";
             }
 
 

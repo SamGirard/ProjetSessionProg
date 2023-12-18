@@ -74,7 +74,7 @@ namespace ProjetSession
 
             if (result == ContentDialogResult.Primary)
             {
-                /*Va rester a faire le singleton et l'appeler ici*/
+                Singleton.GetInstance().modifier(client);
             }
         }
 
