@@ -290,11 +290,10 @@ CREATE PROCEDURE p_modif_empl(IN matEmp VARCHAR(12), IN nomEmp VARCHAR(50), IN p
                                  IN photoEmp VARCHAR(1000), IN idProjet VARCHAR(15))
 BEGIN
     UPDATE employe
-    SET matricule = matEmp, nom = nomEmp, prenom = prenomEmp, email = emailEmp, adresse = adresseEmp, taux = tauxEmp, photo = photoEmp, id_projet = idProjet
+    SET nom = nomEmp, prenom = prenomEmp, email = emailEmp, adresse = adresseEmp, taux = tauxEmp, photo = photoEmp, id_projet = idProjet
     WHERE matricule = matEmp;
 end //
 DELIMITER ;
-DROP PROCEDURE p_modif_empl;
 
 /*Procédure pour modifier un projet (fait par isaac)*/
 DELIMITER //

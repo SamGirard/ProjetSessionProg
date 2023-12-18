@@ -190,7 +190,7 @@ namespace ProjetSession
 
 
             /////////////////////**AJOUT**\\\\\\\\\\\\\\\\\\\\
-            if (erreur == false && !modifier)
+            if (erreur == false)
             {
                 Employe employe = new Employe 
                 {
@@ -208,24 +208,6 @@ namespace ProjetSession
                 };
                 Singleton.GetInstance().ajouter(employe);
             }
-            else if (modifier == true)
-            {
-                Employe employe = new Employe
-                {
-                    Nom = tbxNom.Text,
-                    Prenom = tbxPrenom.Text,
-                    DateNaiss = cdpNaiss.Date.Value.ToString("yyyy-MM-dd"),
-                    Email = tbxEmail.Text,
-                    Adresse = tbxAdresse.Text,
-                    DateEmb = cdpEmb.Date.Value.ToString("yyyy-MM-dd"),
-                    Photo = tbxPhoto.Text,
-                    Statut = null,
-                    TauxHor = Convert.ToDouble(tbxTaux.Text),
-                    ProjetEnCours = projet,
-                    IdProjet = projet.IdProjet
-                };
-                Singleton.GetInstance().modifier(employe);
-            }
         }
 
         /*********************VALIDATION URL*********************/
@@ -238,11 +220,13 @@ namespace ProjetSession
 
 
         /*********************PARTIE MODIFICATION*********************/
-        public Boolean Modifier
+        string matricule;
+        public string Matricule
         {
-            get { return modifier; }
-            set { modifier = value; }
+            get { return matricule; }
+            set { matricule = value; }
         }
+
         public string Nom
         {
             get { return tbxNom.Text; }

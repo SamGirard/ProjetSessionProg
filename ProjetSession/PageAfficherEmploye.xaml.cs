@@ -78,7 +78,7 @@ namespace ProjetSession
             dialog.Taux = Convert.ToString(employe.TauxHor);
             dialog.Photo = employe.Photo;
             dialog.IdProjet = Singleton.GetInstance().GetPositionProjet(employe.IdProjet);
-            dialog.Modifier = true;
+            dialog.Matricule = employe.Matricule;
 
             var result = await dialog.ShowAsync();
 
