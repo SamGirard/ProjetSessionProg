@@ -158,7 +158,7 @@ namespace ProjetSession
 
 
             /////////////////////**AJOUT**\\\\\\\\\\\\\\\\\\\\
-            if (erreur == false)
+            if (erreur == false && modifier == 0)
             {
                 Projet projet = new Projet
                 {
@@ -173,11 +173,41 @@ namespace ProjetSession
                 };
                 Singleton.GetInstance().ajouter(projet);
             }
+            else if (modifier == 1)
+            {
+                Projet projet = new Projet
+                {
+                    IdProjet = idProjet,
+                    Titre = tbTitre.Text,
+                    DateDebut = cdpDate.Date.Value.ToString("yyyy-MM-dd"),
+                    IdCLient = client.Id_Client,
+                    Description = tbDescription.Text,
+                    Budget = Convert.ToDouble(tbBudget.Text),
+                    NbEmploye = Convert.ToInt32(tbNbEmploye.Text),
+                    Statut = cbStatut.SelectedItem.ToString(),
+                    Client = client
+                };
+                Singleton.GetInstance().modifier(projet);
+            }
         }
 
 
 
         /*********************PARTIE MODIFICATION*********************/
+        int modifier = 0;
+        public int Modifier
+        {
+            get { return modifier; }
+            set { modifier = value; }
+        }
+
+        string idProjet;
+        public string IdProjet
+        {
+            get { return idProjet; }
+            set { idProjet = value; }
+        }
+
         public string Titre
         {
             get { return tbTitre.Text; }

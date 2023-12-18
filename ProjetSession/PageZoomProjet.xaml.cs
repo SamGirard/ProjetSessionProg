@@ -14,14 +14,8 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using MySqlX.XDevAPI.Common;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace ProjetSession
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PageZoomProjet : Page
     {
         public PageZoomProjet()
@@ -78,6 +72,8 @@ namespace ProjetSession
             dialog.Budget = Convert.ToString(projet.Budget);
             dialog.NbEmploye = Convert.ToString(projet.NbEmploye);
             dialog.IdClient = Singleton.GetInstance().GetPositionClient(projet.IdCLient);
+            dialog.Modifier = 1;
+            dialog.IdProjet = projet.IdProjet;
             dialog.DateDebut = projet.DateDebutTest.ToString();
             if (projet.Statut == "En cours")
             {
@@ -95,8 +91,7 @@ namespace ProjetSession
             var result = await dialog.ShowAsync();
             if (result == ContentDialogResult.Primary)
             {
-                /*Va rester a faire le singleton et l'appeler ici*/
-                //   }
+                this.Frame.Navigate(typeof(PageAfficherProjet));
             }
         }
     }
