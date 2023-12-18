@@ -14,10 +14,10 @@ namespace ProjetSession
         string nom;
         string prenom;
         string dateNaiss;
+        DateTime dateNaissTest;
         string email;
         string adresse;
         string dateEmb;
-        DateTime dateEmbTest;
         double tauxHor;
         string photo;
         string statut;
@@ -47,6 +47,12 @@ namespace ProjetSession
             get { return dateNaiss; }
             set { dateNaiss = value; this.OnPropertyChanged(); }
         }
+        public string DateNaissTest
+        {
+            get { return dateNaissTest.Date.ToString("yyyy-MM-dd"); }
+            set { dateNaissTest = DateTime.Parse(value); this.OnPropertyChanged(); }
+        }
+
         public string Email
         {
             get { return email; }
@@ -57,12 +63,6 @@ namespace ProjetSession
         {
             get { return adresse; }
             set { adresse = value; this.OnPropertyChanged(); }
-        }
-
-        public string DateEmbTest
-        {
-            get { return dateEmbTest.Date.ToString("yyyy-MM-dd"); }
-            set { dateEmbTest = DateTime.Parse(value); this.OnPropertyChanged(); }
         }
         
         public string DateEmb
