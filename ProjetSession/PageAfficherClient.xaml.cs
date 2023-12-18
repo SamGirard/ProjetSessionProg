@@ -65,16 +65,28 @@ namespace ProjetSession
             dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
 
+            dialog.IdClient = client.Id_Client;
             dialog.Nom = client.Nom;
             dialog.Adresse = client.Adresse;
             dialog.Num_Tel = client.Num_Tel;
             dialog.Email = client.Email;
+            dialog.Test = 1;
+
+
 
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
             {
-                /*Va rester a faire le singleton et l'appeler ici*/
+                Client client2 = new Client
+                {
+                    Id_Client = client.Id_Client,
+                    Nom = dialog.Nom,
+                    Adresse = dialog.Adresse,
+                    Num_Tel = dialog.Num_Tel,
+                    Email = dialog.Email,
+                };
+                Singleton.GetInstance().modifier(client2);
             }
         }
 
