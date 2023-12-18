@@ -36,7 +36,7 @@
 
                                     <TextBlock FontWeight="Light" FontSize="15pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" Opacity="0.5" TextTrimming="WordEllipsis" TextWrapping="Wrap">
                                         <Run Text="Date de naissance : "/>
-                                        <Run Text="{x:Bind DateNaiss}"></Run>
+                                        <Run Text="{x:Bind DateNaissTest}"></Run>
                                     </TextBlock>
 
                                     <TextBlock FontWeight="Light" FontSize="20pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}">

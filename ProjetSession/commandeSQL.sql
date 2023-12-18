@@ -97,7 +97,6 @@ CREATE TRIGGER matriculeEmpModif before update
 BEGIN
 IF (OLD.nom != NEW.nom) THEN
     SET NEW.matricule = CONCAT(SUBSTRING(NEW.nom, 1, 2), '-', YEAR(NEW.date_naissance), '-', FLOOR(rand()*89) + 10);
-    /*************DEVRA AUSSI MODIFIER LE ID DES CLIENTS QUI ETAIT LIE************/
 END IF;
 end;
 DELIMITER ;
@@ -286,15 +285,16 @@ DELIMITER ;
 
 /*Procédure pour modifier un employé (fait par isaac)*/
 DELIMITER //
-CREATE PROCEDURE p_modif_empl(IN matriculeEmp VARCHAR(12), IN nom VARCHAR(50), IN prenom VARCHAR(50),
-                                 IN email VARCHAR(150), IN adresse VARCHAR(100),IN taux DOUBLE,
-                                 IN photo VARCHAR(1000), IN idProjet VARCHAR(15))
+CREATE PROCEDURE p_modif_empl(IN matEmp VARCHAR(12), IN nomEmp VARCHAR(50), IN prenomEmp VARCHAR(50),
+                                 IN emailEmp VARCHAR(150), IN adresseEmp VARCHAR(100),IN tauxEmp DOUBLE,
+                                 IN photoEmp VARCHAR(1000), IN idProjet VARCHAR(15))
 BEGIN
     UPDATE employe
-    SET matricule = matriculeEmp, nom = nom, prenom = prenom, email = email, adresse = adresse, taux = taux, photo = photo, id_projet = idProjet
-    WHERE matricule = matriculeEmp;
+    SET matricule = matEmp, nom = nomEmp, prenom = prenomEmp, email = emailEmp, adresse = adresseEmp, taux = tauxEmp, photo = photoEmp, id_projet = idProjet
+    WHERE matricule = matEmp;
 end //
 DELIMITER ;
+DROP PROCEDURE p_modif_empl;
 
 /*Procédure pour modifier un projet (fait par isaac)*/
 DELIMITER //

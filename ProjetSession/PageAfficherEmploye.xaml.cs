@@ -71,7 +71,7 @@ namespace ProjetSession
 
             dialog.Nom = employe.Nom;
             dialog.Prenom = employe.Prenom;
-            dialog.Date_Naissance = employe.DateNaiss;
+            dialog.Date_Naissance = employe.DateNaissTest;
             dialog.Email = employe.Email;
             dialog.Adresse = employe.Adresse;
             dialog.Date_Embauche = employe.DateEmb;
@@ -83,7 +83,8 @@ namespace ProjetSession
 
             if (result == ContentDialogResult.Primary)
             {
-                /*Va rester a faire le singleton et l'appeler ici*/
+                Singleton.GetInstance().modifier(employe);
+                this.Frame.Navigate(typeof(PageAfficherEmploye));
             }
         }
 

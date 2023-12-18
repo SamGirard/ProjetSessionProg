@@ -66,6 +66,7 @@ namespace ProjetSession
                         IdProjet = reader.GetString("id_projet"),
                         Titre = reader.GetString("titre"),
                         DateDebutTest = reader.GetString("date_debut"),
+                        DateDebut = reader.GetString("date_debut"),
                         Description = reader.GetString("description"),
                         Budget = reader.GetDouble("budget"),
                         NbEmploye = reader.GetInt32("nb_employe"),
@@ -146,6 +147,7 @@ namespace ProjetSession
                         Nom = reader.GetString("nom"),
                         Prenom = reader.GetString("prenom"),
                         DateNaissTest = reader.GetString("date_naissance"),
+                        DateNaiss = reader.GetString("date_naissance"),
                         Email = reader.GetString("email"),
                         Adresse = reader.GetString("adresse"),
                         DateEmb = reader.GetString("date_embauche"),
@@ -187,6 +189,7 @@ namespace ProjetSession
                         Matricule = reader.GetString("matricule"),
                         Nom = reader.GetString("nom"),
                         Prenom = reader.GetString("prenom"),
+                        DateNaissTest = reader.GetString("date_naissance"),
                         DateNaiss = reader.GetString("date_naissance"),
                         Email = reader.GetString("email"),
                         Adresse = reader.GetString("adresse"),
@@ -324,7 +327,6 @@ namespace ProjetSession
                     commande.Parameters.AddWithValue("taux", employe.TauxHor);
                     commande.Parameters.AddWithValue("photo", employe.Photo);
                     commande.Parameters.AddWithValue("idProjet", employe.IdProjet);
-                    commande.Parameters.AddWithValue("statut", employe.Statut);
 
                     con.Open();
                     commande.Prepare();
@@ -417,7 +419,7 @@ namespace ProjetSession
 
 
         
-        public void modifier(Object objet, int position)
+        public void modifier(Object objet)
         {
             if (objet is Client)
             {
@@ -426,7 +428,6 @@ namespace ProjetSession
                 {
                     MySqlCommand commande = new MySqlCommand("p_modif_client");
                     commande.Connection = con;
-
                     commande.CommandType = System.Data.CommandType.StoredProcedure;
 
                     commande.Parameters.AddWithValue("nom", client.Nom);
@@ -452,13 +453,13 @@ namespace ProjetSession
 
                     commande.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    commande.Parameters.AddWithValue("matriculeEmp", employe.Matricule);
-                    commande.Parameters.AddWithValue("nom", employe.Nom);
-                    commande.Parameters.AddWithValue("prenom", employe.Prenom);
-                    commande.Parameters.AddWithValue("email", employe.Email);
-                    commande.Parameters.AddWithValue("adresse", employe.Adresse);
-                    commande.Parameters.AddWithValue("taux", employe.TauxHor);
-                    commande.Parameters.AddWithValue("photo", employe.Photo);
+                    commande.Parameters.AddWithValue("matEmp", employe.Matricule);
+                    commande.Parameters.AddWithValue("nomEmp", employe.Nom);
+                    commande.Parameters.AddWithValue("prenomEmp", employe.Prenom);
+                    commande.Parameters.AddWithValue("emailEmp", employe.Email);
+                    commande.Parameters.AddWithValue("adresseEmp", employe.Adresse);
+                    commande.Parameters.AddWithValue("tauxEmp", employe.TauxHor);
+                    commande.Parameters.AddWithValue("photoEmp", employe.Photo);
                     commande.Parameters.AddWithValue("idProjet", employe.IdProjet);
 
                     con.Open();
