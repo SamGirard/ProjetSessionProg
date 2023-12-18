@@ -27,7 +27,7 @@ namespace ProjetSession
             this.InitializeComponent();
             gvListe.ItemsSource = Singleton.GetInstance().GetListeProjet();
 
-            ObservableCollection<Projet> projets = Singleton.GetInstance().GetListeProjet(); // Assurez-vous de remplacer cela par votre logique de chargement
+            ObservableCollection<Projet> projets = Singleton.GetInstance().GetListeProjet();
             List<Projet> viewModels = projets.Select(p => new Projet { Statut = p.Statut }).ToList();
             gvListe.ItemsSource = projets;
         }

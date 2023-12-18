@@ -71,19 +71,21 @@ namespace ProjetSession
 
             dialog.Nom = employe.Nom;
             dialog.Prenom = employe.Prenom;
-            dialog.Date_Naissance = employe.DateNaiss;
+            dialog.Date_Naissance = employe.DateNaissTest;
             dialog.Email = employe.Email;
             dialog.Adresse = employe.Adresse;
             dialog.Date_Embauche = employe.DateEmb;
             dialog.Taux = Convert.ToString(employe.TauxHor);
             dialog.Photo = employe.Photo;
             dialog.IdProjet = Singleton.GetInstance().GetPositionProjet(employe.IdProjet);
+            dialog.Modifier = true;
 
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
             {
-                /*Va rester a faire le singleton et l'appeler ici*/
+                Singleton.GetInstance().modifier(employe);
+                this.Frame.Navigate(typeof(PageAfficherEmploye));
             }
         }
 

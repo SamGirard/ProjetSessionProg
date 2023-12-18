@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI;
+using Windows.Media.Protection.PlayReady;
 
 namespace ProjetSession
 {
@@ -65,6 +66,7 @@ namespace ProjetSession
                         IdProjet = reader.GetString("id_projet"),
                         Titre = reader.GetString("titre"),
                         DateDebutTest = reader.GetString("date_debut"),
+                        DateDebut = reader.GetString("date_debut"),
                         Description = reader.GetString("description"),
                         Budget = reader.GetDouble("budget"),
                         NbEmploye = reader.GetInt32("nb_employe"),
@@ -144,6 +146,7 @@ namespace ProjetSession
                         Matricule = reader.GetString("matricule"),
                         Nom = reader.GetString("nom"),
                         Prenom = reader.GetString("prenom"),
+                        DateNaissTest = reader.GetString("date_naissance"),
                         DateNaiss = reader.GetString("date_naissance"),
                         Email = reader.GetString("email"),
                         Adresse = reader.GetString("adresse"),
@@ -186,6 +189,7 @@ namespace ProjetSession
                         Matricule = reader.GetString("matricule"),
                         Nom = reader.GetString("nom"),
                         Prenom = reader.GetString("prenom"),
+                        DateNaissTest = reader.GetString("date_naissance"),
                         DateNaiss = reader.GetString("date_naissance"),
                         Email = reader.GetString("email"),
                         Adresse = reader.GetString("adresse"),
@@ -323,7 +327,6 @@ namespace ProjetSession
                     commande.Parameters.AddWithValue("taux", employe.TauxHor);
                     commande.Parameters.AddWithValue("photo", employe.Photo);
                     commande.Parameters.AddWithValue("idProjet", employe.IdProjet);
-                    commande.Parameters.AddWithValue("statut", employe.Statut);
 
                     con.Open();
                     commande.Prepare();
@@ -416,29 +419,82 @@ namespace ProjetSession
 
 
         
-        public void modifier(Object objet, int position)
+        public void modifier(Object objet)
         {
-            MySqlCommand commande = new MySqlCommand();
-            commande.Connection = con;
-
             if (objet is Client)
             {
                 Client client = objet as Client;
                 try
                 {
-                    commande.CommandText = $"";
+                    MySqlCommand commande = new MySqlCommand("p_modif_client");
+                    commande.Connection = con;
+                    commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    commande.Parameters.AddWithValue("nom", client.Nom);
+                    commande.Parameters.AddWithValue("adresse", client.Adresse);
+                    commande.Parameters.AddWithValue("numero_tel", client.Num_Tel);
+                    commande.Parameters.AddWithValue("email", client.Email);
+
                     con.Open();
-                    commande.ExecuteNonQuery();
+                    commande.Prepare();
+                    int i = commande.ExecuteNonQuery();
+
+                    con.Close();
                 }
                 catch (Exception ex) { con.Close(); }
             }
             else if(objet is Employe)
             {
                 Employe employe = objet as Employe;
+                try
+                {
+                    MySqlCommand commande = new MySqlCommand("p_modif_empl");
+                    commande.Connection = con;
+
+                    commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    commande.Parameters.AddWithValue("matEmp", employe.Matricule);
+                    commande.Parameters.AddWithValue("nomEmp", employe.Nom);
+                    commande.Parameters.AddWithValue("prenomEmp", employe.Prenom);
+                    commande.Parameters.AddWithValue("emailEmp", employe.Email);
+                    commande.Parameters.AddWithValue("adresseEmp", employe.Adresse);
+                    commande.Parameters.AddWithValue("tauxEmp", employe.TauxHor);
+                    commande.Parameters.AddWithValue("photoEmp", employe.Photo);
+                    commande.Parameters.AddWithValue("idProjet", employe.IdProjet);
+
+                    con.Open();
+                    commande.Prepare();
+                    int i = commande.ExecuteNonQuery();
+
+                    con.Close();
+                }
+                catch (Exception ex) { con.Close(); }
             }
             else if(objet is Projet)
             {
                 Projet projet = (Projet)objet;
+                try
+                {
+                    MySqlCommand commande = new MySqlCommand("p_modif_projet");
+                    commande.Connection = con;
+
+                    commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    commande.Parameters.AddWithValue("idProjet", projet.IdProjet);
+                    commande.Parameters.AddWithValue("titre", projet.Titre);
+                    commande.Parameters.AddWithValue("description", projet.Description);
+                    commande.Parameters.AddWithValue("budget", projet.Budget);
+                    commande.Parameters.AddWithValue("nbEmplo", projet.NbEmploye);
+                    commande.Parameters.AddWithValue("id_client", projet.IdCLient);
+                    commande.Parameters.AddWithValue("statut", projet.Statut);
+
+                    con.Open();
+                    commande.Prepare();
+                    int i = commande.ExecuteNonQuery();
+
+                    con.Close();
+                }
+                catch (Exception ex) { con.Close(); }
             }
         }
 
