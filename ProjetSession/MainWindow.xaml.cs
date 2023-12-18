@@ -22,9 +22,20 @@ namespace ProjetSession
 {
     public sealed partial class MainWindow : Window
     {
+
+        private bool compteExiste;
         public MainWindow()
         {
             this.InitializeComponent();
+            compteExiste = Singleton.GetInstance().compteExiste();
+            if(compteExiste == false)
+            {
+                iDeco.Content = "Se créer un compte";
+            }
+            else 
+            {
+                iDeco.Content = "Se connecter";
+            }
             bool connecter = Singleton.GetInstance().valideConnection();
 
             if (connecter == true)
@@ -40,7 +51,7 @@ namespace ProjetSession
         }
 
 
-
+        
         private void navView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             var items = (NavigationViewItem)args.SelectedItem;
@@ -102,13 +113,8 @@ namespace ProjetSession
 
         private async void iDeco_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
-            bool compteExiste = Singleton.GetInstance().compteExiste();
-            
             if (compteExiste == false)
             {
-                iDeco.Content = "Se créer un compte";
-
                 creerCompte dialog = new creerCompte();
                 dialog.XamlRoot = mainFrame.XamlRoot;
                 dialog.Title = "Créer un compte administateur";

@@ -27,11 +27,19 @@ namespace ProjetSession
         public PageZoomProjet()
         {
             this.InitializeComponent();
+            bool connecter = Singleton.GetInstance().valideConnection();
+
+            if (connecter == false)
+            {
+                btModifier.Visibility = Visibility.Collapsed;
+            } else btModifier.Visibility = Visibility.Visible;
+            
 
             Style itemContainerStyle = new Style(typeof(ListViewItem));
             itemContainerStyle.Setters.Add(new Setter(FontSizeProperty, 25.0));
             itemContainerStyle.Setters.Add(new Setter(MarginProperty, new Thickness(0)));
             itemContainerStyle.Setters.Add(new Setter(PaddingProperty, new Thickness(20)));
+            itemContainerStyle.Setters.Add(new Setter(HorizontalContentAlignmentProperty, HorizontalAlignment.Left));
             lvListe.ItemContainerStyle = itemContainerStyle;
         }
 

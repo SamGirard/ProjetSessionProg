@@ -507,9 +507,9 @@ namespace ProjetSession
             bool existe = false;
             try
             {
-                MySqlCommand commande = new MySqlCommand();
+                MySqlCommand commande = new MySqlCommand("count_de_compte");
                 commande.Connection = con;
-                commande.CommandText = "SELECT COUNT(*) FROM afficher_admin";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
 
                 con.Open();
                 int nombreDeLignes = Convert.ToInt32(commande.ExecuteScalar());
@@ -556,9 +556,9 @@ namespace ProjetSession
             bool estConnecter = false;
             try
             {
-                MySqlCommand commande = new MySqlCommand();
+                MySqlCommand commande = new MySqlCommand("p_afficher_admin");
                 commande.Connection = con;
-                commande.CommandText = "SELECT * FROM admin";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
 
                 con.Open();
                 MySqlDataReader reader = commande.ExecuteReader();
@@ -611,9 +611,9 @@ namespace ProjetSession
             bool estConnecter = false;
             try
             {
-                MySqlCommand commande = new MySqlCommand();
+                MySqlCommand commande = new MySqlCommand("p_verif_est_connecter");
                 commande.Connection = con;
-                commande.CommandText = "SELECT estConnecter FROM admin";
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
 
                 con.Open();
                 MySqlDataReader reader = commande.ExecuteReader();

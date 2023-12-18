@@ -69,13 +69,13 @@
 
                     <TextBlock Opacity="0.5" Margin="1 0 0 0">Employés associés au projet</TextBlock>
                     <ScrollViewer>
-                        <ListView CornerRadius="3" x:Name="lvListe" DisplayMemberPath="NomComplet">
+                        <ListView CornerRadius="3" x:Name="lvListe" DisplayMemberPath="InfoZoom">
                         </ListView>
                     </ScrollViewer>
                 </StackPanel>
             </StackPanel>
 
-            <Button Click="btModifier_Click" HorizontalAlignment="Center" Width="500" Height="60" Background="CornflowerBlue" FontWeight="SemiBold">Modifier</Button>
+            <Button x:Name="btModifier" Click="btModifier_Click" HorizontalAlignment="Center" Width="500" Height="60" Background="CornflowerBlue" FontWeight="SemiBold">Modifier</Button>
 
         </StackPanel>
         <Frame x:Name="modifFrame"></Frame>

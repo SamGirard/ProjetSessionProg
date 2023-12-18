@@ -317,6 +317,33 @@ BEGIN
 end //
 DELIMITER
 
+/*Procédure pour compter le nombre de compte (fait par sam)*/
+CREATE PROCEDURE count_de_compte()
+begin
+    SELECT COUNT(*) FROM afficher_admin;
+end;
+
+/*Procédure pour verifier si le compte est connecter (fait par sam)*/
+create procedure p_verif_est_connecter()
+begin
+    SELECT estConnecter FROM admin;
+end;
+
+/*Procédure pour afficher si le compte est existe (fait par sam)*/
+create procedure p_afficher_admin()
+begin
+    SELECT * from admin;
+end;
+
+/*Procédure pour creer le compte (fait par sam)*/
+create
+    definer = `2172853`@`%` procedure AjouterAdmin(IN utilisateurParam varchar(255), IN motDePasseParam varchar(255))
+BEGIN
+    INSERT INTO admin (utilisateur, motDePasse, estConnecter) VALUES (utilisateurParam, motDePasseParam, 0);
+END;
+
+
+
 -----------------------------LES VIEWS-----------------------------
 /*Vue pour afficher contenu de la table client (fait par isaac)*/
 CREATE VIEW afficher_client AS
@@ -350,6 +377,73 @@ BEGIN
     end if;
     RETURN salTot;
 end//
+DELIMITER ;
+
+
+
+/*Function pour supprimer un client (fait par sam)*/
+DELIMITER //
+CREATE FUNCTION supprimerClient(
+    p_id_client VARCHAR(3)
+)
+RETURNS INT
+BEGIN
+    DELETE FROM client WHERE id_client = p_id_client;
+    RETURN ROW_COUNT();
+END //
+DELIMITER ;
+
+
+
+/*Function pour supprimer un projet (fait par sam)*/
+DELIMITER //
+CREATE FUNCTION supprimerProjet(
+    p_id_projet VARCHAR(11)
+)
+RETURNS INT
+BEGIN
+    DELETE FROM projet WHERE id_projet = p_id_projet;
+    RETURN ROW_COUNT();
+END //
+DELIMITER ;
+
+
+
+/*Function pour supprimer un employé (fait par sam)*/
+DELIMITER //
+CREATE FUNCTION supprimerEmploye(
+    p_matricule VARCHAR(10)
+)
+RETURNS INT
+BEGIN
+    DELETE FROM employe WHERE matricule = p_matricule;
+    RETURN ROW_COUNT();
+END //
+DELIMITER ;
+
+
+
+/*Function pour obtenir la liste des clients (fait par sam)*/
+DELIMITER //
+CREATE FUNCTION getListeClients()
+    RETURNS VARCHAR(100)
+    BEGIN
+        SELECT * FROM client;
+    END //
+DELIMITER ;
+
+
+
+
+/*Function pour obtenir la liste des employés par projets (fait par sam)*/
+DELIMITER //
+CREATE FUNCTION getListeEmployesParProjet(
+    p_id_projet VARCHAR(11)
+)
+    RETURNS VARCHAR(11)
+                BEGIN
+    SELECT * FROM employe WHERE id_projet = p_id_projet;
+END //
 DELIMITER ;
 
 -----------------------------INSERTION DE DONNÉE (fait par sam)-----------------------------

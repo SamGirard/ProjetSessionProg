@@ -22,6 +22,7 @@ namespace ProjetSession
         string photo;
         string statut;
         string idProjet;
+        int nbrHeure;
         Projet projet;
 
         public string Matricule
@@ -103,6 +104,21 @@ namespace ProjetSession
         public string NomComplet
         {
             get { return $"{prenom} {nom}"; }
+        }
+
+        public string InfoZoom
+        {
+            get { return $"{prenom} {nom} - {tauxHor}$/heures - {NbrHeure} heures travaillés"; }
+        }
+
+        public int NbrHeure
+        {
+            get
+            {
+                Random random = new Random();
+                int valeurAleatoire = random.Next(1, 21);
+                return valeurAleatoire;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
