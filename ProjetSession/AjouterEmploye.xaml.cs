@@ -21,7 +21,6 @@ namespace ProjetSession
 {
     public sealed partial class AjouterEmploye : ContentDialog
     {
-        Boolean modifier = false;
         public AjouterEmploye()
         {
             this.InitializeComponent();
@@ -199,7 +198,7 @@ namespace ProjetSession
 
 
             /////////////////////**AJOUT**\\\\\\\\\\\\\\\\\\\\
-            if (erreur == false)
+            if (erreur == false && modifier == 0)
             {
                 Employe employe = new Employe 
                 {
@@ -216,6 +215,25 @@ namespace ProjetSession
                     IdProjet = projet.IdProjet
                 };
                 Singleton.GetInstance().ajouter(employe);
+            }
+            else if (modifier == 1)
+            {
+                Employe employe = new Employe
+                {
+                    Matricule = matricule,
+                    Nom = tbxNom.Text,
+                    Prenom = tbxPrenom.Text,
+                    DateNaiss = cdpNaiss.Date.Value.ToString("yyyy-MM-dd"),
+                    Email = tbxEmail.Text,
+                    Adresse = tbxAdresse.Text,
+                    DateEmb = cdpEmb.Date.Value.ToString("yyyy-MM-dd"),
+                    Photo = tbxPhoto.Text,
+                    Statut = null,
+                    TauxHor = Convert.ToDouble(tbxTaux.Text),
+                    ProjetEnCours = projet,
+                    IdProjet = projet.IdProjet
+                };
+                Singleton.GetInstance().modifier(employe);
             }
         }
 
@@ -236,6 +254,12 @@ namespace ProjetSession
             set { matricule = value; }
         }
 
+        int modifier = 0;
+        public int Modifier
+        {
+            get { return modifier; }
+            set { modifier = value; }
+        }
         public string Nom
         {
             get { return tbxNom.Text; }

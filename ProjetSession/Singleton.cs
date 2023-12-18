@@ -430,6 +430,7 @@ namespace ProjetSession
                     commande.Connection = con;
                     commande.CommandType = System.Data.CommandType.StoredProcedure;
 
+                    commande.Parameters.AddWithValue("idClient", client.Id_Client);
                     commande.Parameters.AddWithValue("nom", client.Nom);
                     commande.Parameters.AddWithValue("adresse", client.Adresse);
                     commande.Parameters.AddWithValue("numero_tel", client.Num_Tel);

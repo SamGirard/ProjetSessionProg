@@ -77,7 +77,7 @@ namespace ProjetSession
 
 
             /////////////////////**AJOUT**\\\\\\\\\\\\\\\\\\\\
-            if (erreur == false)
+            if (erreur == false && modifier == 0)
             {
                 Client client = new Client 
                 { 
@@ -88,12 +88,37 @@ namespace ProjetSession
                 };
                 Singleton.GetInstance().ajouter(client);
             }
-
+            else if(modifier == 1)
+            {
+                Client client = new Client
+                {
+                    Id_Client = idClient,
+                    Nom = tbxNom.Text,
+                    Adresse = tbxAdresse.Text,
+                    Num_Tel = tbxTel.Text,
+                    Email = tbxEmail.Text
+                };
+                Singleton.GetInstance().modifier(client);
+            }
         }
 
 
 
         /*********************PARTIE MODIFICATION*********************/
+        int modifier = 0;
+        public int Modifier
+        {
+            get { return modifier; }
+            set { modifier = value; }
+        }
+
+        string idClient;
+        public string IdClient
+        {
+            get { return idClient; }
+            set { idClient = value; }
+        }
+
         public string Nom
         {
             get { return tbxNom.Text; }
