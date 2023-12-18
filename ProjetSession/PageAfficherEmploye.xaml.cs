@@ -79,12 +79,12 @@ namespace ProjetSession
             dialog.Photo = employe.Photo;
             dialog.IdProjet = Singleton.GetInstance().GetPositionProjet(employe.IdProjet);
             dialog.Matricule = employe.Matricule;
+            dialog.Modifier = 1;
 
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
             {
-                Singleton.GetInstance().modifier(employe);
                 this.Frame.Navigate(typeof(PageAfficherEmploye));
             }
         }

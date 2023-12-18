@@ -70,7 +70,7 @@ namespace ProjetSession
             dialog.Adresse = client.Adresse;
             dialog.Num_Tel = client.Num_Tel;
             dialog.Email = client.Email;
-            dialog.Test = 1;
+            dialog.Modifier = 1;
 
 
 
@@ -78,15 +78,7 @@ namespace ProjetSession
 
             if (result == ContentDialogResult.Primary)
             {
-                Client client2 = new Client
-                {
-                    Id_Client = client.Id_Client,
-                    Nom = dialog.Nom,
-                    Adresse = dialog.Adresse,
-                    Num_Tel = dialog.Num_Tel,
-                    Email = dialog.Email,
-                };
-                Singleton.GetInstance().modifier(client2);
+                this.Frame.Navigate(typeof(PageAfficherClient));
             }
         }
 

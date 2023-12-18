@@ -100,7 +100,6 @@ namespace ProjetSession
                 };
                 Singleton.GetInstance().modifier(client);
             }
-
         }
 
 
