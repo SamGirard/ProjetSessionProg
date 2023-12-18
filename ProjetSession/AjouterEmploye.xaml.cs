@@ -34,6 +34,16 @@ namespace ProjetSession
             cdpNaiss.MinDate = new DateTime(1950, 01, 01);
         }
 
+        public CalendarDatePicker CdpNaiss
+        {
+            get { return cdpNaiss; }
+        }
+
+        public CalendarDatePicker CdpEmb
+        {
+            get { return cdpEmb; }
+        }
+
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {

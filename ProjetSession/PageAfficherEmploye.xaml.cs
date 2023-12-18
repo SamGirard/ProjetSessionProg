@@ -66,6 +66,9 @@ namespace ProjetSession
             dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Primary;
 
+            dialog.CdpNaiss.IsEnabled = false;
+            dialog.CdpEmb.IsEnabled = false;
+
             dialog.Nom = employe.Nom;
             dialog.Prenom = employe.Prenom;
             dialog.Date_Naissance = employe.DateNaiss;
