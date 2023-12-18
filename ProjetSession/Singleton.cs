@@ -148,7 +148,7 @@ namespace ProjetSession
                         DateNaiss = reader.GetString("date_naissance"),
                         Email = reader.GetString("email"),
                         Adresse = reader.GetString("adresse"),
-                        DateEmb = reader.GetString("date_embauche"),
+                        DateEmbTest = reader.GetString("date_embauche"),
                         TauxHor = reader.GetInt32("taux"),
                         Photo = reader.GetString("photo"),
                         Statut = reader.GetString("statut"),
