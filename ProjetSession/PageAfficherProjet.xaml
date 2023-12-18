@@ -38,12 +38,7 @@
                                     <Run Text="Salaire total : "/>
                                     <Run Text="{x:Bind TotalSalString}"></Run>
                                     </TextBlock>
-
-                                    <ScrollViewer>
-                                        <ListView CornerRadius="3" ItemsSource="{Binding ListeEmploye}" DisplayMemberPath="NomComplet">
-                                        </ListView>
-                                    </ScrollViewer>
-
+                                    
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                         <TextBlock x:Name="statut" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}"/>
                                         <Ellipse Width="8" Height="8" Margin="0 2 0 0" Fill="{x:Bind EllipseColor}" VerticalAlignment="Center"/>

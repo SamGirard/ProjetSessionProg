@@ -81,7 +81,7 @@ namespace ProjetSession
                 reader.Close();
                 con.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 con.Close();
             }
@@ -119,7 +119,7 @@ namespace ProjetSession
 
                 return listeClient;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 con.Close();
                 return null;
@@ -162,7 +162,7 @@ namespace ProjetSession
                 reader.Close();
                 con.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 con.Close();
             }
@@ -203,7 +203,7 @@ namespace ProjetSession
                 reader.Close();
                 con2.Close();
             }
-            catch (Exception ex) { con2.Close(); }
+            catch (Exception) { con2.Close(); }
             return liste;
         }
         private Projet getProjet(string idProjet)
@@ -305,7 +305,7 @@ namespace ProjetSession
                     int i = commande.ExecuteNonQuery();
                     con.Close();
                 }
-                catch (Exception ex) { con.Close(); }
+                catch (Exception) { con.Close(); }
                 listeClient.Add(client);
             }
             ////////////////////AJOUT EMPLOYÉ\\\\\\\\\\\\\\\\\\\\
@@ -333,7 +333,7 @@ namespace ProjetSession
                     int i = commande.ExecuteNonQuery();
                     con.Close();
                 }
-                catch (Exception ex) { con.Close(); }
+                catch (Exception) { con.Close(); }
                 listeEmploye.Add(employe);
             }
             ////////////////////AJOUT PROJET\\\\\\\\\\\\\\\\\\\\
@@ -359,7 +359,7 @@ namespace ProjetSession
                     int i = commande.ExecuteNonQuery();
                     con.Close();
                 }
-                catch (Exception ex) { con.Close(); }
+                catch (Exception) { con.Close(); }
             }
         }
 
@@ -383,7 +383,7 @@ namespace ProjetSession
                     con.Close();
                     listeClient.RemoveAt(position);
                 }
-                catch (Exception ex) { con.Close(); }
+                catch (Exception) { con.Close(); }
             }
             else if(objet is Employe)
             {
@@ -398,7 +398,7 @@ namespace ProjetSession
                     con.Close();
                     listeEmploye.RemoveAt(position);
                 }
-                catch (Exception ex) { con.Close(); }
+                catch (Exception) { con.Close(); }
             }
             else if (objet is Projet)
             {
@@ -413,7 +413,7 @@ namespace ProjetSession
                     con.Close();
                     listeProjet.RemoveAt(position);
                 }
-                catch (Exception ex) { con.Close(); }
+                catch (Exception) { con.Close(); }
             }
         }
 
@@ -442,7 +442,7 @@ namespace ProjetSession
 
                     con.Close();
                 }
-                catch (Exception ex) { con.Close(); }
+                catch (Exception) { con.Close(); }
             }
             else if(objet is Employe)
             {
@@ -469,7 +469,7 @@ namespace ProjetSession
 
                     con.Close();
                 }
-                catch (Exception ex) { con.Close(); }
+                catch (Exception) { con.Close(); }
             }
             else if(objet is Projet)
             {
@@ -495,7 +495,7 @@ namespace ProjetSession
 
                     con.Close();
                 }
-                catch (Exception ex) { con.Close(); }
+                catch (Exception) { con.Close(); }
             }
         }
 
@@ -523,7 +523,7 @@ namespace ProjetSession
 
                 con.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 con.Close();
             }
@@ -546,7 +546,7 @@ namespace ProjetSession
 
                 con.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 con.Close();
             }
@@ -577,7 +577,7 @@ namespace ProjetSession
                 con.Close();
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 con.Close();
             }
@@ -596,7 +596,7 @@ namespace ProjetSession
 
                     con.Close();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     con.Close();
                 }
@@ -632,7 +632,7 @@ namespace ProjetSession
                 con.Close();
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 con.Close();
             }
@@ -654,7 +654,7 @@ namespace ProjetSession
 
                 con.Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 con.Close();
             }
@@ -720,7 +720,7 @@ namespace ProjetSession
             }
 
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 con.Close();
             }
