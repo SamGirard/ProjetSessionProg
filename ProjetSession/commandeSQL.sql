@@ -62,7 +62,12 @@ inner join a2023_420325ri_fabeq19.projet p on employe.id_projet = p.id_projet
 GROUP BY nom_employe
 ORDER BY Taux_total_par_projet
 
-
+/*Requête pour voir l'âge a laquelle chaque employé on été embauché (fait par isaac)'*/
+SELECT CONCAT(prenom, ' ', nom) AS nom,
+       date_naissance,
+       date_embauche,
+       CONCAT(YEAR(date_embauche)-YEAR(date_naissance), ' ans') AS age_embauche
+FROM employe;
 -----------------------------TRIGGER---------------------------------
 /*Trigger pour générer l'identifiant du client (fait par sam)*/
 DELIMITER  // 
