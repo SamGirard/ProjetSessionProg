@@ -193,11 +193,13 @@ CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(50), IN prenom VARCHAR(50), IN d
                                  IN email VARCHAR(150), IN adresse VARCHAR(100), IN date_emb DATE,
                                  IN taux DOUBLE, IN photo VARCHAR(1000), IN idProjet VARCHAR(15))
 BEGIN
+    IF(YEAR(date_naiss) < 18) THEN
+        SIGNAL SQLSTATE '45000' SET message_text="L'employé doit avoir 18 ans pour être embauché";
+    end if;
     INSERT into employe (nom, prenom, date_naissance, email, adresse, date_embauche, taux, photo, id_projet)
     VALUES (nom, prenom, date_naiss, email, adresse, date_emb, taux, photo, idProjet);
 end //
 DELIMITER ;
-
 /*Procédure pour ajouter client (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_client(IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
