@@ -23,7 +23,11 @@
 
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local:Projet">
-                            <Border Margin="20">
+                            <Border Margin="20" CornerRadius="10">
+                                 <Border.Background>
+                                    <SolidColorBrush Color="Black" Opacity="0.2"/>
+                                </Border.Background>
+
                                 <StackPanel Orientation="Vertical" Height="300" Width="300" Margin="20" HorizontalAlignment="Center">
                                     <TextBlock Text="{x:Bind IdProjet}" FontWeight="Light" FontSize="12pt"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}"/>
                                     <TextBlock Text="{x:Bind Titre}" FontSize="30pt" TextWrapping="Wrap"  Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" FontWeight="SemiBold"/>
@@ -38,11 +42,13 @@
                                     <Run Text="Salaire total : "/>
                                     <Run Text="{x:Bind TotalSalString}"></Run>
                                     </TextBlock>
-                                    
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                        <TextBlock x:Name="statut" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 20 0" FontSize="15pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}"/>
-                                        <Ellipse Width="8" Height="8" Margin="0 2 0 0" Fill="{x:Bind EllipseColor}" VerticalAlignment="Center"/>
-                                    </StackPanel>
+
+                                    <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 120 10 0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="statut" Text="{x:Bind Statut}" FontWeight="SemiBold" Margin="0 0 10 0" FontSize="15pt" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}"/>
+                                            <Ellipse Width="8" Height="8" Margin="0 2 0 0" Fill="{x:Bind EllipseColor}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>
@@ -50,6 +56,12 @@
                 </GridView>
             </StackPanel>
         </ScrollViewer>
-        <Frame x:Name="frameZoom"></Frame>
+        <Frame x:Name="frameZoom">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition  />
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
     </Grid>
 </Page>

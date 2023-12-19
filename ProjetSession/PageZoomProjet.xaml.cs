@@ -94,5 +94,32 @@ namespace ProjetSession
                 this.Frame.Navigate(typeof(PageAfficherProjet));
             }
         }
+
+        private async void btAjoutEmploye_Click(object sender, RoutedEventArgs e)
+        {
+            AjoutEmployeProjet dialog = new AjoutEmployeProjet();
+            dialog.XamlRoot = modifFrame.XamlRoot;
+            dialog.Title = "Ajouter un employé au projet";
+            dialog.PrimaryButtonText = "Ajouter";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Primary;
+
+            dialog.IdProjet = tblIdProjet.Text;
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                this.Frame.Navigate(typeof(PageAfficherProjet));
+            }
+        }
+
+        private void btRevenir_Click(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
     }
 }

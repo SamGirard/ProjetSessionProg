@@ -11,6 +11,10 @@
 
     <Grid>
         <StackPanel>
+            <Button Name="btRevenir" Margin="10 10 0 0" Padding="10" Click="btRevenir_Click">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE830;"/>
+            </Button>
+
             <StackPanel Orientation="Vertical" Margin="30 20 0 0">
                 <TextBlock x:Name="tblTitre" Foreground="{ThemeResource SystemControlPageTextBaseHighBrush}" FontSize="50pt" FontWeight="Bold"></TextBlock>
                 <TextBlock x:Name="tblIdProjet" Foreground="CornflowerBlue" FontWeight="Light"></TextBlock>
@@ -75,9 +79,20 @@
                 </StackPanel>
             </StackPanel>
 
-            <Button x:Name="btModifier" Click="btModifier_Click" HorizontalAlignment="Center" Width="500" Height="60" Background="CornflowerBlue" FontWeight="SemiBold">Modifier</Button>
-
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="50">
+                <Button x:Name="btModifier" Click="btModifier_Click" Width="500" Height="60" Background="CornflowerBlue" FontWeight="SemiBold">Modifier</Button>
+                <Button x:Name="btAjoutEmploye" Click="btAjoutEmploye_Click" Width="500" Height="60" Background="Gray" FontWeight="SemiBold">Ajouter un employé au projet</Button>
+            </StackPanel>
+            
+            
         </StackPanel>
-        <Frame x:Name="modifFrame"></Frame>
+        <Frame x:Name="modifFrame">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition  />
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+
+        </Frame>
     </Grid>
 </Page>

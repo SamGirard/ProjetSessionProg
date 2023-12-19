@@ -59,15 +59,15 @@ namespace ProjetSession
             switch (items.Name)
             {
                 case "iListeProjet":
-                    mainFrame.Navigate(typeof(PageAfficherProjet));
+                    mainFrame.Navigate(typeof(PageAfficherProjet), null, new DrillInNavigationTransitionInfo());
                     break;
 
                 case "iListeClient":
-                    mainFrame.Navigate(typeof(PageAfficherClient));
+                    mainFrame.Navigate(typeof(PageAfficherClient), null, new DrillInNavigationTransitionInfo());
                     break;
 
                 case "iListeEmploye":
-                    mainFrame.Navigate(typeof(PageAfficherEmploye));
+                    mainFrame.Navigate(typeof(PageAfficherEmploye), null, new DrillInNavigationTransitionInfo());
                     break;
 
                 default:

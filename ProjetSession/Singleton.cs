@@ -499,6 +499,28 @@ namespace ProjetSession
             }
         }
 
+        public void ajouterEmployeProjet(string idProjet, string matricule)
+        {
+            try
+            {
+                MySqlCommand commande = new MySqlCommand();
+                commande.Connection = con;
+
+                commande.CommandText = "UPDATE employe SET id_projet = @id_projet WHERE matricule = @matricule";
+                commande.Parameters.AddWithValue("@id_projet", idProjet);
+                commande.Parameters.AddWithValue("@matricule", matricule);
+
+                con.Open();
+                commande.ExecuteNonQuery();
+
+                con.Close();
+            }
+            catch (Exception) 
+            { 
+                con.Close(); 
+            }
+        }
+
         /*****************************************************************************************************/
         /**********************************************CONNEXION**********************************************/
         /*****************************************************************************************************/
