@@ -47,7 +47,7 @@ alter table admin Add COLUMN estConnecter BOOL DEFAULT(false);
 
 
 -----------------------------TRIGGER---------------------------------
-/*Trigger pour l'identifiant du client (fait par sam)*/
+/*Trigger pour générer l'identifiant du client (fait par sam)*/
 DELIMITER  // 
 CREATE TRIGGER identifiantClient BEFORE INSERT
     on client
@@ -57,7 +57,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*Trigger pour le numéro de projet (fait par sam)t*/
+/*Trigger pour générer le numéro de projet (fait par sam)t*/
 DELIMITER  //
 CREATE TRIGGER numeroProjet BEFORE INSERT
     on projet
@@ -130,7 +130,7 @@ BEGIN
 END //
 DELIMITER ;
 
-/*Trigger pour le statut de l'employé*/
+/*Trigger pour le statut de l'employé (fait par sam)*/
 DELIMITER //
 CREATE TRIGGER statutEmploye before insert on employe
     for each row
@@ -143,7 +143,7 @@ CREATE TRIGGER statutEmploye before insert on employe
     end ;
 DELIMITER //
 
------------------------------PROCEDURES---------------------------------
+-----------------------------PROCÉDURES---------------------------------
 /*Procédure pour ajouter employé (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_employe(IN nom VARCHAR(50), IN prenom VARCHAR(50), IN date_naiss DATE,
@@ -165,7 +165,7 @@ end //
 DELIMITER ;
 
 
-/*Procédure pour ajouter projet (fait par sam)*/
+/*Procédure pour ajouter projet (fait par isaac et sam)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_projet(IN titre varchar(50), IN date_debut date,
                                  IN description varchar(255), IN budget double, IN nbEmplo INT,
@@ -176,7 +176,7 @@ BEGIN
 END //
 DELIMITER ;
 
-/*Procédure pour ajouter projet (fait par sam)*/
+/*Procédure pour visualiser liste des projets (fait par sam)*/
 DELIMITER //
 CREATE PROCEDURE afficher_projets()
 BEGIN
@@ -184,7 +184,7 @@ BEGIN
 end //
 DELIMITER ;
 
-/*Procédure pour get projet spécifique (fait par isaac)*/
+/*Procédure pour get un projet spécifique à partir de id (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_get_projet (IN id varchar(11))
 BEGIN
@@ -192,7 +192,7 @@ BEGIN
 end//
 DELIMITER ;
 
-/*Procédure pour avoir le client avec son id fait par isaac*/
+/*Procédure pour avoir le client spécifique avec son id (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_get_client (IN id varchar(15))
 BEGIN
