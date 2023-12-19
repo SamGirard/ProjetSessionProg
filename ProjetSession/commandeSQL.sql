@@ -79,6 +79,16 @@ SELECT MAX(moyenneSalaire) FROM (SELECT AVG(taux) AS moyenneSalaire
 SELECT matricule, nom FROM employe WHERE id_projet IN (
     SELECT id_projet FROM projet WHERE titre = 'Projet Alpha'
 );
+
+/*sous-requête pour voir le nombre de jour travaillé sur un projet de chaque employé (fait par isaac)'*/
+SELECT (SELECT titre
+        FROM projet
+        WHERE id_projet = e.id_projet) AS titre_projet,
+    CONCAT(prenom, ' ', nom) AS nom,
+    DATEDIFF(CURRENT_DATE, (SELECT date_debut
+                            FROM projet
+                            WHERE id_projet = e.id_projet)) AS nb_jours_travaillé
+FROM employe e;
 -----------------------------TRIGGER---------------------------------
 /*Trigger pour générer l'identifiant du client (fait par sam)*/
 DELIMITER  // 
