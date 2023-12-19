@@ -56,6 +56,13 @@ INNER JOIN employe e on p.id_projet = e.id_projet
 ORDER BY c.nom;
 
 
+/*Requête pour visualiser chaque taux par heures de chaque employé avec leurs projets (fait par sam)*/
+SELECT CONCAT(SUM(taux), '$') as Taux_total_par_projet, CONCAT(prenom, ' ', nom) as nom_employe, titre FROM employe
+inner join a2023_420325ri_fabeq19.projet p on employe.id_projet = p.id_projet
+GROUP BY nom_employe
+ORDER BY Taux_total_par_projet
+
+
 -----------------------------TRIGGER---------------------------------
 /*Trigger pour générer l'identifiant du client (fait par sam)*/
 DELIMITER  // 
