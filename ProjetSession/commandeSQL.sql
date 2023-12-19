@@ -45,6 +45,16 @@ CREATE TABLE admin(
 
 alter table admin Add COLUMN estConnecter BOOL DEFAULT(false);
 
+-----------------------------REQUÊTE SQL---------------------------------
+/*Requête pour visualiser chaque client et les employés associé à leur projet (fait par isaac)*/
+SELECT c.nom AS client,
+       titre AS titre_projet,
+       CONCAT(e.prenom, ' ', e.nom) AS nom_employé
+FROM client c
+INNER JOIN projet p ON c.id_client = p.id_client
+INNER JOIN employe e on p.id_projet = e.id_projet
+ORDER BY c.nom;
+
 
 -----------------------------TRIGGER---------------------------------
 /*Trigger pour générer l'identifiant du client (fait par sam)*/
