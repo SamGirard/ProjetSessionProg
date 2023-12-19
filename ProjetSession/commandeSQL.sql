@@ -1,3 +1,9 @@
+/*
+  Projet fait par Isaac Béland-Desjardins et Samuel Girard
+  2023-12-19
+  Travail de session (Gestion projet)
+*/
+
 -----------------------------CRÉATION DES TABLES (fait par sam)-------------------------------
 CREATE TABLE client(
     id_client VARCHAR(3) UNIQUE PRIMARY KEY,
