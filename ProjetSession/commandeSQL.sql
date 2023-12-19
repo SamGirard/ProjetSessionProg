@@ -200,6 +200,8 @@ BEGIN
     VALUES (nom, prenom, date_naiss, email, adresse, date_emb, taux, photo, idProjet);
 end //
 DELIMITER ;
+
+
 /*Procédure pour ajouter client (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_client(IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
