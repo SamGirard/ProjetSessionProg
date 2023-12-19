@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" modified="2023-11-27T21:26:59.104Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0" etag="rI69lR5hFfLV-vzJnX-a" version="22.1.4" type="onedrive">
+  <diagram name="Page-1" id="OxQZkVxbYWwU06az4JpO">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lGV_wfb_wegno-4YHLsh-5" value="Client" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="40" width="140" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-6" value="id_client&lt;br&gt;&lt;br&gt;nom&lt;br&gt;&lt;br&gt;adresse&lt;br&gt;&lt;br&gt;numero_tel&lt;br&gt;&lt;br&gt;email" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lGV_wfb_wegno-4YHLsh-5">
+          <mxGeometry y="26" width="140" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-11" value="Projet" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="80" width="140" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-12" value="id_projet&lt;br&gt;&lt;br&gt;titre&lt;br&gt;&lt;br&gt;date_debut&lt;br&gt;&lt;br&gt;description&lt;br&gt;&lt;br&gt;budget&lt;br&gt;&lt;br&gt;nb_employe&lt;br&gt;&lt;br&gt;salaireTotal&lt;br&gt;&lt;br&gt;id_client&lt;br&gt;&lt;br&gt;statut&lt;br&gt;&lt;br&gt;id_client" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lGV_wfb_wegno-4YHLsh-11">
+          <mxGeometry y="26" width="140" height="294" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-15" value="Employe" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="300" width="140" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-16" value="matricule&lt;br&gt;&lt;br&gt;nom&lt;br&gt;&lt;br&gt;prenom&lt;br&gt;&lt;br&gt;date_naissance&lt;br&gt;&lt;br&gt;email&lt;br&gt;&lt;br&gt;adresse&lt;br&gt;&lt;br&gt;date_embauche&lt;br&gt;&lt;br&gt;taux&lt;br&gt;&lt;br&gt;photo&lt;br&gt;&lt;br&gt;id_projet&lt;br&gt;&lt;br&gt;statut&lt;br&gt;&lt;br&gt;id_projet" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lGV_wfb_wegno-4YHLsh-15">
+          <mxGeometry y="26" width="140" height="354" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-19" value="Admin" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="470" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-20" value="utilisateur&lt;br&gt;&lt;br&gt;motDePasse&lt;br&gt;&lt;br&gt;estConnecter" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="lGV_wfb_wegno-4YHLsh-19">
+          <mxGeometry y="26" width="140" height="94" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-23" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="1">
+          <mxGeometry x="300" y="110" width="210" height="19" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-24" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="1">
+          <mxGeometry x="300" y="376" width="210" height="19" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-25" value="possède" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="370" y="90" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-26" value="1:1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="300" y="88" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-27" value="1:n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="470" y="88" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-28" value="1:5" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="300" y="358" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-29" value="1:n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="470" y="358" width="40" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-30" value="possède" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="370" y="358" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-31" value="Projet( &lt;u&gt;id_projet&lt;/u&gt;,&amp;nbsp;&lt;span style=&quot;text-align: left;&quot;&gt;titre,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;date_debut,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;description,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;budget,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;nb_employe,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;salaireTotal, &lt;b&gt;&lt;u&gt;#&lt;/u&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&lt;b&gt;&lt;u&gt;id_client&lt;/u&gt;&lt;/b&gt;,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;statut, &lt;b&gt;&lt;u&gt;#&lt;/u&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&lt;b&gt;&lt;u&gt;id_client&lt;/u&gt;&lt;/b&gt;&amp;nbsp;&lt;/span&gt;)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="85" y="720" width="620" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-32" value="Client( &lt;u&gt;id_client&lt;/u&gt;, nom&lt;span style=&quot;text-align: left;&quot;&gt;, adresse&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;, numero_tel&lt;/span&gt;&lt;span style=&quot;text-align: left;&quot;&gt;, email&lt;/span&gt;)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="85" y="750" width="290" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lGV_wfb_wegno-4YHLsh-33" value="Employe(&lt;u&gt;matricule&lt;/u&gt;, nom, prenom, date_naissance, email, adresse, date_embauche, taux, photo, &lt;u&gt;&lt;b&gt;#&lt;/b&gt;&lt;/u&gt;&lt;b&gt;&lt;u&gt;id_projet&lt;/u&gt;&lt;/b&gt;, statut)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="85" y="780" width="640" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

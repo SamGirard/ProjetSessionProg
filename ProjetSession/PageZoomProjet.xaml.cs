@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using MySqlX.XDevAPI.Common;
+using Microsoft.UI.Xaml.Media.Animation;
 
 namespace ProjetSession
 {
@@ -26,8 +27,13 @@ namespace ProjetSession
             if (connecter == false)
             {
                 btModifier.Visibility = Visibility.Collapsed;
-            } else btModifier.Visibility = Visibility.Visible;
-            
+                btAjoutEmploye.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                btModifier.Visibility = Visibility.Visible;
+                btAjoutEmploye.Visibility = Visibility.Visible;
+            }
 
             Style itemContainerStyle = new Style(typeof(ListViewItem));
             itemContainerStyle.Setters.Add(new Setter(FontSizeProperty, 25.0));
@@ -35,6 +41,7 @@ namespace ProjetSession
             itemContainerStyle.Setters.Add(new Setter(PaddingProperty, new Thickness(20)));
             itemContainerStyle.Setters.Add(new Setter(HorizontalContentAlignmentProperty, HorizontalAlignment.Left));
             lvListe.ItemContainerStyle = itemContainerStyle;
+
         }
 
         Projet projetModif;
@@ -55,6 +62,15 @@ namespace ProjetSession
                 tblSalaire.Text = unProjet.TotalSalString;
                 lvListe.ItemsSource = unProjet.ListeEmploye;
                 rond.Fill = unProjet.EllipseColor;
+
+                int nombreElements = lvListe.Items.Count;
+                int nbrEmploye = Convert.ToInt32(tblNbEmp.Text);
+
+                if (nombreElements == nbrEmploye)
+                {
+                    btAjoutEmploye.IsEnabled = false;
+                }
+                else btAjoutEmploye.IsEnabled = true;
             }
         }
         private async void btModifier_Click(object sender, RoutedEventArgs e)
@@ -110,7 +126,7 @@ namespace ProjetSession
 
             if (result == ContentDialogResult.Primary)
             {
-                this.Frame.Navigate(typeof(PageAfficherProjet));
+                this.Frame.Navigate(typeof(PageAfficherProjet), null, new DrillInNavigationTransitionInfo());
             }
         }
 
