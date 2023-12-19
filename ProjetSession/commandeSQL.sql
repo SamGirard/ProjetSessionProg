@@ -201,7 +201,6 @@ BEGIN
 end //
 DELIMITER ;
 
-
 /*Procédure pour ajouter client (fait par isaac)*/
 DELIMITER //
 CREATE PROCEDURE p_ajout_client(IN nom VARCHAR(50), IN adresse VARCHAR(100), IN numero_tel VARCHAR(30), IN email VARCHAR(150))
@@ -218,6 +217,9 @@ CREATE PROCEDURE p_ajout_projet(IN titre varchar(50), IN date_debut date,
                                  IN description varchar(255), IN budget double, IN nbEmplo INT,
                                  IN id_client varchar(3), IN statut varchar(20))
 BEGIN
+    IF(nbEmplo < 5) THEN
+        SIGNAL SQLSTATE '45000' SET message_text="Le nombre d'employé maximum pouvant être associé à un projet est 5";
+    end if;
     INSERT INTO projet (titre, date_debut, description, budget, nb_employe, salaireTotal, id_client, statut)
     VALUES (titre, date_debut, description, budget, nbEmplo, 0, id_client, statut);
 END //
@@ -348,6 +350,9 @@ CREATE PROCEDURE p_modif_proj(IN idProjet varchar(15), IN titre varchar(50),
                               IN description varchar(255), IN budget double, IN nbEmplo int,
                               IN id_client varchar(3), IN statut varchar(20))
 BEGIN
+    IF(nbEmplo < 5) THEN
+        SIGNAL SQLSTATE '45000' SET message_text="Le nombre d'employé maximum pouvant être associé à un projet est 5";
+    end if;
     UPDATE projet
     SET id_projet = idProjet, titre = titre, description = description, budget = budget, nb_employe = nbEmplo, id_client = id_client, statut = statut
     WHERE id_projet = idProjet;
