@@ -68,6 +68,17 @@ SELECT CONCAT(prenom, ' ', nom) AS nom,
        date_embauche,
        CONCAT(YEAR(date_embauche)-YEAR(date_naissance), ' ans') AS age_embauche
 FROM employe;
+
+
+/*sous-requête pour avoir la moyenne du salaire maximum des employé par projet (fait par sam)'*/
+SELECT MAX(moyenneSalaire) FROM (SELECT AVG(taux) AS moyenneSalaire
+                                 FROM employe
+                                 GROUP BY (id_projet)) e;
+
+/*sous-requête pour avoir les employé qui travail sur le projet alpha (fait par sam)'*/
+SELECT matricule, nom FROM employe WHERE id_projet IN (
+    SELECT id_projet FROM projet WHERE titre = 'Projet Alpha'
+);
 -----------------------------TRIGGER---------------------------------
 /*Trigger pour générer l'identifiant du client (fait par sam)*/
 DELIMITER  // 
